@@ -1,0 +1,131 @@
+﻿        <aside id="sidebar" class="sidebar">
+
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link " href="/">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
+
+            <li class="nav-heading">Thống kê và báo cáo</li>
+            <li class="nav-item">
+               
+                 <a class="nav-link" href="/OrderStatus">
+                    <i class="bi bi-grid"></i>
+                    <span>Theo trạng thái</span>
+                </a>
+               
+            </li><!-- End Components Nav -->
+
+             <li class="nav-item">
+               
+                 <a class="nav-link"  href="/historyImpact">
+                    <i class="bi bi-grid"></i>
+                    <span> Báo cáo Tác động</span>
+                </a>
+               
+            </li><!-- End Components Nav -->
+
+
+             <li class="nav-item">
+               
+                 <a class="nav-link" href="/OrderOnboard">
+                    <i class="bi bi-grid"></i>
+                    <span>Danh sách onboard</span>
+                </a>
+               
+            </li><!-- End Components Nav -->
+
+            <li class="nav-heading">Ứng viên</li>
+
+            <li class="nav-item">
+
+                    <a class="nav-link" href="/checkDuplicate">
+                    <i class="bi bi-grid"></i>
+                    <span>Kiểm tra trùng</span>
+                    </a>
+
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-menu-button-wide"></i><span>Quản lý ứng viên</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="/candidate">
+                            <i class="bi bi-circle"></i><span>Danh sách ứng cử viên</span>
+                            </a>
+                    </li>
+                
+                      <li>
+                        <a href="/candidate?action=add">
+                          
+                            <i class="bi bi-circle"></i><span>Thêm mới</span>
+                        </a>
+                    </li>
+                   
+                </ul>
+            </li><!-- End Components Nav -->
+
+             
+            <li class="nav-heading">Ứng tuyển</li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>Quản lý ứng tuyển</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                   
+                     <li>
+                        <a href="/OrderAssignee">
+                            <i class="bi bi-circle"></i><span>Danh sách Nguồn</span>
+                           
+                        </a>
+                    </li>
+
+                          <li>
+                        <a href="/order">
+                            <i class="bi bi-circle"></i><span>Theo dõi đơn</span>
+                           
+                        </a>
+                    </li>
+                 
+                    <li>
+                        <a href="/order?action=add">
+                            <i class="bi bi-circle"></i><span>Tạo mới đơn</span>
+                           
+                        </a>
+                    </li>
+                    
+                </ul>
+            </li>
+
+            
+
+            
+            
+
+            <li class="nav-heading">Thông tin chung</li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/Infomation">
+                    <i class="bi bi-person"></i>
+                    <span>Thông tin tài khoản</span>
+                </a>
+            </li><!-- End Profile Page Nav -->
+
+       
+      
+             <li class="nav-item">
+                <a class="nav-link collapsed" onclick ="logout()"  data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-bar-chart"></i><span>Đăng xuất tài khoản</span>
+                    
+                </a>
+                
+            </li><!-- End Charts Nav -->
+            
+
+        </ul>
+
+    </aside>

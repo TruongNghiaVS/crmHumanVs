@@ -1,0 +1,121 @@
+﻿@{
+    
+    var arrayRol = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="1", Name ="Admin"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="2", Name ="TC"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="3", Name ="TL"
+            }
+            , new Model.SelectDisplay()
+            {
+              Code ="4", Name ="Marketing"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="6", Name ="Trưởng CTV"
+            }
+        };
+
+    var arrayStatus = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="0", Name ="Không hoạt động"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="1", Name ="Hoạt động"
+            }
+          
+        };
+    var dateText = "";
+  
+}
+
+    <div class="modal-header">
+    
+   
+    @if (Model.Id < 1)
+    {
+        <h5 class="modal-title">Thêm mới ngành nghề</h5>
+    }
+    else
+    {
+        <h5 class="modal-title">Cập nhật thông tin</h5>
+    }
+    <button type="button" class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+
+            <form id="mainForm" class="needs-validation" novalidate>
+
+                <div class="col-12 form-group">
+                    <label class="form-label">Tên</label>
+                         <input type="text" value="@Model.Name" name="fullName" id="txtFullName" class="form-control" required placeholder="" />
+                    <div class="invalid-feedback-cs">
+                    </div>
+
+                </div>
+                
+                @if (Model.Id > 0)
+                {
+                        <div class="col-12 form-group ">
+                        <label class="form-label">Mã đối tác</label>
+                        <input name="code" readonly id="txtCode" value="@Model.Code" type="text" class="form-control" placeholder="">
+                        <div class="invalid-feedback-cs">
+                        Please choose a username.
+                        </div>
+                        </div>
+                 }
+                 <div class="col-12 form-group">
+                    <label class="form-label">Trạng thái</label>
+                    <select name="isActive" id="isActive" class="form-select" aria-label="">
+                        
+                    @foreach (var item in arrayStatus)
+                    {
+                        @if (@Model.IsActive == int.Parse(item.Code))
+                        {
+                             <option selected value="@item.Code">@item.Name</option>
+                        }
+                        else
+                        {
+                             <option value="@item.Code">@item.Name</option>
+                        }
+                    }
+                    </select>
+                    <div class="invalid-feedback-cs">
+                        Please choose a username.
+                    </div>
+                </div>
+
+               
+
+                <div class="col-12">
+            <label for="inputAddress2"  class="form-label">Ghi chú</label>
+            <textarea name="noted"  id="txtNoted" class="form-control" style="height: 100px">@Model.Noted</textarea>
+                </div>
+
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">Đóng
+              </button>
+    <button type="button" onclick="SaveMasterData(@Model.Id,'nganhnghe')" class="btn btn-primary">
+        Lưu
+
+             </button>
+        </div>
+

@@ -1,0 +1,15 @@
+
+               <div id ="@Model.idAdd">
+                    <a onclick="addNewAddress(this, '@Model.controlButton')" class="addButon">@Model.buttonAddText </a>
+                        @foreach (var item in Model.DataList)
+                        {
+
+                            <div class="col-12 form-group">
+                                <label class="form-label">@Model.LableText</label>
+                                <input type="text" value="@item.Text" customvalue="@item.Id" class="form-control" placeholder="" />
+                            </div>
+
+                      }
+                    
+                </div>
+            

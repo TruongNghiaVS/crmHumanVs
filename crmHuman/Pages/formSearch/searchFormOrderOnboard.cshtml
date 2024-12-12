@@ -1,0 +1,152 @@
+﻿@{
+
+       var arrayLimit = new List<crmHuman.Model.SelectDisplay>()
+        {
+             new Model.SelectDisplay()
+            {
+              Code ="100", Name ="100"
+            },
+            new Model.SelectDisplay()
+            {
+                Code ="10", Name ="10"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="20", Name ="20"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="50", Name ="50"
+            }
+           
+        };
+
+}
+
+<form class="row g-3" method="get" action="/OrderOnboard">
+
+   <div class="col-md-2">
+        <label class="form-label">Từ khoá</label>
+        <input type="text" value="@Model.RequestSearch.Token" name="token" class="form-control">
+    </div>
+    <div class="col-md-2">
+        <label class="form-label">Từ Ngày</label>
+        <input value="@Model.RequestSearch.FromText" format: 'dd/mm/yyyy'  type="date" name="from" class="form-control">
+    </div>
+    <div class="col-md-2">
+        <label class="form-label">Đến ngày</label>
+        <input value="@Model.RequestSearch.ToText" format: 'dd/mm/yyyy' type="date" name="to" class="form-control">
+    </div>
+
+     <div class="col-md-2">
+        <label class="form-label">Trạng thái</label>
+        <select  name="status" value="@Model.RequestSearch.Status" class="form-select" aria-label="">
+            <option value="-1">Tất cả</option>
+            @if (@Model.RequestSearch.Status == 0 )
+            {
+
+            <option selected value="0">Trong bảo hành</option>
+            }
+            else
+            {
+             <option  value="0">Trong bảo hành</option>
+            }
+
+              @if (@Model.RequestSearch.Status == 1 )
+            {
+
+            <option selected value="1">Pass</option>
+            }
+            else
+            {
+             <option  value="1">Pass</option>
+            }
+
+
+              @if (@Model.RequestSearch.Status == 2 )
+            {
+
+            <option selected value="2">Failed</option>
+            }
+            else
+            {
+             <option  value="2">Failed</option>
+            }
+            
+
+        </select>
+    </div>
+
+
+    
+    @if(Model.Permision.SearchGrop == true)
+    {
+        <div class="col-md-2">
+                <label class="form-label">Nhóm</label>
+                <select id ="cbgroup" name="groupId"  class="form-select" aria-label="">
+                    <option value="tat-ca">Tất cả</option>
+                
+
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <label class="form-label">Thành viên</label>
+                <select id ="cbmember" name="memberId" class="form-select" aria-label="">
+                    <option selected>Tất cả</option>
+                
+                </select>
+            </div>
+    }
+
+
+    <div class="col-md-3">
+                <label class="form-label">Việc làm/dự án</label>
+                <select id ="cbjob2" name="job"  class="form-select" aria-label="">
+                  <option value="-1">Tất cả</option>
+                    @foreach (var element  in Model.JobList.Data)
+                    {
+                        var item = element as dynamic;
+                        @if (@Model.RequestSearch.Job == item.Id )
+                        {
+                        
+                            <option selected value="@item.Id">@item.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+
+                </select>
+                
+    </div>
+
+     <div class="col-md-3">
+    <label class="form-label">Số lượng hiển thị</label>
+    <select id ="cbLimit" name="limit"  class="form-select" aria-label="">
+            @foreach (var item in arrayLimit )
+                        {   
+                            if( int.Parse(item.Code) == Model.RequestSearch.Limit)
+                            {
+                                <option selected value="@item.Code">@item.Name</option>
+                            }
+                            else 
+                               {  <option value="@item.Code">@item.Name</option> }
+                        
+            }
+          
+    </select>
+
+    </div> 
+
+
+
+    <div class="text-end">
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+        @if (Model.Permision.Add == true)
+        {
+         <button type="button" class="btn btn-primary" onclick="openFormEdit(-1, '@Model.KeyPage')">Thêm mới</button>
+        }
+    </div>
+</form>

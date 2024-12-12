@@ -1,0 +1,154 @@
+﻿@{
+
+       var arrayLimit = new List<crmHuman.Model.SelectDisplay>()
+        {
+             new Model.SelectDisplay()
+            {
+              Code ="100", Name ="100"
+            },
+            new Model.SelectDisplay()
+            {
+                Code ="10", Name ="10"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="20", Name ="20"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="50", Name ="50"
+            }
+           
+        };
+
+}
+@if(@Model.RequestSearch !=  null )
+{
+<form class="row g-3" method="get" action="/order">
+
+   <div class="col-md-2">
+        <label class="form-label">Từ khoá</label>
+        <input type="text" value="@Model.RequestSearch.Token" name="token" class="form-control">
+    </div>
+    <div class="col-md-2">
+        <label class="form-label">Từ Ngày</label>
+        <input value="@Model.RequestSearch.FromText" type="date" name="from" class="form-control">
+    </div>
+    <div class="col-md-2">
+        <label class="form-label">Đến ngày</label>
+        <input value="@Model.RequestSearch.ToText" type="date" name="to" class="form-control">
+    </div>
+
+     <div class="col-md-2">
+        <label class="form-label">Trạng thái</label>
+        <select id ="cbstatus" name="status" value="@Model.RequestSearch.Status" class="form-select" aria-label="">
+            <option value="-1">Tất cả</option>
+            <option value="1">Hoạt động</option>
+            <option value="0">Không hoạt động</option>
+
+        </select>
+    </div>
+
+
+    
+    @if(Model.Permision.SearchGrop == true)
+    {
+         @if( Model.RequestSearch.RoleCode =="3")
+           {
+            <div class="col-md-2" style="display: none;">
+                            <label class="form-label">Nhóm</label>
+                            <select id ="cbgroup" name="groupId"  class="form-select" aria-label="">
+                                <option value="tat-ca">Tất cả</option>
+                            
+
+                            </select>
+                        </div>
+           }
+           else 
+           {
+                <div class="col-md-2">
+                            <label class="form-label">Nhóm</label>
+                            <select id ="cbgroup" name="groupId"  class="form-select" aria-label="">
+                                <option value="tat-ca">Tất cả</option>
+                            
+
+                            </select>
+                        </div>
+           }
+
+            <div class="col-md-2">
+                <label class="form-label">Thành viên</label>
+                <select id ="cbmember" name="memberId" class="form-select" aria-label="">
+                    <option selected>Tất cả</option>
+                
+                </select>
+            </div>
+    }
+    @* <div class="col-md-6" style="display:none">
+        <label class="form-label">Limit</label>
+        <input type="text" name="limit" value="@Model.RequestSearch.Limit" class="form-control">
+    </div>
+ *@
+
+
+    <div class="col-md-3">
+                <label class="form-label">Việc làm/dự án</label>
+                <select id ="cbjob2" name="job"  class="form-select" aria-label="">
+                  <option value="-1">Tất cả</option>
+                    @foreach (var element  in Model.JobList.Data)
+                    {
+                        var item = element as dynamic;
+                        @if (@Model.RequestSearch.Job == item.Id )
+                        {
+                        
+                            <option selected value="@item.Id">@item.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+
+                </select>
+                
+                </div>
+
+     <div class="col-md-3">
+    <label class="form-label">Số lượng hiển thị</label>
+    <select id ="cbLimit" name="limit"  class="form-select" aria-label="">
+            @foreach (var item in arrayLimit )
+                        {   
+                            if( int.Parse(item.Code) == Model.RequestSearch.Limit)
+                            {
+                                <option selected value="@item.Code">@item.Name</option>
+                            }
+                            else 
+                               {  <option value="@item.Code">@item.Name</option> }
+                        
+            }
+          
+    </select>
+
+    </div> 
+
+    @* <div class="col-md-3">
+    <label class="form-label">Tình trạng</label>
+    <select id ="cbProcess" name="processStatus"  class="form-select" aria-label="">
+        <option value="-1">Tất cả</option>
+        <option value="2">Đang khai thác </option>
+        <option value="3">Đã khai thác </option>
+    </select>
+
+    </div>  *@
+
+
+    <div class="text-end">
+               @* <button type="button" class="btn btn-primary" onclick="openFormEdit(-1, 'candidate')">Thêm mới</button> *@
+       @*  @if (Model.Permision.Add == true)
+        {
+         <button type="button" class="btn btn-primary" onclick="OpenPageOrder(-1)">Thêm mới</button>
+        } *@
+    </div>
+</form>
+}
+

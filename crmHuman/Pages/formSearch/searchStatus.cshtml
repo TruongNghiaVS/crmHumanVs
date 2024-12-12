@@ -1,0 +1,66 @@
+﻿<form class="row g-3" method="get" action="/OrderStatus">
+
+    <div class="col-md-6">
+        <label class="form-label">Từ Ngày</label>
+        <input value="@Model.RequestSearch.FromText" type="date" name="from" class="form-control">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Đến ngày</label>
+        <input value="@Model.RequestSearch.ToText" type="date" name="to" class="form-control">
+    </div>
+
+
+ @if(Model.Permision.SearchGrop == true)
+    {
+        <div class="col-md-6">
+                <label class="form-label">Nhóm</label>
+                <select id ="cbgroup" name="groupId"  class="form-select" aria-label="">
+                    <option value="tat-ca">Tất cả</option>
+                
+
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Thành viên</label>
+                <select id ="cbmember" name="memberId" class="form-select" aria-label="">
+                    <option selected>Tất cả</option>
+                
+                </select>
+            </div>
+    }
+    <div class="col-md-6">
+        <label class="form-label">Trạng thái</label>
+        <select id ="cbstatus1" name="status" value="@Model.RequestSearch.Status" class="form-select" aria-label="">
+            <option value="-1">Tất cả</option>
+            @foreach (var element in Model.DataStatus.Data)
+                {
+
+                        var item = element as dynamic;
+                    @if (@Model.RequestSearch.Status == item.Id )
+                    {
+                        <option selected value="@item.Id">@item.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                }
+
+
+        </select>
+    </div>
+    
+   
+   
+
+
+
+    <div class="text-end">
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+        @if (Model.Permision.Add == true)
+        {
+         <button type="button" class="btn btn-primary" onclick="openFormEdit(-1, '@Model.KeyPage')">Thêm mới</button>
+        }
+    </div>
+</form>

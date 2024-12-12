@@ -1,0 +1,96 @@
+﻿@{
+    
+    var arrayRol = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="1", Name ="Admin"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="2", Name ="TC"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="3", Name ="TL"
+            },
+            new Model.SelectDisplay()
+            {
+              Code ="4", Name ="Marketing"
+            }
+            ,
+            new Model.SelectDisplay()
+            {
+            Code ="6", Name ="Trưởng CTV"
+            }
+        };
+
+    var arrayStatus = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="0", Name ="Không hoạt động"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="1", Name ="Hoạt động"
+            }
+          
+        };
+ 
+}
+
+    <div class="modal-header">
+
+
+  
+                <button type="button" class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+            <form id="mainFormMember" class="needs-validation" novalidate>
+                <div class="col-12 form-group">
+                    <label class="form-label">Chọn thành viên</label>
+                     <select name="memberId" id="cbmemberId" class="form-select" aria-label="">
+                <option value="-1">Chọn thành viên</option>
+                @foreach (var item in Model.ListMeberNotGroup)
+                {
+                    <option value="@item.Id">@item.UserName _  @item.FullName</option>
+                }
+                       
+                       
+                      
+                    </select>
+                    <div class="invalid-feedback-cs">
+                        Please choose a username.
+                    </div>
+                </div>
+                <button type="button" onclick="SaveMember(@Model.Id)" class="btn btn-primary buttonRight">Lưu</button>
+             
+            </form>
+
+            <div>
+
+          <div id="DataListView">
+
+           
+
+          </div>
+
+          
+            </div>
+
+        </div>
+
+
+    
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+                Đóng
+            </button>
+
+        </div>
+

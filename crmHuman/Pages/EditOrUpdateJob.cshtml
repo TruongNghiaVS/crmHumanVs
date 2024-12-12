@@ -1,0 +1,214 @@
+﻿@{
+    
+    var arrayRol = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="1", Name ="Admin"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="2", Name ="TC"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="3", Name ="TL"
+            }
+            , new Model.SelectDisplay()
+            {
+              Code ="4", Name ="Marketing"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="6", Name ="Trưởng CTV"
+            }
+        };
+
+    var arrayStatus = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="0", Name ="Không hoạt động"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="1", Name ="Hoạt động"
+            }
+          
+        };
+
+        var itemModel = Model.resultView;
+   
+}
+
+    <div class="modal-header">
+    
+   
+    @if (itemModel.Id < 1)
+    {
+        <h5 class="modal-title">Thêm mới việc làm</h5>
+    }
+    else
+    {
+        <h5 class="modal-title">Cập nhật thông tin</h5>
+    }
+    <button type="button" class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+
+            <form id="mainForm" class="needs-validation" novalidate>
+
+
+               
+                 <div class="col-12 form-group">
+            <label class="form-label">Đối tác</label>
+            <select name="partnerId" id="cbpartnerId4" class="form-select" aria-label="" onchange="getProject(this)" >
+                <option value="-1">Chọn đối tác</option>
+                @foreach (var item in Model.allPartner.Data)
+
+                {
+
+                    @if (@itemModel.PartnerId == item.Id)
+                    {
+                        <option selected value="@item.Id">@item.ShortName</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Id">@item.ShortName</option>
+                    }
+
+                }
+            </select>
+            <div class="invalid-feedback-cs">
+                Please choose a username.
+            </div>
+        </div>
+     <input type="hidden" id ="txtProjectId" value="@itemModel.ProjectId">
+      <div class="col-12 form-group">
+            <label class="form-label">Dự án </label>
+            <select  id="cbProject" class="form-select" aria-label=""  >
+                <option value="-1">Tất cả</option>
+               
+            </select>
+            <div class="invalid-feedback-cs">
+                Please choose a username.
+            </div>
+        </div>
+        <div class="col-12 form-group">
+            <label class="form-label">Chọn lĩnh vực</label>
+            <select name="Field" id="cbField" class="form-select" aria-label="">
+
+                @foreach (var item in Model.allFiled.Data)
+                {
+                    @if (@itemModel.Field == item.Id)
+                    {
+                        <option selected value="@item.Id">@item.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                }
+            </select>
+
+
+
+            <div class="invalid-feedback-cs">
+                Please choose a username.
+            </div>
+        </div>
+
+
+       
+              <div class="col-12 form-group">
+                    <label class="form-label">Vị trí tuyển</label>
+                    <input type="text" value="@itemModel.Name" name="fullName" id="txtName" class="form-control" required placeholder="" />
+                    <div class="invalid-feedback-cs">
+                    </div>
+
+                </div>
+
+
+
+                <div class="col-12 form-group">
+                    <label class="form-label">Trạng thái</label>
+            <select name="isActive" id="cbisActive" class="form-select" aria-label="">
+                        
+                @foreach (var item in arrayStatus)
+                {
+                    @if (@itemModel.IsActive == int.Parse(item.Code))
+                    {
+                        <option selected value="@item.Code">@item.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Code">@item.Name</option>
+                    }
+                }
+            </select>
+
+                       
+                   
+                    <div class="invalid-feedback-cs">
+                        Please choose a username.
+                    </div>
+                </div>
+        <div class="col-12 form-group">
+                <label class="form-label">Số ngày bảo hành</label>
+            <input type="text" value="@itemModel.WarrantyDate" name="Warrantydate" id="txtWarrantydate" class="form-control" required placeholder="" />
+                <div class="invalid-feedback-cs">
+                </div>
+
+        </div>
+
+        @{
+            Html.RenderPartial("ControlForm/FileInputCs", new
+            {
+                ValueControl = itemModel.Inputfile,
+                NameControl = "txtinputfile",
+                IdControl = "txtinputfile",
+                Lable = "File mô tả"
+
+            });
+        }
+        <div class="col-12">
+            <label for="inputAddress2" class="form-label">Mô tả ngắn</label>
+            <textarea name="ShortDes" id="txtShortDes" class="form-control" style="height: 100px">@itemModel.ShortDes</textarea>
+        </div>   
+        
+        
+
+
+            <div class="col-12">
+                <label for="inputAddress2" class="form-label">Nội dung</label>
+                <textarea name="content" id="txtContent" class="form-control" style="height: 100px">@itemModel.Content</textarea>
+                
+      
+           
+            </div>
+
+
+           
+
+
+                <div class="col-12">
+            <label for="inputAddress2"  class="form-label">Ghi chú</label>
+            <textarea name="noted" id="txtNoted" class="form-control" style="height: 100px">@itemModel.Noted</textarea>
+                </div>
+
+
+
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+                Đóng
+            </button>
+    <button type="button" onclick="saveJob(@itemModel.Id)" class="btn btn-primary">Lưu</button>
+        </div>
+

@@ -1,0 +1,391 @@
+﻿@page
+@model IndexAdminModel
+
+@{
+    ViewData["Title"] = "Home page";
+   
+    var infoDashboard = Model.InfoDashboard;
+}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link href="assets/css/main.css" rel="stylesheet">
+
+<div class="pagetitle"> 
+    <h1>Dashboard</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+    </nav>
+</div>
+
+<section class="section dashboard">
+
+      <div class="card-body">
+         <section class="reportSection">
+             
+                <form class="row" method="get" action="/indexAdmin">
+                      <div class="col-md-3">
+                <label class="form-label">Lựa chọn nhanh</label>
+                <select id ="cbTypeSelect" name="typeTime" onchange = changeTypeTime(this)   class="form-select" aria-label="">
+                 
+                  <option  value="0">Hôm nay</option>
+                  <option   value="1">Tuần này</option>
+                  <option selected value="3">Tháng này</option>
+                  <option  value="2">Khoảng thời gian</option>
+                  
+                </select>
+                
+                </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Từ </label>
+                                <input  id ="fromDate" type="date"  value = "@Model.RequestPage.FromText" name="from" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Đến </label>
+                                <input   id ="toDate" type="date" value = "@Model.RequestPage.ToText" name="to" class="form-control">
+                            </div>
+
+                            <div class="col-md-2">
+                            <label class="form-label">Nhóm</label>
+                            <select id ="cbgroup" name="groupId"  class="form-select" aria-label="">
+                            <option value="tat-ca">Tất cả</option>
+
+
+                            </select>
+                            </div>
+
+                            <div class="col-md-2">
+                            <label class="form-label">Thành viên</label>
+                            <select id ="cbmember" name="memberId" class="form-select" aria-label="">
+                            <option selected>Tất cả</option>
+
+                            </select>
+                            </div>
+
+                          <div class="col-md-2"> 
+                                <br/>
+                                <button type="submit" class="btn btn-primary">Xem báo cáo</button>
+
+                            </div>
+                            
+                     
+
+            </form>
+          
+        </section>
+      
+    <div class="row">
+
+        <div class="col-lg-8 ">
+            <section class="reportSection">
+                <p class="title">BÁO CÁO  <span id="lableText">HÀNG NGÀY</span> </p>
+                    <span>Số lượng CV theo ngày tạo</span>
+
+                    <div class="row">
+                    <div class="pieChart">
+                        <canvas id="myChart"></canvas>
+
+                        <p>Dựa trên CV</p>
+                    </div>
+                    <div class="pieChart">
+                        <canvas id="myChart2"></canvas>
+                        <p>Dưa trên ứng tuyển</p>
+                    </div>
+
+
+
+                </div>
+
+                <table class="table">
+
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tổng Số CV</th>
+                            <th scope="col">Số CV ứng tuyển</th>
+                            <th scope="col">Số CV Onboard</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                            @{
+                                var rateOnboard  = infoDashboard.rateOB;
+                                var rateUV = infoDashboard.rateUV;
+
+                               
+                            }
+
+                       
+                        <tr>
+                            <th scope="row">Số lượng</th>
+                             <td>@infoDashboard.sumTotalCV</td>
+                             <td>@infoDashboard.totalCVAply</td>
+                             <td>@infoDashboard.sumOnboard</td>
+                           
+                        </tr>
+
+                            <tr>
+                                <th scope="row">Tỉ lệ</th>
+                                <td></td>
+                                <td>@infoDashboard.rateUV</td>
+                                <td>@infoDashboard.rateOB</td>
+
+                            </tr>
+
+
+                        </tbody>
+                </table>
+
+                <span >Số lượng CV onboard</span>   
+                 
+                <table class="table">
+            
+                        <tr>
+                             <th scope="row">Số CV onboard</th>
+                              <th >Số CV pass</th>
+                              <th scope="row">Tỉ lệ pass(%)</th>
+                        
+                          
+                        </tr>
+                         <tr>
+
+                            <td><a href="javascript:void(0)" onclick="openCVOnboard(0)"> @infoDashboard.sumOnboardcV </a></td>
+                       
+                            <td> <a href="javascript:void(0)" onclick="openCVOnboard(1)">@infoDashboard.SumcvPass </a></td>
+                       
+                            <td>@infoDashboard.rateCVPass</td>
+                       
+                        </tr>  
+                </table>
+               
+            </section>
+
+
+
+
+        </div>
+        <div class="col-lg-4 ">
+
+            <section class="reportSection">
+                <p class="title">User đang online </p>
+
+                <div class="card info-card sales-card">
+
+                    <div class="card-body">
+                        <h5 class="card-title"> <span>User Online</span></h5>
+
+                        <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                <i class="bi bi-cart"></i>
+                            </div>
+                            <div class="ps-3">
+                                <h6><a onclick="opneFormActiveUser()">@Model.UserDataGlobal.GetCountUserOnline() </a></h6>
+                                <span class="text-success small pt-1 fw-bold">@Model.GlobalData.TotalUser</span> <span class="text-muted small pt-2 ps-1">Tổng User</span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+            <section class="reportSection">
+                <p class="title">Biểu đồ theo dõi tỉ lệ </p>
+                <div class="row">
+                    <div class="row col-lg-12">
+                       
+
+
+                    </div>
+
+                </div>
+
+                <div>
+                    
+                  <canvas id="myChart3"></canvas>
+
+
+                </div>
+
+                <div>
+
+                    <canvas id="myChart4"></canvas>
+
+
+                </div>
+
+                <div>
+
+                    <canvas id="myChart5"></canvas>
+
+
+                </div>
+
+
+
+        </div>
+
+
+
+
+</section>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" >
+ <div class="modal-dialog modal-xl" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Danh sách ứng viên</h5>
+     
+      </div>
+            <div class="modal-body"  >
+               <table class="table  table-striped">
+                        <thead>
+                            <tr>    
+                                <th>STT</th>
+                                <th>Mã</th>
+                                <th>Ứng cử viên</th>
+                                <th>Vị trí</th>
+                                <th>Đối tác/dự án</th>
+                                <th>Trạng thái</th>
+                                <th>Người tạo</th>
+                                <th>Xử lý bởi</th>
+                                <th>Ngày nhận</th>
+                                <th>Cập nhật gần nhất</th>
+                       
+                            </tr>
+                        </thead>
+                          <tbody id = "tableDataChart">
+
+
+                         </tbody>
+                </table>
+            
+
+            </div>
+      <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeForm()" >Đóng</button>
+          
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="dataUser" tabindex="-1" >
+ <div class="modal-dialog modal-xl" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Danh sách ứng viên</h5>
+     
+      </div>
+            <div class="modal-body"  >
+               <table class="table  table-striped">
+                        <thead>
+                            <tr>    
+                                <th>STT</th>
+                                <th>Mã nhân viên</th>
+                                
+                                <th>Tên nhân viên</th>
+                                <th>Vai trò</th>
+                                <th>Trạng thái</th>
+                                <th>Truy cập gần nhất</th>
+                                
+                       
+                            </tr>
+                        </thead>
+                          <tbody >
+                        @{
+                            var indextemp = 0;
+                        }
+                        @foreach (var itemData in infoDashboard.listUser)
+                        {
+                            var itemInfo = itemData as dynamic;
+                            var datetimeUpdate = itemInfo.LastUpdated.ToString("dd/MM/yyyy HH:mm");
+                            indextemp++;
+                            <tr>
+                                <td>@indextemp</td>
+                                <td>@itemInfo.UserName</td>
+                                <td>@itemInfo.FullName </td>
+                                <td> </td>
+                                <td>@itemInfo.StatusOnline</td>
+                                <td>@datetimeUpdate</td>
+                            </tr>
+                        }
+                           
+
+                         </tbody>
+                </table>
+            
+
+            </div>
+      <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeFormUser()" >Đóng</button>
+          
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="dataOrderMember" tabindex="-1" >
+ <div class="modal-dialog modal-xl" >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Danh sách đơn hàng member</h5>
+     
+      </div>
+            <div class="modal-body"  >
+               <table class="table  table-striped">
+                        <thead>
+                            <tr>    
+                                    <th>STT</th>
+                                    <th>Họ tên</th>
+                                    <th>Onboard</th>
+                                    <th>Vị trí</th>
+                                    <th>Đối tác</th>
+                                    <th>Trạng thái</th>
+                                    <th>hệ thống</th>
+                                
+                                    <th>Người tạo</th>
+                                     <th>Ngày tạo</th>
+                                    <th>DPD</th>
+                                    <th>Hết hạn BH</th>
+                                    <th>Xử lý bởi</th>
+
+                                    <th>Kết quả</th>
+                       
+                            </tr>
+                        </thead>
+                          <tbody  id ="dataOnboardMemberTable">
+               
+                           
+
+                         </tbody>
+                </table>
+            
+
+            </div>
+      <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeFormUserCharOnboard()" >Đóng</button>
+          
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+<script type="text/javascript">
+    
+    let dataDraw = @Html.Raw(Json.Serialize(@infoDashboard));
+
+
+
+
+
+</script>
+
+<script src="assets/js/chart.js"></script>

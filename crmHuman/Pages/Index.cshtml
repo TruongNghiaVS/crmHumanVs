@@ -1,0 +1,425 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+
+}
+
+
+@*    <main id="main" class="main"> *@
+
+<div class="pagetitle"> 
+    <h1>Dashboard</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section dashboard">
+    
+    <div class="row">
+         <div class="card-body">
+
+                <form class="row" method="get" action="/">
+
+                <div class="col-md-2">
+                    <label class="form-label">Từ Ngày</label>
+                    <input value="@Model.RequestPage.FromText" id ="fromDate" type="date" name="from" class="form-control">
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Đến ngày</label>
+                    <input value="@Model.RequestPage.ToText"  id ="toDate" type="date" name="to" class="form-control">
+                </div>
+
+                <div class="col-md-3">
+                <label class="form-label">Việc làm/dự án</label>
+                <select id ="cbjob" name="job"  class="form-select" aria-label="">
+                  <option value="-1">Tất cả</option>
+                    @foreach (var element  in Model.JobList.Data)
+                    {
+                        var item = element as dynamic;
+                        @if (@Model.RequestPage.Job == item.Id )
+                        {
+                        
+                            <option selected value="@item.Id">@item.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+
+                </select>
+                
+                </div>
+                <div class="col-md-3">
+                <label class="form-label">Trạng thái</label>
+                <select id ="cbstatus2" name="status"  class="form-select" aria-label="">
+                      <option value="-1">Tất cả</option>
+                        @foreach (var element  in Model.StatusList.Data)
+
+                        {
+                            var item = element as dynamic;
+
+                            @if (@Model.RequestPage.Status == item.Id )
+                            {
+                                
+                                <option selected value="@item.Id">@item.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        
+                        }
+
+                </select>
+
+                </div>
+
+                 @if(Model.Permision.SearchGrop == true)
+    {
+                    @if (Model.RequestPage.RoleCode == "3")
+           {
+            <div class="col-md-2" style="display: none;">
+                            <label class="form-label">Nhóm</label>
+                            <select id ="cbgroup" name="groupId"  class="form-select" aria-label="">
+                                <option value="tat-ca">Tất cả</option>
+                            
+
+                            </select>
+                        </div>
+           }
+           else 
+           {
+                <div class="col-md-2">
+                            <label class="form-label">Nhóm</label>
+                            <select id ="cbgroup" name="groupId"  class="form-select" aria-label="">
+                                <option value="tat-ca">Tất cả</option>
+                            
+
+                            </select>
+                        </div>
+           }
+
+
+            <div class="col-md-3">
+                <label class="form-label">Thành viên</label>
+                <select id ="cbmember" name="memberId" class="form-select" aria-label="">
+                    <option selected>Tất cả</option>
+                
+                </select>
+            </div>
+    }
+
+
+
+                 <div class="text-end">
+                    <button type="button" onclick="exportFileDashboard()" class="btn btn-primary" >Xuất file</button>
+                    <button type="submit" class="btn btn-primary">Tìm kiém</button>
+                </div>
+
+
+
+            </form>
+           </div>
+         
+        <!-- Left side columns -->
+            <div class="col-lg-8">
+                    <div class="row">
+
+                        <!-- Sales Card -->
+                        @{
+                            var itemdashboard = Model.InfoDashboard;
+                        }
+                        
+
+                            <div class="col-xxl-4 col-md-6">
+                            <div class="card info-card sales-card">
+
+
+
+                                <div class="card-body">
+
+                                    <h5 class="card-title">Số lượng CV</h5>
+                                    <div class="d-flex align-items-center">
+                                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-cart"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                                <h6>@itemdashboard.totalCVInput</h6>
+                                            <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+
+                                        </div>
+                                    </div>
+                                </div> 
+
+                            </div>
+                        </div>
+                        <div class="col-xxl-4 col-md-6">
+                            <div class="card info-card sales-card">
+
+
+
+                                <div class="card-body">
+
+                                    <h5 class="card-title">Số lượng ứng tuyển </h5>
+                                    <div class="d-flex align-items-center">
+                                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-cart"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                                <h6>@itemdashboard.totalCV</h6>
+                                            <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+
+                                        </div>
+                                    </div>
+                                </div> 
+
+                            </div>
+                        </div>
+                    
+                        <div class="col-xxl-4 col-xl-12">
+
+                            <div class="card info-card customers-card">
+
+
+
+                                <div class="card-body">
+
+                                    <h5 class="card-title">Ứng viên Onboard </h5>
+                                    <div class="d-flex align-items-center">
+                                        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-people"></i>
+                                        </div>
+                                        <div class="ps-3">
+                                            <h6>@itemdashboard.totalOnboard</h6>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    
+                        
+
+                        <!-- Recent Sales -->
+                        <div class="col-12">
+                            <div class="card recent-sales overflow-auto">
+
+                                <div class="card-body">
+                                    <h5 class="card-title">Tổng quan </h5>
+
+                                            <table class="table table-borderless ">
+                                            <thead>
+                                                <tr>
+                                                
+                                                    <th scope="col">Tổng quan </th>
+                                                    <th scope="col">Số lượng</th>
+                                                    <th scope="col">Tỉ lệ đạt</th>
+                                                
+                                                </tr>
+                                            </thead>
+                                        <tbody>
+                                    @{
+                                        var listStatusReportOrder = Model.StatusListOverviewDashboard.Data; 
+
+                                       
+
+                                        var rateCVNew ="0";
+                                        var rateCVProcess ="0";
+                                        var rateCVOnboard ="0";
+
+                                        var rateCVDone ="0";
+
+                                        if(itemdashboard.totalCV > 0)
+                                        {
+                                            rateCVNew = ((itemdashboard.totalCVNew / itemdashboard.totalCV)).ToString("0.00%");
+                                            rateCVProcess = ((itemdashboard.totalCVProcess / itemdashboard.totalCV) ).ToString("0.00%");
+                                            rateCVOnboard = ((itemdashboard.totalOnboard / itemdashboard.totalCV)) .ToString("0.00%");
+                                            rateCVDone = ((itemdashboard.totalDone / itemdashboard.totalCV)) .ToString("0.00%");
+                                        }
+
+                                                
+                                                
+                                            }
+
+                                            <tr>
+                                                <td>CV nguồn</td>
+                                                <td>@itemdashboard.totalCVNew  </td>  
+                                                <td>@rateCVNew</td> 
+                                            </tr>
+
+                                            <tr>
+                                                <td>Ứng viên đang process</td>
+                                                <td>@itemdashboard.totalCVProcess</td>
+                                                 <td>@rateCVProcess</td>
+                                             </tr>
+
+                                            <tr>
+                                                <td>Ứng viên Onboard</td>
+                                                <td>@itemdashboard.totalOnboard</td>
+                                                <td>@rateCVOnboard</td>
+                                             </tr>
+
+                                              <tr>
+                                                <td>Ứng viên Done</td>
+                                                <td>@itemdashboard.totalDone</td>
+                                                <td>@rateCVDone</td>
+                                             </tr>
+                                             <tr>
+
+                                                <td>
+                                            <h5 class="card-title">Thông số theo trạng thái </h5>
+
+                                                </td>
+                                             </tr>
+                                            
+                                            
+                                                    @if(listStatusReportOrder != null)
+                                        
+                                                    @foreach (var item in listStatusReportOrder)
+                                                    {
+                                                            var itemorder = item as dynamic;
+                                                            var rateItem = "0";
+                                                                if(itemdashboard.totalCV > 0)
+                                                                {
+                                                                    rateItem = ((itemorder.Total / itemdashboard.totalCV) ).ToString("0.00%");
+                                                                }
+                                                                <tr>
+                                                                    <td scope="row">
+                                                                        @itemorder.Name
+                                                                    </td>
+                                                                    <td>@itemorder.Total</td>
+                                                                    <td>@rateItem</td>
+                                                        
+                                                               </tr>
+                                                    }
+                                                
+                                                    
+                                                    
+                                                </tbody>
+                                            </table>
+
+                                
+                                </div><!-- End Recent Sales -->
+
+                                        <div class="card-body">
+                                    <h5 class="card-title">Đơn hàng gần nhất </h5>
+
+                                    <table class="table table-borderless ">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Tên ứng cử viên </th>
+                                                <th scope="col">Vị trí</th>
+                                                <th scope="col">Trạng thái</th>
+                                                <th scope="col">Cập nhật lần cuối</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                        
+                                                    @foreach (var item in Model.TopOrder.Data)
+                                                    {
+                                                            var itemorder = item as dynamic;
+                                                                <tr>
+                                                                <td scope="row">
+                                                                    <a href="/OrderDetail?OrderId=@itemorder.Id">
+                                                                        #@itemorder.Code</a>
+                                                                </td>
+                                                                <td>@itemorder.CandidateName</td>
+                                                                <td>@itemorder.JobName</td>
+                                                        
+                                                                <td><span class="badge bg-success">@itemorder.StatusText</span></td>
+                                                                <td>@itemorder.CreateAt</td>
+                                                            </tr>
+                                                    }
+                                                
+                                                    
+                                                    
+                                                </tbody>
+                                    </table>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            
+
+                            </div>
+                </div><!-- End Left side columns -->
+                <!-- Right side columns -->
+                <div class="col-lg-4">
+
+                    <!-- Recent Activity -->
+                    <div class="card">
+                        <div class="filter">
+                            <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                <li class="dropdown-header text-start">
+                                    <h6>Filter</h6>
+                                </li>
+
+                                <li><a class="dropdown-item" href="#">Hôm nay</a></li>
+                                <li><a class="dropdown-item" href="#">Thàng này</a></li>
+                             
+                            </ul>
+                        </div>
+
+                        <div class="card-body">
+                            <h5 class="card-title">Hoạt đông gần đây </h5>
+
+                            <div class="activity">
+                        @if( Model.TopImpact != null && Model.TopImpact.Data != null)
+                        @foreach (var item in Model.TopImpact.Data)
+                        {
+                            var itemImpact = item as dynamic;
+                     
+                            <div class="activity-item d-flex">
+                                <div class="activite-label">@itemImpact.CreateAt</div>
+                                <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
+                                <div class="activity-content">
+                                    Đơn hàng @itemImpact.OrderCode đã được cập nhật bởi @itemImpact.CreatedByName
+                                    Trạng thái: @itemImpact.StatusName 
+                                   
+                                </div>
+                            </div>
+
+                        
+
+                        }
+                        
+                               
+
+                               
+                            </div>
+
+                        </div>
+                    </div><!-- End Recent Activity -->
+                   
+                 
+                  
+                    
+
+                </div><!-- End Right side columns -->
+
+            </div>
+        </section>
+
+    @* </main> *@
+ 
+
+ <script>
+   var groupSearch = "@Model.RequestPage.GroupId";
+   var memberSearch = "@Model.RequestPage.MemberId";
+   
+   
+   var extraSearchRequest  = {groupSearch,memberSearch};
+
+</script>
+
+

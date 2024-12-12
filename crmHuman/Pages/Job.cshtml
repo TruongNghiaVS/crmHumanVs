@@ -1,0 +1,94 @@
+﻿@page
+@model JobModel
+@{
+    ViewData["Title"] = Model.TitlePage;   
+}
+<div class="pagetitle">
+    <h1>@Model.TitlePage</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="/Employee">Nhân viên</a></li>
+            <li class="breadcrumb-item active">Danh sách</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+            
+                    @{
+                        Html.RenderPartial("formSearch/searchFormJob", Model);
+                    }
+
+                   
+                    <table class="table  table-striped">
+                        <thead>
+                            <tr>
+                                @foreach (var item in Model.TableColumnText)
+                                {
+                                    <th>
+                                        @item
+                                    </th>
+                                }     
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int i = 0;
+                            }
+                            @foreach (var itemData in Model.DataAll.Data)
+                            {
+                                var itemInfo = itemData as dynamic;
+                                var datetimeCreate = @itemInfo.CreateAt.ToString("dd/MM/yyyy HH:mm");
+                                var datetimeUpdate = "";
+                                if (@itemInfo.UpdateAt != null)
+                                {
+                                    datetimeUpdate = @itemInfo.UpdateAt.ToString("dd/MM/yyyy HH:mm");
+                                }
+                                i++;
+                                <tr>
+                                    <td>@i</td>
+                                    <td><a href="javascript:void(0)" onclick="openFormEdit(@itemInfo.Id,'@Model.KeyPage')">@itemInfo.Name</a></td>
+                                    <td>@itemInfo.Code</td>
+                                    <td>@itemInfo.FieldText
+                                    </td>
+                                    <td>@itemInfo.WarrantyDate</td>
+                                    <td>@Model.GetNameStatus(itemInfo.IsActive) </td>
+                                    <td>@datetimeCreate</td>
+                                    <td>@datetimeUpdate</td>
+                                    <td>
+                                        <a href="javascript:void(0)" onclick="confirmDelete(@itemInfo.Id,'job')">
+                                            <i class="bi bi-trash-fill">  </i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                      
+                            
+                            
+                        </tbody>
+                    </table>
+                    @{
+                        await Html.RenderPartialAsync("formSearch/pagination", Model);
+                    }
+                        
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="formModal" tabindex="-1" >
+    <div class="modal-dialog  modal-dialog-centered modal-lg" >
+        <div class="modal-content" id="contentModal">
+        </div>
+    </div>
+</div><!-- End Large Modal-->
+
+

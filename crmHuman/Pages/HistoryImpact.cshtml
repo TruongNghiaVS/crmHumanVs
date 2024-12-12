@@ -1,0 +1,139 @@
+﻿@page
+@model HistoryImpactModel
+@{
+    ViewData["Title"] = Model.TitlePage;   
+
+    var arraysource = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="1", Name ="Facebook"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="2", Name ="Web"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="3", Name ="Form"
+            },
+            new Model.SelectDisplay()
+            {
+              Code ="5", Name ="khác"
+            }
+            ,
+            new Model.SelectDisplay()
+            {
+              Code ="6", Name ="HCNS"
+            }
+        };
+      string GetNameSource(string code)
+        {
+            if (string.IsNullOrEmpty(code))
+            {
+                return "TC";
+            }
+            string temp = "";
+            foreach (var item in arraysource)
+            {
+                if (item.Code == code.ToString())
+                {
+                    temp = item.Name;
+                    break;
+                }
+            }
+            if(temp =="")
+            {
+                return "TC";
+            }
+            return temp;
+        }
+}
+<div class="pagetitle">
+    <h1>@Model.TitlePage</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="/Employee">Nhân viên</a></li>
+            <li class="breadcrumb-item active">Danh sách</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+            
+                    @{
+                        Html.RenderPartial("formSearch/searchFormImpact", Model);
+                    }
+
+                   
+                    <table class="table  table-striped">
+                        <thead>
+                            <tr>
+                                @foreach (var item in Model.TableColumnText)
+                                {
+                                    <th>
+                                        @item
+                                    </th>
+                                }     
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int i = 0;
+                            }
+                            @foreach (var itemData in Model.DataAll.Data)
+                            {
+                                var itemDisplay = itemData as dynamic;
+                                i++;
+                                 var datetimeCreate = @itemDisplay.CreateAt.ToString("dd/MM/yyyy HH:mm");
+                               
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@itemDisplay.OrderCode</td>
+                                    <td>@itemDisplay.AuthorName</td>
+                                    <td>@itemDisplay.StatusName</td>
+                                    <td>
+                                         @if(!string.IsNullOrEmpty(itemDisplay.TxtTimer))
+                                        {
+                                              <span> Vào lúc @itemDisplay.TxtTimer  </span> <br>
+                                        }
+                                        @if(itemDisplay.DateFrom != null)
+                                        {
+                                              <span> Ngày   @itemDisplay.DateFrom </span> <br>
+                                        }
+                                        @if(!string.IsNullOrEmpty(itemDisplay.TxtPlace))
+                                        {
+                                               <span>Tại  @itemDisplay.TxtPlace </span> 
+                                        }
+                                    </td>
+                                    <td>@datetimeCreate</td>
+                                </tr>
+                               
+                            }
+                            </tbody>
+                    </table>
+                    @{
+                        Html.RenderPartial("formSearch/pagination", Model);
+                    }
+                        
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="formModal" tabindex="-1" >
+    <div class="modal-dialog  modal-dialog-centered modal-lg" >
+        <div class="modal-content" id="contentModal">
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,166 @@
+﻿@page
+@model OrderStatusModel
+@{
+    ViewData["Title"] = Model.TitlePage;   
+
+    var arraysource = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="1", Name ="Facebook"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="2", Name ="Web"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="3", Name ="Form"
+            },
+            new Model.SelectDisplay()
+            {
+              Code ="5", Name ="khác"
+            }
+            ,
+            new Model.SelectDisplay()
+            {
+              Code ="6", Name ="HCNS"
+            }
+             ,
+            new Model.SelectDisplay()
+            {
+              Code ="7", Name ="ZALO OA"
+            },
+              new Model.SelectDisplay()
+            {
+              Code ="8", Name ="Google FormCNS"
+            }
+        };
+      string GetNameSource(string code)
+        {
+            if (string.IsNullOrEmpty(code))
+            {
+                return "TC";
+            }
+            string temp = "";
+            foreach (var item in arraysource)
+            {
+                if (item.Code == code.ToString())
+                {
+                    temp = item.Name;
+                    break;
+                }
+            }
+            if(temp =="")
+            {
+                return "TC";
+            }
+            return temp;
+        }
+}
+<div class="pagetitle">
+    <h1>@Model.TitlePage</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="/Employee">Nhân viên</a></li>
+            <li class="breadcrumb-item active">Danh sách</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+            
+                    @{
+                        Html.RenderPartial("formSearch/searchStatus", Model);
+                    }
+
+
+                    <table class="table  table-striped">
+                        <thead>
+                            <tr>
+
+                                @{
+                                    var totalSum =0;
+                                      foreach (var itemData in Model.DataAll.Data)
+                                      {
+                                          var itemDisplay2 = itemData as dynamic;
+                                          totalSum+= int.Parse( itemDisplay2.Total);
+                                      }
+                                }
+                                @foreach (var item in Model.TableColumnText)
+                                {
+                                    <th>
+                                        @item
+                                    </th>
+                                }     
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int i = 0;
+                            }
+                            @foreach (var itemData in Model.DataAll.Data)
+                            {
+                                var itemDisplay = itemData as dynamic;
+                                i++;
+                                decimal rate =0;
+                                var totalCv = int.Parse(itemDisplay.Total);
+                                if(totalCv  > 0 && totalSum > 0)
+                                {
+                                        rate =  (decimal)totalCv/totalSum ;
+                                        
+                                }
+                                
+                                 <tr>
+                                  
+                                    <td>@i</td>
+                                      <td><a onclick="showOrderList('@itemDisplay.Id')" href="javascript:void(0)"> @itemDisplay.Name </a> </td>
+                                    <td>@itemDisplay.Total</td>
+                                    <td> @rate.ToString("0.00%") </td>
+                                 </tr>
+                               
+                            }
+                            <tr>
+
+                                <td></td>
+                                <td><strong>Tổng </strong></td>
+                                <td><strong> @totalSum </strong></td>
+                                <td><strong>100% </strong></td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                    @{
+                        Html.RenderPartial("formSearch/pagination", Model);
+                    }
+                        
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="formModal" tabindex="-1" >
+    <div class="modal-dialog  modal-dialog-centered modal-lg" >
+        <div class="modal-content" id="contentModal">
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+   var groupSearch = "@Model.RequestSearch.GroupId";
+   var memberSearch = "@Model.RequestSearch.MemberId";
+   
+   
+   var extraSearchRequest  = {groupSearch,memberSearch};
+
+</script>

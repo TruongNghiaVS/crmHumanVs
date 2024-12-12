@@ -1,0 +1,196 @@
+﻿@{
+
+    var arrayRol = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="1", Name ="Admin"
+            },
+            new Model.SelectDisplay()
+            {
+             Code ="2", Name ="TC"
+            },
+            new Model.SelectDisplay()
+            {
+              Code ="3", Name ="TL"
+            }, new Model.SelectDisplay()
+            {
+              Code ="4", Name ="Marketting"
+            },
+            new Model.SelectDisplay()
+            {
+              Code ="6", Name ="Trưởng CTV"
+            },
+               new Model.SelectDisplay()
+            {
+              Code ="7", Name ="CTV"
+            }
+        };
+
+
+    var arrayStatus = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="0", Name ="Deactive"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="1", Name ="Online"
+            }
+
+        };
+    var dateText = "";
+    if (@Model.Dob != null)
+    {
+        dateText = @Model.Dob.ToString("yyy-MM-dd");
+    }
+
+    var dateOnboard = "";
+    if ( @Model.Onboard != null)
+    {
+        dateOnboard = @Model.Onboard.ToString("yyy-MM-dd");
+    }
+
+    var roleCodeUser = @Model.RoleCode;
+
+    if(roleCodeUser == "6")
+    {
+        arrayRol = new List<crmHuman.Model.SelectDisplay>()
+        {
+           
+               new Model.SelectDisplay()
+            {
+              Code ="7", Name ="CTV"
+            }
+        };
+    }
+}
+
+    <div class="modal-header">
+    
+   
+    @if (Model.Id < 1)
+    {
+        <h5 class="modal-title">Thêm mới nhân viên</h5>
+    }
+    else
+    {
+        <h5 class="modal-title">Cập nhật thông tin</h5>
+    }
+    <button type="button" class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+
+            <form id="mainForm" class="needs-validation" novalidate>
+
+                <div class="col-12 form-group">
+                    <label class="form-label">Họ và tên</label>
+            <input type="text" value="@Model.FullName" name="fullName" id="txtFullName" class="form-control" required placeholder="" />
+                    <div class="invalid-feedback-cs">
+                    </div>
+
+                </div>
+                <div class="col-12 form-group">
+                    <label class="form-label">Ngày sinh</label>
+                    <input type="date" id="dob"
+                   value="@dateText"
+                        name="dob" class="form-control">
+                </div>
+
+        <div class="col-12 form-group">
+            <label class="form-label">Ngày vào làm</label>
+            <input type="date" id="dateOnboard"
+                   value="@dateOnboard"
+                   name="dob" class="form-control">
+        </div>
+
+                <div class="col-12 form-group">
+                    <label for="inputAddress2" class="form-label">Số điện thoại</label>
+            <input type="text" name="phone" id="txtPhone" value="@Model.Phone" class="form-control" placeholder="">
+                </div>
+
+        @if(roleCodeUser != "6")
+    {
+        <div class="col-12 form-group">
+            <label for="txtLineCode" class="form-label">Line gọi</label>
+            <input type="text" name="lineCode" id="txtLineCode" value="@Model.LineCode" class="form-control" placeholder="">
+        </div>
+
+
+         <div class="col-12 form-group">
+                    <label class="form-label">Màu sắc đại diện</label>
+                         <input type="color" value="@Model.ColorCode" name="Color" id="txtColor" class="form-control" placeholder="" />
+                    <div class="invalid-feedback-cs">
+                    </div>
+
+                </div>
+        }
+
+                @if (Model.Id > 0)
+                {
+                        <div class="col-12 form-group ">
+                        <label class="form-label">Mã nhân viên</label>
+                        <input name="userName" readonly id="txtUserName" value="@Model.UserName" type="text" class="form-control" placeholder="">
+                        <div class="invalid-feedback-cs">
+                        Please choose a username.
+                        </div>
+                        </div>
+                 }
+
+        @if (Model.Id < 1)
+        {
+            <div class="col-12 form-group ">
+                <label class="form-label">Mật khẩu</label>
+                <input name="pass" id="txtPass" type="password" class="form-control" placeholder="">
+                <div class="invalid-feedback-cs">
+                </div>
+            </div>
+        }
+        <div class="col-12 form-group">
+                    <label class="form-label">Vai trò</label>
+            <select  name="roleCode" id="txtRoleCode" class="form-select" aria-label="">
+                @foreach (var item in arrayRol)
+                {
+                    @if (@Model.RoleCode == item.Code)
+                    {
+                        <option selected value="@item.Code">@item.Name</option>
+                    }
+                    else
+                    {
+                        <option  value="@item.Code">@item.Name</option>
+                    }
+                }
+                </select>
+
+  
+                    <div class="invalid-feedback-cs">
+                    </div>
+                </div>
+
+                
+
+                <div class="col-12">
+                    <label class="form-label">Hình ảnh đại diện</label>
+                    <input class="form-control" type="file" id="formFile">
+                </div>
+
+                <div class="col-12">
+            <label for="inputAddress2"  class="form-label">Ghi chú</label>
+            <textarea name="noted"  id="txtNoted" class="form-control" style="height: 100px">@Model.Noted</textarea>
+                </div>
+
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+                Đóng
+            </button>
+    <button type="button" onclick="SaveEmployee(@Model.Id)" class="btn btn-primary">Lưu</button>
+        </div>
+

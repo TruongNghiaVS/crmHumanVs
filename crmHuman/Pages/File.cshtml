@@ -1,0 +1,123 @@
+﻿@page
+@model FileModel
+@{
+    ViewData["Title"] = Model.TitlePage;   
+}
+<div class="pagetitle">
+    <h1>@Model.TitlePage</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="/Employee">Nhân viên</a></li>
+            <li class="breadcrumb-item active">Danh sách</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+            
+                    @{
+                        Html.RenderPartial("formSearch/searchForm", Model);
+                    }
+                    @{
+                        var columnText = Model.TableColumnText;
+                        if(Model.UserData.RoleCode =="1")
+                        {
+                            columnText = Model.TableColumnTextAdmin;
+                        }
+
+                    }
+                   
+                    <table class="table  table-striped">
+                        <thead>
+                            <tr>
+                                @foreach (var item in columnText)
+                                {
+                                    <th>
+                                        @item
+                                    </th>
+                                }     
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int i = 0;
+                            }
+                            @foreach (var itemData in Model.DataAll.Data)
+                            {
+                                var itemInfo = itemData as dynamic;
+                                var datetimeCreate = "";
+                                datetimeCreate  =@itemInfo.CreateAt.ToString("dd/MM/yyyy HH:mm");
+                                var datetimeUpdate = "";
+                                if (@itemInfo.UpdateAt != null)
+                                {
+                                    datetimeUpdate = @itemInfo.UpdateAt.ToString("dd/MM/yyyy HH:mm");
+                                    if (@itemInfo.UpdateAt > @itemInfo.CreateAt)
+                                    {
+                                        datetimeCreate = datetimeUpdate;
+                                    }
+                                }
+
+                               
+
+                                var onBoardext = "";
+                                if (@itemInfo.Onboard != null)
+                                {
+                                    onBoardext = @itemInfo.Onboard.ToString("dd/MM/yyyy HH:mm");
+                                }
+                                i++;
+                                <tr>
+                                    <td>@i</td>
+                                    <td><a href="javascript:void(0)" onclick="openFormEdit(@itemInfo.Id)">@itemInfo.FullName</a></td>
+                                    <td>@itemInfo.UserName</td>
+                                    <td>@Model.GetNameRoleCode(itemInfo.RoleCode)</td>
+                                    @if(Model.UserData.RoleCode == "1")
+                                    {
+                                        <td>@Model.GetStatusDelete(itemInfo.Deleted) </td>
+                                    }
+                                
+                                    <td>@onBoardext</td>
+                                    <td>@datetimeCreate</td>
+                                    <td>
+                                        <a href="javascript:void(0)" onclick="confirmDelete(@itemInfo.Id)">
+                                            <i class="bi bi-trash-fill">
+
+                                    </i></a>
+                                        <a href="javascript:void(0)" onclick="OpenChangPassword(@itemInfo.Id)">
+                                            <i class="bi bi-compass-fill">
+
+                                            </i>
+                                        </a>
+                                       
+                                </td>
+                                </tr>
+                            }
+                      
+                            
+                            
+                        </tbody>
+                    </table>
+                    @{
+                        Html.RenderPartial("formSearch/pagination", Model);
+                    }
+                        
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="formModal" tabindex="-1" >
+    <div class="modal-dialog  modal-dialog-centered modal-lg" >
+        <div class="modal-content" id="contentModal">
+        </div>
+    </div>
+</div><!-- End Large Modal-->
+
+

@@ -1,0 +1,61 @@
+﻿<form class="row g-3" method="get" action="/Employee">
+
+    <div class="col-md-6">
+        <label class="form-label">Từ Ngày</label>
+        <input value="@Model.RequestSearch.FromText" type="date" name="from" class="form-control">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Đến ngày</label>
+        <input value="@Model.RequestSearch.ToText" type="date" name="to" class="form-control">
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Từ khoá</label>
+        <input type="text" value="@Model.RequestSearch.Token" name="token" class="form-control">
+    </div>
+
+
+    <div class="col-md-6" style="display:none">
+        <label class="form-label">Limit</label>
+        <input type="text" name="limit" value="@Model.RequestSearch.Limit" class="form-control">
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Trạng thái</label>
+        <select name="status" value="@Model.RequestSearch.Status" class="form-select" aria-label="">
+            <option value="-1">Tất cả</option>
+            <option value="1">Hoạt động</option>
+            <option value="0">Không hoạt động</option>
+
+        </select>
+    </div>
+<div class="col-md-6">
+        <label class="form-label">Đối tác</label>
+        <select name="partnerId" id="cbpartnerId3" onchange=getProject(this,"cbProject3") class="form-select" aria-label="">
+        <option value="-1">Tất cả</option>
+
+        </select>
+
+        </div>
+
+
+        <div class="col-md-6">
+
+            <label class="form-label">Dự án </label>
+
+            <select  id="cbProject3"  class="form-select" aria-label=""  >
+            <option value="-1">Tất cả</option>
+
+            </select>
+            
+    </div>
+    <div class="text-end">
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+        @if (Model.Permision.Add == true)
+        {
+            <button type="button" class="btn btn-primary" onclick="openFormEdit(-1, '@Model.KeyPage')">Thêm mới</button>
+        }
+
+
+    </div>
+</form>

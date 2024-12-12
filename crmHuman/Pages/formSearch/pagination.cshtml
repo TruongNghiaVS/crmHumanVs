@@ -1,0 +1,69 @@
+﻿@{
+    
+    var totalPage = 0;  
+
+    var numberPage =0;
+     try {
+  
+    totalPage=   Model.TotalRecord;
+
+    numberPage =  totalPage / Model.RequestSearch.Limit + 1;
+     }
+     catch ( Exception ){
+
+   }
+
+}
+@if(numberPage > 1)
+{
+<!-- Disabled and active states -->
+<nav aria-label="...">
+    <ul class="pagination justify-content-center">
+        @{
+
+        }
+
+        @if (Model.RequestSearch.Page > 1)
+        {
+            <li class="page-item">
+                <a class="page-link" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        }
+
+        @for (int pageNumber = 0; pageNumber < numberPage; pageNumber++)
+        {
+            var pagetext = pageNumber + 1;
+
+            @if (pageNumber + 1 == Model.RequestSearch.Page)
+            {
+                <li class="page-item active " aria-current="page">
+                    <a class="page-link" onclick="changePage(@pagetext)">@pagetext</a>
+                </li>
+
+            }
+
+            else
+            {
+                <li class="page-item " aria-current="page">
+                    <a class="page-link" onclick="changePage(@pagetext)">@pagetext</a>
+                </li>
+
+            }
+
+        }
+
+        @if (Model.RequestSearch.Page <= numberPage -1  ) 
+        {
+            <li class="page-item">
+                <a class="page-link" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        }
+
+
+    </ul>
+</nav><!-- End Disabled and active states -->
+}

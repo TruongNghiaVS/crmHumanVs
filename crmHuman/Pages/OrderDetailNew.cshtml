@@ -1,0 +1,812 @@
+﻿@page
+@model OrderDetailNewModel
+@{
+
+
+    ViewData["Title"] = Model.TitlePage;   
+    var infoItem  = Model.OrderInfo;
+    var tiemObject =  Model.OrderInfo;
+    var candidateObject = Model.CandidateInfo;
+    var alljob = Model.AllJob.Data ;
+    var allCandidate = Model.AllCandidate;
+    var allPartner = Model.AllPartner;
+    var arrayRol = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="1", Name ="Admin"
+            },
+            new  Model.SelectDisplay()
+            {
+            Code ="2", Name ="TC"
+            },
+            new  Model.SelectDisplay()
+            {
+            Code ="3", Name ="TL"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="6", Name ="Trưởng CTV"
+            }
+        };
+
+    var arrayStatus = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new  Model.SelectDisplay()
+            {
+                Code ="0", Name ="Không hoạt động"
+            },
+            new  Model.SelectDisplay()
+            {
+            Code ="1", Name ="Hoạt động"
+            }
+          
+        };
+   var dateText = "";
+    if (candidateObject.Dob.HasValue)
+    {
+        dateText = @candidateObject.Dob.Value.ToString("yyy-MM-dd");
+    }
+
+    var columnText = "col-lg-7";
+    if (tiemObject.Id < 0)
+    {
+        columnText = "col-lg-12";
+    }
+}
+<div class="pagetitle">
+    <h1>@Model.TitlePage</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="/Order">Đơn hàng</a></li>
+            <li class="breadcrumb-item active">@infoItem.Code</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+ 
+
+    <div class="row">
+
+        <div class="col-lg-12">
+
+
+            <div class="card">
+                <div class="card-body">
+ 
+            <div class="row">
+                 
+                    <div class ="@columnText">
+             
+                
+                   
+
+                            @if (tiemObject.Id < 1)
+                                {
+                                <h5 class="modal-title">Lên mới hồ sơ</h5>
+                                }
+                                else
+                                {
+                               
+
+                                <div class="sameline">
+                                    <h5 class="modal-title">Thông tin hồ sơ 
+                                        <strong>@tiemObject.Code </strong> </h5>
+                                    <p>@infoItem.StatusName</p>
+                                </div>
+
+                                }
+
+                    <form id="mainForm2" class="needs-validation" novalidate>
+                           
+                        <div class="col-12 form-group">
+
+                                     <div class="row">
+                                        <div class="col-6 ">
+                                            
+                                            <input type="hidden" value="@tiemObject.Id" name="candidateInfo" id="txtcanddiateInfo" class="form-control" required placeholder="" />
+                                            <div class="form-group">
+                                                <label class="form-label">Tên ứng cử viên</label>
+                                                <input type="text" value="@candidateObject.Name" name="fullName" id="txtFullName" class="form-control" required placeholder="" />
+                                                <div class="invalid-feedback-cs">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-6 ">
+                                            <div class="form-group">
+                                                <label class="form-label">Ngày sinh</label>
+                                                <input type="date" value="@dateText" name="dob" id="dob" class="form-control" required placeholder="" />
+                                                <div class="invalid-feedback-cs">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 ">
+                                            <label class="form-label">Số điện thoại</label>
+                                            <div class="col-12  input-group  form-group">
+
+                                                <input type="text" value="@candidateObject.Phone" id="txtPhoneCall" class="form-control phonecall" required placeholder="" />
+                                                <span class="input-group-text"><i onclick="callFrom('orderDetail', '@tiemObject.Id', this)" class="bi bi-telephone-outbound-fill"></i></span>
+                                                <div class="invalid-feedback-cs">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-6 ">
+                                            <label class="form-label">Gọi số khác</label>
+                                            <div class="col-12  input-group  form-group">
+
+                                                <input type="text" aria-placeholder="Nhập số điện thoại liên quan để gọi" name="txtPhone" id="txtPhone" class="form-control phonecall" required placeholder="" />
+                                                <span class="input-group-text"><i onclick="callFrom('orderDetail', '@tiemObject.Id', this)" class="bi bi-telephone-outbound-fill"></i></span>
+                                                <div class="invalid-feedback-cs">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                  
+                                    
+
+                                    <div class="form-group">
+                                        <label class="form-label">Email</label>
+                                        <input type="text" value="@candidateObject.Email" name="Email" id="txtEmail" class="form-control" required placeholder="" />
+                                        <div class="invalid-feedback-cs">
+                                        </div>
+
+                                    </div>
+                                    
+                                  <div class="form-group">
+                                    <label class="form-label"> Vị trí Việc làm </label>
+                                    <select name="cbJobId1" id="cbJobId1" onchange="getFullPathJob(this)"  class="form-select"
+                                    aria-label="">
+                                        <option value="-1">Chọn việc làm</option>
+                                        @foreach (var element in Model.AllJob.Data)
+                                        {
+                                                var item = element as dynamic;
+                                                @if (@tiemObject.JobId == item.Id )
+                                                {
+                                                    <option selected value="@item.Id">@item.Name</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Id">@item.Name</option>
+                                                }
+                                        }
+                                    </select>
+
+                                    
+                                
+                                    <div class="invalid-feedback-cs">
+                                        Please choose a username.
+                                    </div>
+                                    </div>
+                        </div>
+                    
+
+    @{
+            Html.RenderPartial("ControlForm/FileInputCs",new
+            {
+                                        ValueControl = tiemObject.CVLink,
+                NameControl = "inputCvlinkName",
+               IdControl ="inputCvlink",
+               Lable = "File CV ( ưu tiên file pdf, file hình)"
+
+            });
+        }
+
+                        <label class="form-label">Link tài liệu liên quan</label>
+                        <div class="col-12  input-group  form-group">
+                            
+                            <input type="text" name ="shortDes" id ="txtShortDes" value="@tiemObject.ShortDes"   class="form-control phonecall" required placeholder="" />
+                            <span class="input-group-text">
+                                <i class="bi bi-eye" onclick="openFileNewTag(this)" ></i>
+                                
+                            <div class="invalid-feedback-cs">
+                            </div>
+
+                        </div>
+
+                            <div class="col-12">
+                            <label for="inputAddress2"  class="form-label">Ghi chú</label>
+                            <textarea name="noted"  id="txtNoted" class="form-control" style="height: 100px">@tiemObject.Noted</textarea>
+                                </div>
+
+                       
+                        <strong> Thông tin thêm ( có thể cập nhật sau) </strong>
+                        <div class="col-12 form-group">
+                        <label class="form-label">Khu vực ứng tuyển</label>
+                        <select name="cbProvinces" id="idProvinces" class="form-select" aria-label="">
+                    
+                            <option value="-1" disabled selected>Chọn Khu vực ứng tuyển</option>
+
+                               @foreach (var itemStatus in Model.AllTinh.Data)
+                        { 
+                            var itemStatus2 =  itemStatus as dynamic;
+                            @if (@tiemObject.Regional == itemStatus2.Code)
+                            {
+                                <option  selected value="@itemStatus2.Code">@itemStatus2.Name</option>
+                            }   
+                            else
+                            {
+                                 <option  value="@itemStatus2.Code">@itemStatus2.Name</option>
+                            }
+                        }
+                        </select>
+
+                        <div class="invalid-feedback-cs">
+                        Please choose a username.
+                        </div>
+                        </div>
+
+                        <label class="form-label">Trường học</label>
+                        <div class="col-12  input-group  form-group">
+                            <input type="text" name ="shortDes" id ="txtSchoolText" value="@tiemObject.SchoolName"   class="form-control phonecall" required placeholder="" />
+                          <div class="invalid-feedback-cs">
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-12 form-group">
+                            <label class="form-label">Số năm kinh nghiệm ứng viên</label>
+                            <select name="cbExperence" id="idExperence" class="form-select" aria-label="">
+                            <option value="-1" disabled selected>Chọn mức độ kinh nghiệm ứng viên</option>
+                                @if (@tiemObject.Experience == 0 )
+                            {
+                              <option selected  value="0">Chưa có kinh nghiệm</option>
+                            }
+                            else
+                            {
+                               <option value="0">Chưa có kinh nghiệm</option>
+                            }
+
+                            @if (@tiemObject.Experience == 1)
+                            {
+                                            <option selected value="1">Dưới 1 năm</option>
+                            }
+                            else
+                            {
+                                            <option value="1">Dưới 1 năm</option>
+                            }
+
+
+                            @if (@tiemObject.Experience == 2)
+                            {
+                                            <option selected value="2">Từ 1-3 năm</option>
+                            }
+                            else
+                            {
+                                            <option value="2">Từ 1-3 năm</option>
+                            }
+
+                            @if (@tiemObject.Experience == 3)
+                            {
+                                             <option selected value="3">Từ 3-5 năm</option>
+                            }
+                            else
+                            {
+                                            <option value="3">Từ 3-5 năm</option>
+                            }
+
+                            @if (@tiemObject.Experience == 4)
+                            {
+                                            <option selected value="4">Trên 5 năm</option>
+                            }
+                            else
+                            {
+                                            <option value="4">Trên 5 năm</option>
+                            }
+                         
+                            </select>
+                            <div class="invalid-feedback-cs">
+                                     Please choose a username.
+                            </div>
+                         </div>
+
+                          <div class="col-12 form-group">
+                            <label class="form-label">Trình độ ứng viên</label>
+                            <select name="cbRankEducation" id="idRankLevel" class="form-select" aria-label="">
+                                <option value="-1" disabled selected>Chọn trình độ nghiệm ứng viên</option>
+                         
+                            
+                            @if (@tiemObject.RankLevel == 86)
+                            {
+                                            <option selected value="86">THPT</option>
+                            }
+                            else
+                            {
+                                            <option  value="86">THPT</option>
+                            }
+                            @if (@tiemObject.RankLevel == 87)
+                            {
+                                                <option selected value="87">Trung cấp/Trung cấp nghề</option>
+                            }
+                            else
+                            {
+                                                <option  value="87">Trung cấp/Trung cấp nghề</option>
+                            }
+
+                            @if (@tiemObject.RankLevel == 88)
+                            {
+                                <option selected value="88">Cao đẳng</option>
+                            }
+                            else
+                            {
+                                <option  value="88">Cao đẳng</option>
+                            }
+
+
+                            @if (@tiemObject.RankLevel == 89)
+                            {
+                                            <option selected value="89">Đại học</option>
+                            }
+                            else
+                            {
+                                            <option  value="89">Đại học</option>
+                            }
+                            @if (@tiemObject.RankLevel == 90)
+                            {
+                                            <option selected value="90">Thạc sĩ</option>
+                            }
+                            else
+                            {
+                                            <option  value="90">Thạc sĩ</option>
+                            }
+
+                            @if (@tiemObject.RankLevel == 91)
+                            {
+                                            <option selected value="91">Tiến sĩ</option>
+                            }
+                            else
+                            {
+                                            <option  value="91">Tiến sĩ</option>
+                            }
+
+
+                                   
+
+                            </select>
+
+                            <div class="invalid-feedback-cs">
+                            Please choose a username.
+                            </div>
+                         </div>
+                            
+
+                            
+                          <div class="col-12 form-group">
+                            <label class="form-label">Giới tính</label>
+                            <select name="cbRankEducation" id="idGender" class="form-select" aria-label="">
+                             <option value="-1" disabled selected>Chọn giới tính</option>
+                            @if (@tiemObject.Gender == 1)
+                            {
+                                <option selected value="1">Nam</option>
+                            }
+                            else
+                            {
+                                <option value="1">Nam</option>
+                            }
+
+                            @if (@tiemObject.Gender == 0)
+                            {
+                                <option selected value="0">Nữ</option>
+                            }
+                            else
+                            {
+                                <option value="0">Nữ</option>
+                            }
+                            </select>
+                            <div class="invalid-feedback-cs">
+                            Please choose a username.
+                            </div>
+                         </div>
+
+                            
+                        <div class="col-12 form-group" >
+                        <label for="inputAddress2"  class="form-label"> Mục tiêu nghề nghiệp</label>
+                        <textarea name="noted"  id="txtIntroduction" class="form-control" style="height: 100px">@tiemObject.Introduction</textarea>
+                         <div class="invalid-feedback-cs">
+                         
+                            </div>
+                        </div>
+
+
+
+
+                            
+                          
+
+                            </form>
+
+                            <div>
+
+
+
+                                @if (tiemObject.Assignee > 0)
+                                 {
+
+                                    if (tiemObject.Assignee > 0 && tiemObject.Id >0)
+                                    {
+                                        if (tiemObject.IsClose < 1 && tiemObject.Isapply < 1)
+                                        {
+                                            <button type="button" onclick="saveInfoCV(@tiemObject.Id)" class="btn btn-primary">Cập nhật danh sách ứng Viên</button>
+                                        }
+
+                                        if (tiemObject.IsClose < 1 && tiemObject.Isapply > 0)
+                                        {
+                                            <button type="button" onclick="saveInfoCV(@tiemObject.Id, true)" class="btn btn-primary">Cập nhật danh sách ứng tuyển</button>
+                                        }
+
+                                        if (tiemObject.Isapply < 1 && tiemObject.Assignee > 0)
+                                        {
+                                            <button type="button" onclick="changeApply(@tiemObject.Id)" class="btn btn-primary">Đẩy qua danh sách ứng tuyển</button>
+
+                                        }
+                                        if (tiemObject.Assignee > 0 && tiemObject.IsClose > 0)
+                                        {
+                                            <button type="button" onclick="changeReturnOrderAlert(@tiemObject.Id)" class="btn btn-primary">Khai thác lại</button>
+                                        }
+
+
+                                    }
+                                    else
+                                    {
+                                        <button type="button" onclick="saveInfoCV(@tiemObject.Id)" class="btn btn-primary">Lên mới hồ sơ</button>
+
+                                    }
+                                }
+                                else
+                                {
+
+                                  
+                                    <button type="button" onclick="saveInfoCV(@tiemObject.Id)" class="btn btn-primary">Cập nhật hồ sơ</button>
+
+                                    @if (Model.UserData.RoleCode == "6")
+                                    {
+                                        <button type="button" onclick="pushCVCTV(@tiemObject.Id)" class="btn btn-primary">Đẩy qua</button>
+                                    }
+
+                                  
+
+
+
+
+
+                                }
+
+                                 
+                            </div>
+
+
+
+                    </div> 
+                    @if(tiemObject.Id >0)
+                    {
+   <div class ="col-lg-5">
+                         <br/>
+                       <br/>
+
+                                @if (tiemObject.Assignee > 0)
+                                {
+                                    
+                             
+                                <form id ="formSecond"> 
+               
+                      
+                      <div class="col-12 form-group">
+                                    <label class="form-label">Trạng thái mới</label>
+                                <select name="cbSelectStatus" id="cbSelectStatus" class="form-select" aria-label="">
+                                                    <option value="-1">Tất cả</option>
+                                  
+
+                                    @foreach (var itemStatus in Model.AllStatus.Data)
+                                    { 
+                                        var itemStatus2 =  itemStatus as dynamic;
+
+                                        if(itemStatus2.Id.ToString() == infoItem.Status )
+                                        {
+                                            <option value="@itemStatus2.Id" selected >@itemStatus2.Name</option>
+                                        }
+                                        else {
+                                             <option value="@itemStatus2.Id">@itemStatus2.Name</option>
+                                        }
+                                        
+                                    }
+                                </select>
+
+                                    
+                                
+                                    <div class="invalid-feedback-cs">
+                                        Please choose a username.
+                                    </div>
+                                </div>
+
+                                <div id = "divShowExtraInfo"> 
+                                    <div class="row col-12">
+                                    <div class="col-6 form-group">
+                                    <label class="form-label">Ngày </label>
+                                    <input  type="date" name="from" id ="dateFrom" class="form-control">
+
+
+                                    <div class="invalid-feedback-cs">
+                                    Please choose a username.
+                                    </div>
+                                    </div>
+
+
+                                    <div class="col-6 form-group">
+                                    <label class="form-label">Thời gian </label>
+                                    <input  type="text" name="timer" id ="txtTimer" class="form-control">
+
+
+                                    <div class="invalid-feedback-cs">
+                                    Please choose a username.
+                                    </div>
+                                    </div>
+                                    </div>
+
+
+
+                                    <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="checkDefaultAddress" onchange="changeSelect(this,1)">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                     Địa chỉ có sẵn
+                                    </label>
+                                    </div>
+                                    
+                                 
+                                   
+                                     <div class="col-12 form-group" style="display:none;" id ="divAdddressDefault">
+                                    
+                                        <select name="CareerId" id="cbAddress" class="form-select" aria-label="">
+                                            <option value="-1">Chọn địa chỉ mặc định</option>
+                                    </select>
+                               
+                                    </div>
+                                       <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="checkOtherAddress" onchange="changeSelect(this,2)"  >
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                      Địa chỉ khác
+                                    </label>
+                                    </div>
+                                    <div class="col-12 form-group" style="display:none;" id ="divAdddressOther">
+                                   
+                                    <input  type="text" name="place" id ="txtPlace" class="form-control">
+
+
+                                    <div class="invalid-feedback-cs">
+                                    Please choose a username.
+                                    </div>
+                                    </div>
+                                    </div>
+
+                               
+                                      
+
+                                    <div class="col-12 form-group">
+                                    <label class="form-label">Ghi chú</label>
+                                     <textarea name= "noted" class="form-control"  id = "txtNotedExtra" rows = "3"> </textarea>
+                                    
+                                
+                                    <div class="invalid-feedback-cs">
+                                        Please choose a username.
+                                    </div>
+                                </div>
+                
+                     </form>
+
+                                }
+                                @if (tiemObject.Assignee > 0 )
+                            {
+                                        <div>
+
+                                     
+                                        <button type="button" onclick="saveImpact('@tiemObject.Code')" class="btn btn-primary">Thêm tác động</button>
+                                        </div>
+
+                            }
+                          
+
+                            <table class="table  table-striped">
+                            <thead>
+                            <tr>
+                                    <th> STT  </th>  
+                                    <th> Ngày  </th>  
+                                    <th> Thực hiện bởi  </th>  
+                                      <th> Trạng thái  </th>  
+                                    <th> NỘi dung ghi chú </th>  
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var indexLoop =0;
+                                }
+
+                                @foreach (var itemImpact in Model.AllImpact.Data)
+                                {
+                                    indexLoop ++;
+                                    var itemImpact2 = itemImpact as dynamic;
+                                    var datetimeCreate = @itemImpact2.CreateAt.ToString("dd/MM/yyyy HH:mm");
+                                    <tr>
+                                    <td> @indexLoop  </td>
+                                    <td> @datetimeCreate </td>
+                                    <td> @itemImpact2.CreatedByName  </td>
+                                        <td> @itemImpact2.StatusName  </td>
+                                    <td> 
+                                    @if(itemImpact2.DateFrom != null )
+                                    {
+                                            <p> Ngày:  @itemImpact2.DateFrom.ToString("dd/MM/yyyy HH:mm")  </p>
+                                    }
+                                    @if(!string.IsNullOrEmpty( itemImpact2.TxtTimer ))
+                                    {
+                                            <p> Vào lúc:  @itemImpact2.TxtTimer  </p>
+                                    }
+
+                                    @if(!string.IsNullOrEmpty(itemImpact2.TxtPlace ) )
+                                    {
+                                            <p> Tại:  @itemImpact2.TxtPlace  </p>
+                                    }
+
+                                        @if(string.IsNullOrEmpty(itemImpact2.Noted ))
+                                    {
+                                            <p> @itemImpact2.TxtPlace  </p>
+                                    }
+                                            <p> @itemImpact2.Noted  </p>
+                                    </td>
+                                    </tr>
+                                }
+                           
+               
+                            
+                              
+                            </tbody>
+                            </table>
+                        
+                    </div>
+                    }
+                  
+
+            </div>
+                                
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+     @if( infoItem.Id > 0 )
+                        {
+
+             <h5 class="modal-title">Thông tin lịch sử đơn hàng</h5>
+             <table class="table  table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                            STT
+                                </th>  
+                                    <th>
+                                        Mã đơn hàng
+                                </th>
+                                <th>
+                                        Ứng cử viên
+                                </th>
+                                <th>
+                                        Vị trí
+                                </th>  
+                                <th>
+                                        Đối tác/dự án
+                                </th>  
+                                <th>
+                                        Trạng thái
+                                </th>
+                                
+                                <th>
+                                        Xử lý bởi
+                                </th>
+                                <th>
+                                        Ngày nhận
+                                </th>
+                                <th>
+                                        Cập nhật gần nhất
+                                </th>
+                                <th>
+                                        Kết quả tuyển dụng
+                                </th>
+                                
+                            </tr>  
+                            
+                        </thead>
+                       
+
+                        <tbody>
+                            @{
+                                int i = 0;
+                            }
+                            @foreach (var itemData in Model.allOrder.Data)
+                            {
+                                
+                                var itemInfo = itemData as dynamic;
+                            
+                                var datetimeCreate = @itemInfo.CreateAt.ToString("dd/MM/yyyy HH:mm");
+                                var datetimeUpdate = "";
+                                if (@itemInfo.UpdateAt != null)
+                                {
+                                    datetimeUpdate = @itemInfo.UpdateAt.ToString("dd/MM/yyyy HH:mm");
+                                }
+                                i++;
+                                var partnerText = "";
+                                partnerText = @itemInfo.PartnerName;
+                                if(!string.IsNullOrEmpty(@itemInfo.ProjectName))
+                                {
+                                        partnerText += "-" + @itemInfo.ProjectName; 
+                                }
+
+                                var assigneeName = "";
+                                if(@itemInfo.Assignee > 0)
+                                {
+                                    assigneeName  = @itemInfo.AssigeeName;
+                                }
+                                else 
+                                {
+                                    assigneeName  = "";
+                                }
+                                <tr>
+                                    <td>@i</td>
+                                    <td><a href="/OrderDetailNew?OrderId=@itemInfo.Id" >@itemInfo.Code</a></td>
+                                    <td>@itemInfo.UserNameText</td>
+                        
+                                    <td>@itemInfo.PositionText</td>
+                                    <td>@partnerText</td>
+
+                                    @if(string.IsNullOrEmpty(itemInfo.StatusText))
+                                    {
+                                        <td >@itemInfo.StatusText</td>  
+                                    }
+                                    else 
+                                    {
+                                                <td style="color: @itemInfo.ExtraColor">@itemInfo.StatusText</td>
+                                    }
+                                
+                                
+                                    <td>@assigneeName</td>
+                                    <td>@itemInfo.DateGet</td>
+                                    <td>@datetimeUpdate</td>
+                                    <td>
+                                
+                                        @if( itemInfo.Result == 1)
+                                        {
+                                                        <a class="iconResult" href="javascript:void(0)" >
+                                                                        <img src="/assets/icon/crm-Onbroad.png" />
+                                                        </a>
+                                        } else if( itemInfo.Result == 2)
+                                        {
+                                                        <a class="iconResult" href="javascript:void(0)" >
+                                                            <img src="/assets/icon/crm-complete.png" />
+                                                        </a>
+                                        }
+                                        else {
+                                            <a class="iconResult" href="javascript:void(0)" onclick="changeResult('@itemInfo.Id')">
+                                                                        <img src="/assets/icon/crm-Process.png" />
+                                                        </a>
+                                        }
+                                    
+                                    </td>
+                                </tr>
+                            }
+                    
+                        </tbody>
+            </table>
+      
+        
+     }
+</section>
+
+

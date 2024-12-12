@@ -1,0 +1,98 @@
+﻿@page
+@model SettingModel
+@{
+    ViewData["Title"] = "Thông tin";
+
+    var userCurrent = Model.UserProfile;
+    var dateText = "";
+    if (userCurrent.Dob != null)
+    {
+        dateText = userCurrent.Dob.Value.ToString("dd/MM/yyyy");
+    }
+
+
+    var arrayRol = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="1", Name ="Admin"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="2", Name ="TC"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="3", Name ="TL"
+            }, new Model.SelectDisplay()
+            {
+              Code ="4", Name ="Marketing"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="6", Name ="Trưởng CTV"
+            }
+        };
+
+
+    string getNameArrol(string roleCode)
+    {
+        if( roleCode =="1")
+        {
+            return "Admin";
+        }
+        if (roleCode == "2")
+        {
+            return "TC";
+        }
+        if (roleCode == "3")
+        {
+            return "Trưởng nhóm";
+        }
+        return "";
+    }
+}
+ 
+ <div class="pagetitle">
+
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Cài đặt</a></li>
+         
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section profile">
+    <div class="row">
+     <div class="card">
+                
+                        
+
+                            <form>
+                      
+
+                                <div class="row mb-3">
+                                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Số ngày bảo hành</label>
+                                    <div class="col-md-8 col-lg-9">
+                                    <input  type="number" class="form-control" id="fullName" value="30">
+                                    </div>
+                                </div>
+
+
+                             
+
+                                  <div class="">
+                                    <button type="button"  class="btn btn-primary">Cập nhật</button>
+                                </div>
+                              
+                            </form>
+
+                  
+
+    </div>
+
+      
+    </div>
+</section>

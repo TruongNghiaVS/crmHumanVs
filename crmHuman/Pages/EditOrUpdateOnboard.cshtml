@@ -1,0 +1,43 @@
+﻿
+    <div class="modal-header">
+
+    <h5 class="modal-title">Cập nhật thông tin</h5>
+    <button type="button" class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"></button>
+    </div>
+
+    <div class="modal-body">
+
+        <form id="mainForm" class="needs-validation" novalidate>
+
+                <div class="col-12 form-group">
+                    <label class="form-label">Ngày Onboard thực tế </label>
+                    <input type="date" id="dateOnboard"
+                        value=""
+                        name="dateOnboard" class="form-control">
+                </div>
+
+
+                <div class="col-12 form-group">
+                    <label class="form-label">Kết quả Onboard</label>
+                    <select  name="roleCode" id="cbOnboarded" class="form-select" aria-label="">
+                        @* <option selected value="1">Onboarded</option> *@
+                        <option  value="2">Failed</option>
+                     </select>
+                    
+                    <div class="invalid-feedback-cs">
+                    </div>
+                </div>
+
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+                data-bs-dismiss="modal">
+            Đóng
+        </button>
+        <button type="button" onclick="SaveOnboard(@Model.Id)" class="btn btn-primary">Cập nhật</button>
+    </div>
+

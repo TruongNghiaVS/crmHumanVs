@@ -1,0 +1,168 @@
+﻿@{
+    
+    var arrayRol = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="1", Name ="Admin"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="2", Name ="TC"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="3", Name ="TL"
+            }
+            , new Model.SelectDisplay()
+            {
+              Code ="4", Name ="Marketing"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="6", Name ="Trưởng CTV"
+            }
+        };
+
+    var arrayStatus = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="0", Name ="Không hoạt động"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="1", Name ="Hoạt động"
+            }
+          
+        };
+    var dateText = "";
+
+    var itemObject = Model.info;
+  
+}
+
+    <div class="modal-header">
+    
+   
+    @if (itemObject.Id < 1)
+    {
+        <h5 class="modal-title">Thêm mới đối tác</h5>
+    }
+    else
+    {
+        <h5 class="modal-title">Cập nhật thông tin</h5>
+    }
+    <button type="button" class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+
+            <form id="mainForm" class="needs-validation" novalidate>
+
+                    @if (itemObject.Id > 0)
+                {
+                        <div class="col-12 form-group ">
+                        <label class="form-label">Mã đối tác</label>
+                        <input name="code" readonly id="txtCode" value="@itemObject.Code" type="text" class="form-control" placeholder="">
+                        <div class="invalid-feedback-cs">
+                        Please choose a username.
+                        </div>
+                        </div>
+                 }
+     
+                <div class="col-12 form-group">
+                    <label class="form-label">Tên đối tác</label>
+                         <input type="text" value="@itemObject.Name" name="fullName" id="txtFullName" class="form-control" required placeholder="" />
+                    <div class="invalid-feedback-cs">
+                    </div>
+
+                </div>
+
+                  <div class="col-12 form-group">
+                    <label class="form-label">Tên ngắn</label>
+                         <input type="text" value="@itemObject.ShortName"  id="txtShortName" class="form-control" required placeholder="" />
+                    <div class="invalid-feedback-cs">
+                    </div>
+
+                </div>
+
+               <div class="col-12 form-group">
+                    <label class="form-label">Nã số thuế</label>
+                         <input type="text" value="@itemObject.TaxCode"  id="txtTaxCode" class="form-control" required placeholder="" />
+                    <div class="invalid-feedback-cs">
+                    </div>
+
+                </div>
+           
+           
+
+             
+                 <div class="col-12 form-group">
+                    <label class="form-label">Trạng thái</label>
+                    <select name="isActive" id="isActive" class="form-select" aria-label="">
+                        
+                    @foreach (var item in arrayStatus)
+                    {
+                        @if (@itemObject.IsActive == int.Parse(item.Code))
+                        {
+                             <option selected value="@item.Code">@item.Name</option>
+                        }
+                        else
+                        {
+                             <option value="@item.Code">@item.Name</option>
+                        }
+                    }
+                    </select>
+                    <div class="invalid-feedback-cs">
+                        Please choose a username.
+                    </div>
+                </div>
+
+               
+
+                <div class="col-12">
+            <label for="inputAddress2"  class="form-label">Ghi chú</label>
+            <textarea name="noted"  id="txtNoted" class="form-control" style="height: 100px">@itemObject.Noted</textarea>
+                </div>
+
+
+                       @{
+                            Html.RenderPartial("ControlForm/ItemAdd", new
+                            {
+                                 DataList = Model.listProject.Data,
+                                 idAdd = "listProject",
+                                 controlButton =  "Dự án",
+                                
+                                buttonAddText ="Thêm dự án",
+                                LableText ="Danh sách dự án"
+                            
+
+                            });
+                        }
+
+                        @{
+                            Html.RenderPartial("ControlForm/ItemAdd", new
+                            {
+                                DataList = Model.listAddress.Data,
+                                buttonAddText ="Thêm mới địa chỉ",
+                                LableText ="Địa chỉ",
+                                 idAdd = "lisItemAdd",
+                                controlButton = "Dự án",
+                            
+
+                            });
+                        }
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+                Đóng
+            </button>
+    <button type="button" onclick="SavePartner(@itemObject.Id)" class="btn btn-primary">Lưu</button>
+        </div>
+

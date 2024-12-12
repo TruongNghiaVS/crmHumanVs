@@ -1,0 +1,223 @@
+﻿@{
+
+    var tiemObject = Model.resultView;
+
+    var arrayRol = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="1", Name ="Admin"
+            },
+            new  Model.SelectDisplay()
+            {
+            Code ="2", Name ="TC"
+            },
+            new  Model.SelectDisplay()
+            {
+            Code ="3", Name ="TL"
+            }
+            , new Model.SelectDisplay()
+            {
+              Code ="4", Name ="Marketing"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="6", Name ="Trưởng CTV"
+            }
+        };
+
+    var arrayStatus = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new  Model.SelectDisplay()
+            {
+                Code ="0", Name ="Không hoạt động"
+            },
+            new  Model.SelectDisplay()
+            {
+            Code ="1", Name ="Hoạt động"
+            }
+          
+        };
+
+  
+}
+
+
+
+
+
+
+
+    <div class="modal-header">
+
+
+   
+    
+   
+    @if (tiemObject.Id < 1)
+    {
+        <h5 class="modal-title">Thêm mới đơn</h5>
+    }
+    else
+    {
+        <h5 class="modal-title">Cập nhật thông tin</h5>
+    }
+    <button type="button" class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+
+
+            <form id="mainForm2" class="needs-validation" novalidate>
+
+                      
+            <select class="selectpicker">
+  <option>Mustard</option>
+  <option>Ketchup</option>
+  <option>Barbecue</option>
+</select>
+                @if(@tiemObject.Id > 0)
+                {
+                 <div class="col-12 form-group">
+                    <label class="form-label">Mã đơn hàng</label>
+                      <input type="text" readonly value="@tiemObject.Code" name="fullName" id="txtCode" class="form-control" required placeholder="" />
+                    <div class="invalid-feedback-cs">
+                    </div>
+
+                </div>
+                }
+                    <div class="col-12 form-group">
+                    <label class="form-label"> Vị trí Việc làm </label>
+                    <select name="cbJobId" id="cbJobId1" onchange="getFullPathJob(this)" class="form-select"
+                    aria-label=""> 
+                    <option value="-1">Chọn việc làm</option>
+                            
+                    @foreach (var item in Model.allJob.Data)
+                    {
+                        @if (@tiemObject.JobId == item.Id )
+                        {
+                            <option selected value="@item.Id">@item.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+                    </select>
+
+                       
+                   
+                    <div class="invalid-feedback-cs">
+                        Please choose a username.
+                    </div>
+                </div>
+
+                    <div class="col-12 form-group" id ="fullPathJob">
+                        
+                    </div>
+
+
+ 
+
+
+           
+
+                 <div class="combobox">
+
+     <div class="col-12 form-group">
+    <input type="hidden" id ="cbcandidateId" value="@tiemObject.CandidateId" >
+    <label>Ứng cử viên</label>
+    <input  autocomplete="off" role="combobox" list=""
+    id="input" name="browsers" placeholder="Chọn ứng cử viên">
+
+    <datalist id="browsers" role="listbox">
+
+
+
+                @foreach (var item in Model.allCandidate.Data)
+
+                        {
+
+                            @if (@tiemObject.CandidateId == item.Id )
+                    {
+                        <option selected value="@item.Id">@item.Name</option>
+                    }
+                    else
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                        
+                        }
+
+
+    </datalist>
+
+
+       <div class="invalid-feedback-cs">
+                        Please choose a username.
+                    </div>
+
+  </div>
+
+   </div>
+
+               
+
+              
+
+        
+              
+                       
+                   
+                  
+
+
+                   <div class="col-12 form-group">
+                    <label class="form-label">Sử dụng CV </label>
+            <select name="cbSelectCV" id="cbSelectCV" class="form-select" aria-label="">
+                     <option value="0">Có sẵn</option>
+                     <option value="1">Upload CV</option>
+            </select>
+
+                       
+                   
+                    <div class="invalid-feedback-cs">
+                        Please choose a username.
+                    </div>
+                </div>
+
+           @{
+            Html.RenderPartial("ControlForm/FileInputCs",new
+            {
+                                        ValueControl = tiemObject.CVLink,
+                NameControl = "inputCvlinkName",
+               IdControl ="inputCvlink",
+               Lable = "File CV ( ưu tiên file pdf, file hình)"
+
+            });
+        }
+
+
+              <div class="col-12">
+            <label for="inputAddress2"  class="form-label">Link tài liệu liên quan</label>
+            <textarea name="shortDes"  id="txtShortDes" class="form-control" style="height: 100px">@tiemObject.Noted</textarea>
+                </div>
+
+                <div class="col-12">
+            <label for="inputAddress2"  class="form-label">Ghi chú</label>
+            <textarea name="noted"  id="txtNoted" class="form-control" style="height: 100px">@tiemObject.Noted</textarea>
+                </div>
+
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+                Đóng
+            </button>
+    <button type="button" onclick="saveOrder2(@tiemObject.Id)" class="btn btn-primary">Lưu</button>
+        </div>
+

@@ -1,0 +1,51 @@
+﻿
+
+
+            
+          <table class="table  table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        STT
+                    </th>
+                    <th>
+                        Tên thành viên
+                    </th>
+                     <th>
+                        Ngày thêm
+                    </th>
+                    <th>
+                        Thao tác
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    var datetimeCreate = @item.CreateAt.ToString("dd/MM/yyyy HH:mm");
+                    var datetimeUpdate = "";
+                    if (@item.UpdateAt != null)
+                    {
+                        datetimeUpdate = @item.UpdateAt.ToString("dd/MM/yyyy HH:mm");
+                    }
+                    <tr>
+                        <td>1</td>
+                        <td>@item.MemberName</td>
+                        <td>@datetimeCreate</td>
+
+                        <td>
+                    <a href="javascript:void(0)" onclick="deleteGroupMember(@item.Id,@item.GroupId)">
+                                <i class="bi bi-trash-fill">
+
+                                </i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+                    
+                    
+            </tbody>
+        </table>
+       
+
+

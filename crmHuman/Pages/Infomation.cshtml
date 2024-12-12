@@ -1,0 +1,211 @@
+﻿@page
+@model InfomationModel
+@{
+    ViewData["Title"] = "Thông tin";
+
+    var userCurrent = Model.UserProfile;
+    var dateText = "";
+    var onboardText = "";
+    if (userCurrent.Dob != null)
+    {
+        dateText = userCurrent.Dob.Value.ToString("dd/MM/yyyy");
+    }
+    if (userCurrent.Onboard != null)
+    {
+        onboardText = userCurrent.Onboard.Value.ToString("dd/MM/yyyy");
+    }
+
+    var arrayRol = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="1", Name ="Admin"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="2", Name ="TC"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="3", Name ="TL"
+            }
+            , new Model.SelectDisplay()
+            {
+              Code ="4", Name ="Marketting"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="6", Name ="Trưởng CTV"
+            }
+        };
+
+
+    string getNameArrol(string roleCode)
+    {
+        if( roleCode =="1")
+        {
+            return "Admin";
+        }
+        if (roleCode == "2")
+        {
+            return "TC";
+        }
+        if (roleCode == "3")
+        {
+            return "Trưởng nhóm";
+        }
+        return "";
+    }
+}
+ 
+ <div class="pagetitle">
+    <h1>@Model.TitlePage</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Thông tin</a></li>
+            <li class="breadcrumb-item active">@userCurrent.FullName</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section profile">
+    <div class="row">
+       
+
+      
+
+            <div class="card">
+                <div class="card-body pt-3">
+                    <!-- Bordered Tabs -->
+                    <ul class="nav nav-tabs nav-tabs-bordered">
+
+                        <li class="nav-item">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Thông tin</button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Cập nhật thông tin</button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Thay đổi mật khẩu</button>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content pt-2">
+
+                        <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                       @*      <h5 class="card-title">About</h5>
+                            <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p>
+
+                           *@
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label ">Họ và tên</div>
+                            <div class="col-lg-9 col-md-8">@userCurrent.FullName</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Mã nhân viên</div>
+                            <div class="col-lg-9 col-md-8">@userCurrent.UserName</div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Ngày sinh</div>
+                                 <div class="col-lg-9 col-md-8">@dateText</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Ngày onboard</div>
+                            <div class="col-lg-9 col-md-8">@onboardText</div>
+                            </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 label">Line đang gọi</div>
+                            <div class="col-lg-9 col-md-8">@userCurrent.LineCode</div>
+                        </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Số điện thoại</div>
+                                <div class="col-lg-9 col-md-8">@userCurrent.Phone</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Vai trò trên trang</div>
+                            <div class="col-lg-9 col-md-8">@getNameArrol(@userCurrent.RoleCode)</div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Ghi chú</div>
+                                 <div class="col-lg-9 col-md-8">@userCurrent.Noted</div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                            <!-- Profile Edit Form -->
+                            <form id="formUpdateEmployee">
+                        
+
+                            <div class="row mb-3 form-group">
+                                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Họ tên</label>
+                                    <div class="col-md-8 col-lg-9">
+                                    <input name="fullName" type="text" class="form-control" id="txtUpdateName" value="@userCurrent.FullName">
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row mb-3 form-group">
+                                    <label for="company" class="col-md-4 col-lg-3 col-form-label">Ghi chú</label>
+                                    <div class="col-md-8 col-lg-9">
+                                    <input name="company" type="text" class="form-control" id="txtUpdateNote" value="@userCurrent.Noted">
+                                    </div>
+                                </div>
+
+                              
+                                <div class="text-center">
+                                <button type="button" onclick="updateEmployInfo(@userCurrent.Id)" class="btn btn-primary">Cập nhật</button>
+                                </div>
+                            </form><!-- End Profile Edit Form -->
+
+                        </div>
+
+                        <div class="tab-pane fade pt-3" id="profile-settings">
+
+                            <!-- Settings Form -->
+                          
+
+                        </div>
+
+                        <div class="tab-pane fade pt-3" id="profile-change-password">
+                            <!-- Change Password Form -->
+                            <form id="updateChangePassword">
+                                <div class="row mb-3 form-group">
+                                    <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Mật khẩu mới</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="newpassword" type="password" class="form-control" id="txtnewPassword">
+                                    </div>
+                                </div>
+
+                            <div class="row mb-3 form-group">
+                                    <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Nhập lại mật khẩu</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <input name="renewpassword" type="password" class="form-control" id="txtrenewPassword">
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button  class="btn btn-primary"onclick="changePassword()" >Thay đổi mật khẩu</button>
+                                </div>
+                            </form><!-- End Change Password Form -->
+
+                        </div>
+
+                    </div><!-- End Bordered Tabs -->
+
+                </div>
+            </div>
+
+      
+    </div>
+</section>

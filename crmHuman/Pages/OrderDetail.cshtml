@@ -1,0 +1,408 @@
+﻿@page
+@model OrderDetailNewModel
+@{
+    ViewData["Title"] = Model.TitlePage;   
+    var infoItem  = Model.OrderInfo;
+    var tiemObject =  Model.OrderInfo;
+    var alljob = Model.AllJob.Data ;
+    var allCandidate = Model.AllCandidate;
+    var allPartner = Model.AllPartner;
+   
+    var arrayRol = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="1", Name ="Admin"
+            },
+            new  Model.SelectDisplay()
+            {
+            Code ="2", Name ="TC"
+            },
+            new  Model.SelectDisplay()
+            {
+            Code ="3", Name ="TL"
+            }
+            ,
+            new Model.SelectDisplay()
+            {
+            Code ="6", Name ="Trưởng CTV"
+            }
+        };
+
+    var arrayStatus = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new  Model.SelectDisplay()
+            {
+                Code ="0", Name ="Không hoạt động"
+            },
+            new  Model.SelectDisplay()
+            {
+            Code ="1", Name ="Hoạt động"
+            }
+          
+        };
+}
+<div class="pagetitle">
+    <h1>@Model.TitlePage</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="/Order">Đơn hàng</a></li>
+            <li class="breadcrumb-item active">@infoItem.Code</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+<div class="row">
+                    <div class ="col-lg-6">
+
+                            @if (tiemObject.Id < 1)
+                                {
+                                <h5 class="modal-title">Thêm mới đơn</h5>
+                                }
+                                else
+                                {
+                               
+
+                                <div class="sameline">
+                                    <h5 class="modal-title">Thông tin đơn <strong>@tiemObject.Code </strong> </h5>
+                                    <p>@infoItem.StatusName</p>
+                                </div>
+
+                                }
+
+
+                        
+                            <form id="mainForm2" class="needs-validation" novalidate>
+                           
+                        <div class="col-12 form-group">
+                                    <label class="form-label"> Vị trí Việc làm </label>
+                            <select name="cbJobId1" id="cbJobId1" onchange="getFullPathJob(this)"  class="form-select"
+                            aria-label="">
+                                <option value="-1">Chọn việc làm</option>
+
+                                @foreach (var element in Model.AllJob.Data)
+                                {
+
+                                        var item = element as dynamic;
+                                    @if (@tiemObject.JobId == item.Id )
+                                    {
+                                        <option selected value="@item.Id">@item.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
+                            </select>
+
+                                    
+                                
+                                    <div class="invalid-feedback-cs">
+                                        Please choose a username.
+                                    </div>
+                        </div>
+                        <div class="col-12 form-group" id ="fullPathJob">
+                             
+                         </div>
+                         <input type ="hidden" id ="cbpartnerId3" value="">
+
+                        
+
+                               
+
+                        @{
+                            var phoneCall ="";
+                        }
+                                <div class="col-12 form-group">
+                                    <label class="form-label">Ứng cử viên</label>
+                                    <select disabled  name="candidateId" id="cbcandidateId"  class="form-select" aria-label="">
+                                        <option value="-1"> ứng cử viên</option>
+                                @foreach (var element  in Model.AllCandidate.Data)
+
+                                        {
+                                                    var item = element as dynamic;
+
+                                      @if (@tiemObject.CandidateId == item.Id )
+                                    {
+                                        phoneCall = item.Phone;
+                                        <option selected value="@item.Id">@item.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                        
+                                        }
+                                    </select>
+                                    <div class="invalid-feedback-cs">
+                                        Please choose a username.
+                                    </div>
+                                </div>
+
+                         
+                        
+
+                                <label class="form-label">Số điện thoại</label>
+        <div class="col-12  input-group  form-group">
+        
+            <input type="text" value="@phoneCall"   id ="txtPhoneCall" class="form-control phonecall" required placeholder="" />
+            <span class="input-group-text"><i onclick="callFrom('orderDetail', '@tiemObject.Id', this)" class="bi bi-telephone-outbound-fill"></i></span>
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+         <label class="form-label">Gọi số khác</label>
+        <div class="col-12  input-group  form-group">
+        
+            <input type="text" aria-placeholder="Nhập số điện thoại liên quan để gọi"   name="txtPhone" id="txtPhone" class="form-control phonecall" required placeholder="" />
+            <span class="input-group-text"><i onclick="callFrom('orderDetail', '@tiemObject.Id', this)" class="bi bi-telephone-outbound-fill"></i></span>
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+                           
+
+    @{
+            Html.RenderPartial("ControlForm/FileInputCs",new
+            {
+                                        ValueControl = tiemObject.CVLink,
+                NameControl = "inputCvlinkName",
+               IdControl ="inputCvlink",
+               Lable = "File CV ( ưu tiên file pdf, file hình)"
+
+            });
+        }
+        
+                         
+
+
+          <label class="form-label">Link tài liệu liên quan</label>
+        <div class="col-12  input-group  form-group">
+        
+            <input type="text" name ="shortDes" id ="txtShortDes" value="@tiemObject.ShortDes"   class="form-control phonecall" required placeholder="" />
+            <span class="input-group-text">
+                <i class="bi bi-eye" onclick="openFileNewTag(this)" ></i>
+             
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+
+
+
+
+                                <div class="col-12">
+                            <label for="inputAddress2"  class="form-label">Ghi chú</label>
+                            <textarea name="noted"  id="txtNoted" class="form-control" style="height: 100px">@tiemObject.Noted</textarea>
+                                </div>
+
+                            </form>
+
+                            <div>
+
+                                        <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">
+                                            Đóng
+                                        </button>
+
+                                        
+                                        <button type="button" onclick="saveOrder2(@tiemObject.Id)" class="btn btn-primary">Lưu</button>
+                            </div>
+
+
+
+                    </div> 
+
+                     <div class ="col-lg-6">
+                         <br/>
+                       <br/>
+                     <form id ="formSecond"> 
+               
+                      
+                      <div class="col-12 form-group">
+                                    <label class="form-label">Trạng thái mới</label>
+                                <select name="cbSelectStatus" id="cbSelectStatus" class="form-select" aria-label="">
+                                                    <option value="-1">Tất cả</option>
+                                  
+
+                                    @foreach (var itemStatus in Model.AllStatus.Data)
+                                    { 
+                                        var itemStatus2 =  itemStatus as dynamic;
+
+                                        if(itemStatus2.Id.ToString() == infoItem.Status )
+                                        {
+                                            <option value="@itemStatus2.Id" selected >@itemStatus2.Name</option>
+                                        }
+                                        else {
+                                             <option value="@itemStatus2.Id">@itemStatus2.Name</option>
+                                        }
+                                        
+                                    }
+                                </select>
+
+                                    
+                                
+                                    <div class="invalid-feedback-cs">
+                                        Please choose a username.
+                                    </div>
+                                </div>
+
+                                <div id = "divShowExtraInfo"> 
+                                    <div class="row col-12">
+                                    <div class="col-6 form-group">
+                                    <label class="form-label">Ngày </label>
+                                    <input  type="date" name="from" id ="dateFrom" class="form-control">
+
+
+                                    <div class="invalid-feedback-cs">
+                                    Please choose a username.
+                                    </div>
+                                    </div>
+
+
+                                    <div class="col-6 form-group">
+                                    <label class="form-label">Thời gian </label>
+                                    <input  type="text" name="timer" id ="txtTimer" class="form-control">
+
+
+                                    <div class="invalid-feedback-cs">
+                                    Please choose a username.
+                                    </div>
+                                    </div>
+                                    </div>
+
+
+
+                                    <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="checkDefaultAddress" onchange="changeSelect(this,1)">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                     Địa chỉ có sẵn
+                                    </label>
+                                    </div>
+                                    
+                                 
+                                   
+                                     <div class="col-12 form-group" style="display:none;" id ="divAdddressDefault">
+                                    
+                                        <select name="CareerId" id="cbAddress" class="form-select" aria-label="">
+                                            <option value="-1">Chọn địa chỉ mặc định</option>
+                                    </select>
+                               
+                                    </div>
+                                       <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="checkOtherAddress" onchange="changeSelect(this,2)"  >
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                      Địa chỉ khác
+                                    </label>
+                                    </div>
+                                    <div class="col-12 form-group" style="display:none;" id ="divAdddressOther">
+                                   
+                                    <input  type="text" name="place" id ="txtPlace" class="form-control">
+
+
+                                    <div class="invalid-feedback-cs">
+                                    Please choose a username.
+                                    </div>
+                                    </div>
+                                    </div>
+
+                               
+                                      
+
+                                    <div class="col-12 form-group">
+                                    <label class="form-label">Ghi chú</label>
+                                     <textarea name= "noted" class="form-control"  id = "txtNotedExtra" rows = "3"> </textarea>
+                                    
+                                
+                                    <div class="invalid-feedback-cs">
+                                        Please choose a username.
+                                    </div>
+                                </div>
+                
+                     </form>
+
+                           
+
+                            <div>
+
+                                     
+                                        <button type="button" onclick="saveImpact('@tiemObject.Code')" class="btn btn-primary">Thêm tác động</button>
+                            </div>
+
+
+                            <table class="table  table-striped">
+                            <thead>
+                            <tr>
+                                    <th> STT  </th>  
+                                    <th> Ngày  </th>  
+                                    <th> Thực hiện bởi  </th>  
+                                      <th> Trạng thái  </th>  
+                                    <th> NỘi dung ghi chú </th>  
+                            </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var indexLoop =0;
+                                }
+
+                                @foreach (var itemImpact in Model.AllImpact.Data)
+                                    {
+                                        indexLoop ++;
+                                        var itemImpact2 = itemImpact as dynamic;
+                                        var datetimeCreate = @itemImpact2.CreateAt.ToString("dd/MM/yyyy HH:mm");
+                                        <tr>
+                                        <td> @indexLoop  </td>
+                                        <td> @datetimeCreate </td>
+                                        <td> @itemImpact2.CreatedByName  </td>
+                                         <td> @itemImpact2.StatusName  </td>
+                                        <td> 
+                                        @if(itemImpact2.DateFrom != null )
+                                        {
+                                             <p> Ngày:  @itemImpact2.DateFrom.ToString("dd/MM/yyyy HH:mm")  </p>
+                                        }
+                                        @if(!string.IsNullOrEmpty( itemImpact2.TxtTimer ))
+                                        {
+                                             <p> Vào lúc:  @itemImpact2.TxtTimer  </p>
+                                        }
+
+                                        @if(!string.IsNullOrEmpty(itemImpact2.TxtPlace ) )
+                                        {
+                                             <p> Tại:  @itemImpact2.TxtPlace  </p>
+                                        }
+
+                                         @if(string.IsNullOrEmpty(itemImpact2.Noted ))
+                                        {
+                                             <p> @itemImpact2.TxtPlace  </p>
+                                        }
+                                                <p> @itemImpact2.Noted  </p>
+                                        </td>
+                                        </tr>
+                                    }
+                           
+               
+                            
+                              
+                            </tbody>
+                            </table>
+                        
+                    </div>
+
+</div>
+                                
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
