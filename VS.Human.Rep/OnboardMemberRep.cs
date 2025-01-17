@@ -74,6 +74,16 @@ namespace VS.Human.Rep
             return await this.ExecuteSQL("sp_OnboardMember_update", item);
         }
 
+        public async Task<bool> UpdateOnboardStatus()
+        {
+
+            return await this.ExecuteSQL("sp_UpdateOnboardStatus", new
+            {
+
+            });
+        }
+
+
         public async Task<BaseList> GetAll(OrderRequest request)
         {
             var sqlText = "sp_onboard_getAll";

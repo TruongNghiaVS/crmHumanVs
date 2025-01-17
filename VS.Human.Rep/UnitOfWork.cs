@@ -18,6 +18,9 @@
         public IParrentChildRep ParrentChildRep { get; set; }
         public IOnboardMemberRep OnboardMemberRep { get; set; }
         public IGlobalDataRep GlobalDataRep { get; set; }
+
+        public IReportTalkTimeRepository ReportTalkTimeRepository { get; set; }
+        public IReportRepository ReportRepository { get; set; }
         public UnitOfWork(
             IEmployeeRep employeeRep,
             IGroupRep groupRep,
@@ -30,7 +33,9 @@
             IParrentChildRep parrentChildRep,
             IOnboardMemberRep onboardMemberRep,
             IGlobalDataRep globalDataRep,
-            IlocationRep locationRep
+            IlocationRep locationRep,
+            IReportTalkTimeRepository reportTalkTimeRepository,
+            IReportRepository _reportRepository
             )
         {
             this.EmployeeRep = employeeRep;
@@ -44,7 +49,9 @@
             this.ParrentChildRep = parrentChildRep;
             this.OnboardMemberRep = onboardMemberRep;
             this.GlobalDataRep = globalDataRep;
+            ReportTalkTimeRepository = reportTalkTimeRepository;
             LocationRep = locationRep;
+            ReportRepository = _reportRepository;
         }
     }
 }

@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VS.Human.Rep\VS.Human.Rep.csproj" />
+    <ProjectReference Include="..\VS.Human.Utility\VS.Human.Utility.csproj" />
   </ItemGroup>
 
 </Project>

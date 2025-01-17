@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "FIYM1wsOnUWrCxC6cbKJpTOdljbq5Mt9QAtYfJfARgo=",
+  "Hash": "MZJwHTDvefbM4GPjkQ2B0dJLppMaUCaEZact/jwJho4=",
   "Source": "crmHuman",
   "BasePath": "_content/crmHuman",
   "Mode": "Default",
@@ -1953,6 +1953,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\CV\\candidate\\candidate502.jpg"
+    },
+    {
+      "Identity": "C:\\vietbank\\crm\\services\\crmHuman\\wwwroot\\assets\\CV\\candidate\\candidate504.pdf",
+      "SourceId": "crmHuman",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\vietbank\\crm\\services\\crmHuman\\wwwroot\\",
+      "BasePath": "_content/crmHuman",
+      "RelativePath": "assets/CV/candidate/candidate504.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\CV\\candidate\\candidate504.pdf"
     },
     {
       "Identity": "C:\\vietbank\\crm\\services\\crmHuman\\wwwroot\\assets\\CV\\candidate\\candidate5120.jpg",

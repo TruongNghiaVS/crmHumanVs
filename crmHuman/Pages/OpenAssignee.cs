@@ -4,7 +4,6 @@ namespace crmHuman.Pages
 {
     public class OpenAssignee : PageModel
     {
-
         public void OnGet()
         {
         }

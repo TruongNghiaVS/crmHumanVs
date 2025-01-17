@@ -19,6 +19,7 @@ namespace crmHuman.Pages
         private readonly IOnboardMemberBusiness _onboardMemberBusiness;
 
         private readonly ImasterDataBussiness _imasterDataBussiness;
+        private readonly IReportCDRBussiness _reportCDRBussiness;
 
 
         public OrderRequest RequestSearch { get; set; }
@@ -36,7 +37,7 @@ namespace crmHuman.Pages
         public BaseList AllStatus { get; set; }
         public BaseList AllTinh { get; set; }
         public BaseList AllLinhvuc { get; set; }
-
+        public BaseList AllFileRecord { get; set; }
         public int TotalRecord
         {
 
@@ -52,7 +53,8 @@ namespace crmHuman.Pages
             ICandidateBusiness candidateBusiness,
             IPartnerBusiness partnerBusiness,
             ImasterDataBussiness imasterDataBussiness,
-            IOnboardMemberBusiness onboardMemberBusiness
+            IOnboardMemberBusiness onboardMemberBusiness,
+            IReportCDRBussiness reportCDRBussiness
             )
         {
             _logger = logger;
@@ -74,8 +76,7 @@ namespace crmHuman.Pages
                 "STT","Mã","Ứng cử viên","Vị trí","Trạng thái","Ngày tạo","Cập nhật gần nhất","Thao tác"
             };
             _onboardMemberBusiness = onboardMemberBusiness;
-
-
+            _reportCDRBussiness = reportCDRBussiness;
         }
 
 
@@ -259,8 +260,6 @@ namespace crmHuman.Pages
 
                 };
             }
-
-
             if (resultView == null || resultView.CandidateId.HasValue == false)
             {
                 OrderInfo = resultView;
@@ -299,10 +298,7 @@ namespace crmHuman.Pages
                 allOrder = dataOrder;
 
             }
-
             CandidateInfo = candidateInfoTemp;
-
-
             OrderInfo = resultView;
             AllImpact = await _empBusiness.GetAllImpact(new OrderRequest()
             {
@@ -310,7 +306,12 @@ namespace crmHuman.Pages
                 OrderId = resultView.Id
 
             });
+            var result = await _reportCDRBussiness.GetAllRecordingByOrderId(resultView.Id);
+            if (result == null)
+            {
 
+            }
+            AllFileRecord = new BaseList() { Data = result.Data, Total = result.Total };
             return Page();
         }
 

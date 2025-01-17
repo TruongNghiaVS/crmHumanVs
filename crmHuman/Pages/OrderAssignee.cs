@@ -57,8 +57,6 @@ namespace crmHuman.Pages
                 "Cập nhật gần nhất","Thao tác"
             };
             _empBusiness2 = empBusiness2;
-
-
         }
 
         public async Task<IActionResult> OnPostAssingee(OrderAssingeeAdd request)
@@ -92,9 +90,6 @@ namespace crmHuman.Pages
 
             };
         }
-
-
-
         public async Task<ActionResult> OnGet([FromQuery] OrderRequest request)
         {
             if (!HttpContext.User.Identity.IsAuthenticated)
@@ -124,9 +119,7 @@ namespace crmHuman.Pages
             JobList = await _jobItemBusiness.GetAll(new JobRequest());
             return Page();
         }
-
         public virtual async Task<PartialViewResult> OnGetOpenForm(int id)
-
         {
             GetInfoUser();
             var useridReuest = UserData.UserId;
@@ -175,14 +168,11 @@ namespace crmHuman.Pages
                     StatusCode = StatusCodes.Status400BadRequest
                 };
             }
-
             var result = true;
-
             result = await _business.DeleteOrder(Id);
             var dataReponse = new
             {
                 success = result,
-
             };
             return new JsonResult(dataReponse)
             {
@@ -190,9 +180,6 @@ namespace crmHuman.Pages
 
             };
         }
-
-
-
 
     }
 }

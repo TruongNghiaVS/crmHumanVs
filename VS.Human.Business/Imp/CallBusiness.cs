@@ -16,8 +16,6 @@ namespace VS.Human.Business.Imp
 
         public async Task<bool> MakeCall(string phone, string type, int? IdRel, string chanel, int userId)
         {
-
-
             var data = new StringContent(JsonConvert.SerializeObject(new
             {
                 phoneNumber = phone,
@@ -32,7 +30,6 @@ namespace VS.Human.Business.Imp
                 var reponse = await client.PostAsync("api/client/makeCall", data);
                 var result = await reponse.Content.ReadAsStringAsync();
             }
-
             return true;
         }
     }

@@ -20,6 +20,8 @@
         public IDashboardRep DashboardRep { get; set; }
         public IGlobalDataRep GlobalDataRep { get; set; }
         public IParrentChildRep ParrentChildRep { get; set; }
+        public IReportTalkTimeRepository ReportTalkTimeRepository { get; set; }
+        public IReportRepository ReportRepository { get; set; }
 
     }
 }

@@ -13,3 +13,4 @@ C:\vietbank\crm\services\VS.Human.Rep\obj\Debug\net6.0\VS.Human.Rep.dll
 C:\vietbank\crm\services\VS.Human.Rep\obj\Debug\net6.0\refint\VS.Human.Rep.dll
 C:\vietbank\crm\services\VS.Human.Rep\obj\Debug\net6.0\VS.Human.Rep.pdb
 C:\vietbank\crm\services\VS.Human.Rep\obj\Debug\net6.0\ref\VS.Human.Rep.dll
+C:\vietbank\crm\services\VS.Human.Rep\obj\Debug\net6.0\VS.Human.Rep.sourcelink.json

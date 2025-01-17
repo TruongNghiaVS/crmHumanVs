@@ -669,6 +669,75 @@
                               
                             </tbody>
                             </table>
+
+
+
+
+                               @if (tiemObject.Assignee > 0 )
+                            {
+                                        <div>
+
+                                     
+                                        <button type="button" onclick="saveImpact('@tiemObject.Code')" class="btn btn-primary">danh sách ghi âm</button>
+                                        </div>
+
+                            }
+                          
+
+                            <table class="table  table-striped">
+                            <thead>
+                            <tr>
+                                    <th> STT  </th>  
+                                    <th> Ngày  </th>  
+                                    <th> Thực hiện bởi  </th>
+                                    <th>Số điện thoại</th>  
+                                    <th> Giờ bắt đầu </th>  
+                                    <th> Giờ kết thúc </th> 
+                                    <th> Thời gian đàm thoại </th>  
+                                     <th> File ghi âm </th>  
+                            </tr>
+                            </thead>
+                            <tbody>
+                               
+ @{
+                                    var indexLoop1 =0;
+                                }
+
+                                @foreach (var itemImpact in Model.AllFileRecord.Data)
+                                {
+                                    indexLoop1 ++;
+                                    var itemImpact2 = itemImpact as dynamic;
+                                     var datetimeCreate = @itemImpact2.Calldate.ToString("dd/MM/yyyy");
+                                    var dateteTimeBegin = @itemImpact2.Calldate.ToString("HH:mm:ss");
+                                    var dateteTimeEnd = @itemImpact2.Calldate.AddSeconds(double.Parse(@itemImpact2.Duration)).ToString("HH:mm:ss");
+                                    var timetoHour = TimeSpan.FromSeconds(itemImpact2.DurationReal);
+                                      
+                                     
+                                    <tr>
+                                    <td> @indexLoop  </td>
+                                    <td> @datetimeCreate </td>
+                                     <td> @itemImpact2.Src </td>
+                                     <td> @itemImpact2.Dst </td>
+                                    <td> @dateteTimeBegin </td>
+                                    <td> @dateteTimeEnd </td>
+                                                <td>  @timetoHour.ToString("mm\\:ss")  </td>
+                                    <td>
+                                     <a href="javascript:void(0)" onclick="dowloadfileRecord('@itemImpact2.Recordingfile')">
+                                                <i class="bi bi-record-btn-fill">
+                                                </i>
+                                        </a>
+                                     </td>
+                                    </tr>
+                                }
+                           
+               
+                                
+                           
+               
+                            
+                              
+                            </tbody>
+                            </table>
                         
                     </div>
                     }
@@ -690,16 +759,16 @@
                         <thead>
                             <tr>
                                 <th>
-                                            STT
+                                    STT
                                 </th>  
-                                    <th>
-                                        Mã đơn hàng
+                                  <th>
+                                    Mã đơn hàng
                                 </th>
                                 <th>
-                                        Ứng cử viên
+                                   Ứng cử viên
                                 </th>
                                 <th>
-                                        Vị trí
+                                   Vị trí
                                 </th>  
                                 <th>
                                         Đối tác/dự án
@@ -732,9 +801,7 @@
                             }
                             @foreach (var itemData in Model.allOrder.Data)
                             {
-                                
                                 var itemInfo = itemData as dynamic;
-                            
                                 var datetimeCreate = @itemInfo.CreateAt.ToString("dd/MM/yyyy HH:mm");
                                 var datetimeUpdate = "";
                                 if (@itemInfo.UpdateAt != null)

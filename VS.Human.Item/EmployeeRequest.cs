@@ -66,6 +66,8 @@
 
     public class OrderRequest : BaseRequest
     {
+
+        public bool DisplayAll { get; set; }
         public string? OrderCode { get; set; }
         public int OrderId { get; set; }
         public int? Marketting { get; set; }

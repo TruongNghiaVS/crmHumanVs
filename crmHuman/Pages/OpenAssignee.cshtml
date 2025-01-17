@@ -1,36 +1,35 @@
 ﻿@{
 
     var tiemObject = Model.resultView;
-
     var arrayRol = new List<crmHuman.Model.SelectDisplay>()
+    {
+        new Model.SelectDisplay()
         {
-            new Model.SelectDisplay()
-            {
-                Code ="1", Name ="Admin"
-            },
-            new  Model.SelectDisplay()
-            {
-            Code ="2", Name ="TC"
-            },
-            new  Model.SelectDisplay()
-            {
-            Code ="3", Name ="TL"
-            }
-            , new Model.SelectDisplay()
-            {
-              Code ="4", Name ="Marketing"
-            },
-            new Model.SelectDisplay()
-            {
-            Code ="6", Name ="Trưởng CTV"
-            }
-        };
+            Code ="1", Name ="Admin"
+        },
+        new  Model.SelectDisplay()
+        {
+        Code ="2", Name ="TC"
+        },
+        new  Model.SelectDisplay()
+        {
+        Code ="3", Name ="TL"
+        }
+        , new Model.SelectDisplay()
+        {
+            Code ="4", Name ="Marketing"
+        },
+        new Model.SelectDisplay()
+        {
+        Code ="6", Name ="Trưởng CTV"
+        }
+    };
 
     var arrayStatus = new List<crmHuman.Model.SelectDisplay>()
         {
             new  Model.SelectDisplay()
             {
-                Code ="0", Name ="Không hoạt động"
+            Code ="0", Name ="Không hoạt động"
             },
             new  Model.SelectDisplay()
             {
@@ -38,8 +37,6 @@
             }
           
         };
-
-  
 }
   <div class="modal-header">
     <h5 class="modal-title">Phân case cho thông tin </h5>
@@ -52,35 +49,28 @@
              <form id="mainForm2" class="needs-validation" novalidate>
                 @if(@tiemObject.Id > 0)
                 {
-                 <div class="col-12 form-group">
-                    <label class="form-label">Mã đơn hàng</label>
-                      <input type="text" readonly value="@tiemObject.Code" name="fullName" id="txtCode" class="form-control" required placeholder="" />
-                    <div class="invalid-feedback-cs">
-                    </div>
+                    <div class="col-12 form-group">
+                        <label class="form-label">Mã đơn hàng</label>
+                        <input type="text" readonly value="@tiemObject.Code" name="fullName" id="txtCode" class="form-control" required placeholder="" />
+                        <div class="invalid-feedback-cs">
+                        </div>
 
-                </div>
+                    </div>
                 }
 
                 <div class="col-12 form-group">
                     <label class="form-label">Phân cho TC</label>
                     <select name="candidateId" id="cbAssingeeId" class="form-select" aria-label="">
                         <option value="-1">Chọn ứng cử viên</option>
-                @foreach (var item in Model.allEmployers.Data)
-
+                        @foreach (var item in Model.allEmployers.Data)
                         {
-
-                                  <option value="@item.Id">@item.FullName</option>
-                        
+                            <option value="@item.Id">@item.FullName</option>
                         }
                     </select>
                     <div class="invalid-feedback-cs">
                         Please choose a username.
                     </div>
                 </div>
-                
-
-
-
             </form>
 
         </div>

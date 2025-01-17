@@ -92,7 +92,9 @@
                             @{
                                 int i = 0;
                             }
-                            @foreach (var itemData in Model.DataAll.Data)
+
+                            
+                             @foreach (var itemData in   Model.DataAll.Data)
                             {
                                 var itemInfo = itemData as dynamic;
                                 var datetimeCreate = @itemInfo.CreateAt.ToString("dd/MM/yyyy HH:mm");

@@ -1,0 +1,13 @@
+C:\vietbank\crm\services\VS.Human.Utility\obj\Debug\net6.0\VS.Human.Utility.GeneratedMSBuildEditorConfig.editorconfig
+C:\vietbank\crm\services\VS.Human.Utility\obj\Debug\net6.0\VS.Human.Utility.AssemblyInfoInputs.cache
+C:\vietbank\crm\services\VS.Human.Utility\obj\Debug\net6.0\VS.Human.Utility.AssemblyInfo.cs
+C:\vietbank\crm\services\VS.Human.Utility\obj\Debug\net6.0\VS.Human.Utility.csproj.CoreCompileInputs.cache
+C:\vietbank\crm\services\VS.Human.Utility\obj\Debug\net6.0\VS.Human.Utility.sourcelink.json
+C:\vietbank\crm\services\VS.Human.Utility\bin\Debug\net6.0\VS.Human.Utility.deps.json
+C:\vietbank\crm\services\VS.Human.Utility\bin\Debug\net6.0\VS.Human.Utility.dll
+C:\vietbank\crm\services\VS.Human.Utility\bin\Debug\net6.0\VS.Human.Utility.pdb
+C:\vietbank\crm\services\VS.Human.Utility\obj\Debug\net6.0\VS.Human.Utility.csproj.AssemblyReference.cache
+C:\vietbank\crm\services\VS.Human.Utility\obj\Debug\net6.0\VS.Human.Utility.dll
+C:\vietbank\crm\services\VS.Human.Utility\obj\Debug\net6.0\refint\VS.Human.Utility.dll
+C:\vietbank\crm\services\VS.Human.Utility\obj\Debug\net6.0\VS.Human.Utility.pdb
+C:\vietbank\crm\services\VS.Human.Utility\obj\Debug\net6.0\ref\VS.Human.Utility.dll

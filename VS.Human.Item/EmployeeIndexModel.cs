@@ -224,6 +224,7 @@
         public DateTime? OnboardDate { get; set; }
         public DateTime? Warrantydate { get; set; }
         public string? SystemStatusText { get; set; }
+        public int OrderId { get; set; }
         public int? Dpd { get; set; }
 
     }

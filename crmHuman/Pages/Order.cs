@@ -85,7 +85,6 @@ namespace crmHuman.Pages
             };
         }
 
-
         public async Task<IActionResult> OnPostChangeStatusApply(ApplyToStatus request)
         {
             if (request.OrderId.HasValue == false)
@@ -148,7 +147,7 @@ namespace crmHuman.Pages
                 string.IsNullOrEmpty(orderInfo.Introduction) ||
                 orderInfo.Experience < 1 ||
                 orderInfo.RankLevel < 1 ||
-               orderInfo.Gender < 1)
+               orderInfo.Gender < 0)
             {
                 return new JsonResult(new
                 {
@@ -384,8 +383,6 @@ namespace crmHuman.Pages
                 this.Permision.SearchGrop = false;
             }
 
-
-
             if (UserData.RoleCode == "3")
             {
 
@@ -401,11 +398,10 @@ namespace crmHuman.Pages
 
                 }
             }
-
             RequestSearch = request2;
-
             JobList = await _jobItemBusiness.GetAll(new JobRequest());
             request2.Isapply = 0;
+            request2.DisplayAll = true;
             DataAll = await _orderBussiness.GetAll(request2);
             return Page();
         }
@@ -433,9 +429,7 @@ namespace crmHuman.Pages
                     StatusCode = StatusCodes.Status400BadRequest
                 };
             }
-
             var result = true;
-
             result = await _orderBussiness.DeleteOrder(Id);
             var dataReponse = new
             {

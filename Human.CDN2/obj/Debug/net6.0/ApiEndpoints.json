@@ -1,0 +1,66 @@
+[
+  {
+    "ContainingType": "Human.CDN2.Controllers.Filecontroller",
+    "Method": "getaudio09",
+    "RelativePath": "api/file/getaudio09",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filePath",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Human.CDN2.Controllers.Filecontroller",
+    "Method": "getaudio12",
+    "RelativePath": "api/file/getaudio12",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filePath",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Human.CDN2.Controllers.Filecontroller",
+    "Method": "getaudio151",
+    "RelativePath": "api/file/getaudio151",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filePath",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Human.CDN2.Controllers.Filecontroller",
+    "Method": "getaudio9",
+    "RelativePath": "api/file/getaudio9",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "filePath",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

@@ -15,3 +15,6 @@ C:\vietbank\crm\services\VS.Human.Business\obj\Debug\net6.0\VS.Human.Business.dl
 C:\vietbank\crm\services\VS.Human.Business\obj\Debug\net6.0\refint\VS.Human.Business.dll
 C:\vietbank\crm\services\VS.Human.Business\obj\Debug\net6.0\VS.Human.Business.pdb
 C:\vietbank\crm\services\VS.Human.Business\obj\Debug\net6.0\ref\VS.Human.Business.dll
+C:\vietbank\crm\services\VS.Human.Business\obj\Debug\net6.0\VS.Human.Business.sourcelink.json
+C:\vietbank\crm\services\VS.Human.Business\bin\Debug\net6.0\VS.Human.Utility.dll
+C:\vietbank\crm\services\VS.Human.Business\bin\Debug\net6.0\VS.Human.Utility.pdb

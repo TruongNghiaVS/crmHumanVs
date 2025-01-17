@@ -341,6 +341,7 @@
                         <thead>
                             <tr>    
                                     <th>STT</th>
+                                    <th>Mã ĐH</th>
                                     <th>Họ tên</th>
                                     <th>Onboard</th>
                                     <th>Vị trí</th>
@@ -389,3 +390,11 @@
 </script>
 
 <script src="assets/js/chart.js"></script>
+
+
+ <script>
+   var groupSearch = "@Model.RequestPage.GroupId";
+   var memberSearch = "@Model.RequestPage.MemberId";
+   var extraSearchRequest  = {groupSearch,memberSearch};
+
+</script>

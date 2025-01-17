@@ -11,6 +11,8 @@ namespace VS.Human.Rep
         Task<BaseList> GetAll(OrderRequest request);
         Task<OnboardMember> GetById(int id);
 
+        public Task<bool> UpdateOnboardStatus();
+
 
     }
 }

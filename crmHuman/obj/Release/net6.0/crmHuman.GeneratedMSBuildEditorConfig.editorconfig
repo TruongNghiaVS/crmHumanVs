@@ -150,6 +150,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcZm9ybVNlYXJjaFxzZWFyY2hGb3JtT3JkZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/vietbank/crm/services/crmHuman/Pages/formSearch/searchFormOrderApply.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcZm9ybVNlYXJjaFxzZWFyY2hGb3JtT3JkZXJBcHBseS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/vietbank/crm/services/crmHuman/Pages/formSearch/searchFormOrderCTV.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcZm9ybVNlYXJjaFxzZWFyY2hGb3JtT3JkZXJDVFYuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -160,6 +164,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/vietbank/crm/services/crmHuman/Pages/formSearch/searchFormOrderMarkettingCTV.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcZm9ybVNlYXJjaFxzZWFyY2hGb3JtT3JkZXJNYXJrZXR0aW5nQ1RWLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/vietbank/crm/services/crmHuman/Pages/formSearch/searchFormOrderNew.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcZm9ybVNlYXJjaFxzZWFyY2hGb3JtT3JkZXJOZXcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/vietbank/crm/services/crmHuman/Pages/formSearch/searchFormOrderOnboard.cshtml]

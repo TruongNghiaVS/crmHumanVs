@@ -96,13 +96,9 @@ namespace crmHuman.Pages
             {
                 return Redirect("/Login");
             }
-
             var identity = HttpContext.User.Identity as ClaimsIdentity;
             var roleCodeText = "";
-
-
             RequestPage = request;
-
             if (identity != null)
             {
                 var userClaims = identity.Claims;
@@ -123,17 +119,10 @@ namespace crmHuman.Pages
                 roleCodeText = roleCode;
                 UserActive.DataActiveOnline.AddOrUpdate(idUser, userName, fullName);
             }
-
             RequestPage.UserId = UserData.UserId;
-
             RequestPage.RoleCode = UserData.RoleCode;
-
-
-
-
             if (RequestPage.RoleCode == "4")
             {
-
                 this.Permision.SearchGrop = false;
             }
             if (UserData.RoleCode == "2" || UserData.RoleCode == "4")
@@ -142,12 +131,9 @@ namespace crmHuman.Pages
             }
             if (UserData.RoleCode == "3")
             {
-
                 if (UserData.UserId == 37)
                 {
                     RequestPage.GroupId = 6;
-
-
                 }
                 else if (UserData.UserId == 38)
                 {
@@ -155,7 +141,6 @@ namespace crmHuman.Pages
 
                 }
             }
-
             var orderRequest = new OrderRequest()
             {
                 UserId = UserData.UserId,
@@ -172,22 +157,17 @@ namespace crmHuman.Pages
             TopImpact = await dashboardBusinness.GetTopImpactOrder(orderRequest);
             ParamDashboard = await dashboardBusinness.GetParam(orderRequest);
             ReportGroupStatus = await dashboardBusinness.StatisticsReport(orderRequest);
-
             StatusListOverviewDashboard = await dashboardBusinness.GetDashboardStatus(orderRequest);
-
             var dataReport = ParamDashboard.Data;
             var allOrder = await dashboardBusinness.GetALLOrderInfo(orderRequest);
             double sumTotalCV = 0;
             double totalCVProcess = 0;
             double totalOnboard = 0;
             double cvDone = 0;
-
             double totalCVNew = 0;
             double totalDone = 0;
             var allCV = await dashboardBusinness.GetAllCV(orderRequest);
-
             var totalCVInput = allCV.Total;
-
             if (allOrder.Data != null)
                 foreach (var item in allOrder.Data)
                 {
@@ -223,8 +203,6 @@ namespace crmHuman.Pages
             {
                 dataReport = new List<object>();
             }
-
-
             InfoDashboard = new
             {
                 totalCV = sumTotalCV,

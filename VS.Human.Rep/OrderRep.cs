@@ -267,7 +267,6 @@ namespace VS.Human.Rep
             {
                 sqlGetALl = "sp_Order_MarkettingGetAll";
             }
-
             else
             {
                 sqlGetALl = "sp_order_getAll";
@@ -299,6 +298,7 @@ namespace VS.Human.Rep
                  request.IsReturn,
                  request.IsClose,
                  request.IsPush,
+                 request.DisplayAll,
                  request.CTV
              }, sqlText);
             return result;

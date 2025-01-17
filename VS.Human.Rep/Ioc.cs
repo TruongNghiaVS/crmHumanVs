@@ -12,8 +12,6 @@ namespace VS.Human.Rep
             services.AddSingleton<ILoginRep, LoginRep>();
             services.AddSingleton<IEmployeeRep, EmployeeRep>();
             services.AddSingleton<IGroupRep, GroupRep>();
-
-
             services.AddSingleton<IMasterDataRep, MasterDataRep>();
             services.AddSingleton<IJobItemRep, JobItemRep>();
             services.AddSingleton<ICandidateRep, CandidateRep>();
@@ -25,8 +23,9 @@ namespace VS.Human.Rep
             services.AddSingleton<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IlocationRep, locationRep>();
             services.AddSingleton<IPartnerRep, PartnerRep>();
-
-
+            services.AddSingleton<IReportTalkTimeGroupByDay, ReportTalkTimeGroupByDayRepository>();
+            services.AddSingleton<IReportTalkTimeRepository, ReportTalkTimeRepository>();
+            services.AddSingleton<IReportRepository, ReportRepository>();
         }
     }
 }

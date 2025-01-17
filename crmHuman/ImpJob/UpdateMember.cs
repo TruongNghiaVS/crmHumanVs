@@ -32,7 +32,6 @@ namespace crmHuman.ImpJob
                     RelId = itemgroup.RelId,
                     LinkId = itemgroup.LinkId
                 };
-
                 GlobalGroupMember.GlobalData.AddGroup(item);
 
             }

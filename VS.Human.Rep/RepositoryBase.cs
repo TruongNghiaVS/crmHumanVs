@@ -14,10 +14,12 @@ namespace VS.Human.Rep
         protected int offset;
         protected string tableName = "Employees";
         protected string sqlGetALl = "sp_Employee_getAll";
+        protected SqlContraint _Sql;
         public RepositoryBase(IConfiguration configuration)
         {
             _configuration = configuration;
             _connection = new SqlConnection(configuration.GetConnectionString("stringConnect7"));
+            _Sql = SqlContraint.GetVariable();
         }
         protected IDbConnection GetConnection()
         {
@@ -25,6 +27,7 @@ namespace VS.Human.Rep
             con.Open();
             return con;
         }
+
         public async Task<bool> Delete(int id)
         {
             return await DeleteBase(id, tableDelete: tableName);
@@ -277,6 +280,41 @@ namespace VS.Human.Rep
             }
 
         }
+
+        public async Task<List<T>> GetDataList<T>(string sql = "",
+        object parameter = null)
+        where T : class, new()
+        {
+            if (string.IsNullOrEmpty(sql))
+            {
+                return null;
+            }
+            if (parameter == null)
+            {
+                parameter = new DynamicParameters();
+            }
+
+            try
+            {
+                using (var _con = GetConnection())
+                {
+                    var result = await _con.QueryAsync<T>(sql, param: parameter);
+
+                    if (result == null)
+                    {
+                        return result.ToList();
+                    }
+                    return new List<T>();
+                }
+            }
+            catch (Exception e)
+            {
+                return new List<T>();
+
+            }
+        }
+
+
         public async Task<bool> ExecuteSQL(string sql = "",
          object parameter = null)
 
@@ -354,6 +392,7 @@ namespace VS.Human.Rep
         }
 
 
+
         public async Task<BaseList> GetBaseAll<TIndexModel>(
              BaseRequest request,
              dynamic parameter,
@@ -423,7 +462,7 @@ namespace VS.Human.Rep
             {
                 return new BaseList()
                 {
-                    Data = null,
+                    Data =  new List<Object>(),
                     Total = 0,
                 };
             }

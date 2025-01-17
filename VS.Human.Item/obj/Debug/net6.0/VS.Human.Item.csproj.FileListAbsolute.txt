@@ -9,3 +9,4 @@ C:\vietbank\crm\services\VS.Human.Item\obj\Debug\net6.0\VS.Human.Item.dll
 C:\vietbank\crm\services\VS.Human.Item\obj\Debug\net6.0\refint\VS.Human.Item.dll
 C:\vietbank\crm\services\VS.Human.Item\obj\Debug\net6.0\VS.Human.Item.pdb
 C:\vietbank\crm\services\VS.Human.Item\obj\Debug\net6.0\ref\VS.Human.Item.dll
+C:\vietbank\crm\services\VS.Human.Item\obj\Debug\net6.0\VS.Human.Item.sourcelink.json

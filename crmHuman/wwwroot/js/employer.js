@@ -2438,9 +2438,9 @@ function saveOrderCandidateMarketting(idEmp,waysave= false) {
     }
 
 
-    if( phoneCand == "" && emailCand == "")
+    if( phoneCand == "" )
     {
-        addError("txtPhone", "Chọn điền email hoặc số điện thoại");
+        addError("txtPhone", "Số điện thoại bắt buộc nhập");
 
     
         return;
@@ -2448,6 +2448,12 @@ function saveOrderCandidateMarketting(idEmp,waysave= false) {
    
     else
     {
+
+        if (phoneCand.length < 10) {
+            addError("txtPhone", "Số điện thoại không hợp lệ");
+            return;
+        }
+
         if( phoneCand.length > 0)
         {
             if(!isVietnamesePhoneNumber(phoneCand))

@@ -9,6 +9,7 @@ namespace VS.Human.Business
         Task<BaseList> GetAll(OrderRequest request);
         Task<OnboardMember> GetById(int id);
         Task<bool> UpdateOnboard(dynamic request);
+        Task<bool> UpdateOnboardStatus();
 
     }
 }

@@ -22,12 +22,8 @@ namespace VS.Human.Business.Imp
         }
         public async Task<bool> UpdateOnboard(dynamic item)
         {
-
-
             return await _unitOfWork.OnboardMemberRep.UpdateOnboard(item);
         }
-
-
         public async Task<BaseList> GetAll(OrderRequest request)
         {
             return await _unitOfWork.OnboardMemberRep.GetAll(request);
@@ -35,6 +31,10 @@ namespace VS.Human.Business.Imp
         public async Task<OnboardMember> GetById(int id)
         {
             return await _unitOfWork.OnboardMemberRep.GetById(id);
+        }
+        public async Task<bool> UpdateOnboardStatus()
+        {
+            return await _unitOfWork.OnboardMemberRep.UpdateOnboardStatus();
         }
 
     }

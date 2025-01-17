@@ -25,6 +25,12 @@ namespace VS.Human.Business
             services.AddSingleton<IOnboardMemberBusiness, OnboardMemberBusiness>();
             services.AddSingleton<IExportFileBussiness, ExportFileBussiness>();
             services.AddSingleton<IGlobalDataBusiness, GlobalDataBusinness>();
+            services.AddSingleton<ICalculateTimeBusiness, CalculateTimeBusiness>();
+            services.AddSingleton<IHandleReportBussiness, HandleReportBussiness>();
+            services.AddSingleton<IReportCDRBussiness, ReportCDRBussiness>();
+
+
+
 
         }
     }

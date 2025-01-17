@@ -322,6 +322,7 @@ namespace crmHuman.Pages
 
             JobList = await _jobItemBusiness.GetAll(new JobRequest());
             request2.Isapply = 0;
+            request2.DisplayAll = true;
             DataAll = await _orderBussiness.GetAll(request2);
             return Page();
         }
