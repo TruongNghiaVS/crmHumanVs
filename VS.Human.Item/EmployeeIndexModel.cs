@@ -152,6 +152,7 @@
     public class OnboardMemberIndexModel : BaseIndexModel
     {
 
+        public int OrderId { get; set; }
         public string? Code { get; set; }
         public int? JobId { get; set; }
         public int? Status { get; set; }

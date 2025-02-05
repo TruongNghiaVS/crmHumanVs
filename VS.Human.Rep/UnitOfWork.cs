@@ -21,6 +21,7 @@
 
         public IReportTalkTimeRepository ReportTalkTimeRepository { get; set; }
         public IReportRepository ReportRepository { get; set; }
+        public   IReportTalkTimeGroupByDay ReportTalkTimeGroupByDay { get; set;}
         public UnitOfWork(
             IEmployeeRep employeeRep,
             IGroupRep groupRep,
@@ -35,7 +36,8 @@
             IGlobalDataRep globalDataRep,
             IlocationRep locationRep,
             IReportTalkTimeRepository reportTalkTimeRepository,
-            IReportRepository _reportRepository
+            IReportRepository _reportRepository,
+            IReportTalkTimeGroupByDay  reportTalkTimeGroupByDay
             )
         {
             this.EmployeeRep = employeeRep;
@@ -52,6 +54,7 @@
             ReportTalkTimeRepository = reportTalkTimeRepository;
             LocationRep = locationRep;
             ReportRepository = _reportRepository;
+            ReportTalkTimeGroupByDay = reportTalkTimeGroupByDay;
         }
     }
 }

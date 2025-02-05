@@ -593,16 +593,12 @@ namespace VS.Human.Rep
                             TimeTalkBegin,
                             from,
                             to,
-
                             request.Token,
-
                             request.VendorId,
                             request.NoAgree,
-
                             request.Limit,
                             request.MemberId,
                             request.GroupId,
-
                             request.Page,
                             request.OrderBy,
                             request.UserId

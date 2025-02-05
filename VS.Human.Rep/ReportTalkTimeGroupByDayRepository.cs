@@ -291,7 +291,6 @@ namespace VS.Human.Rep
                 request.Page,
                 request.OrderBy
             });
-
             var fistElement = result.FirstOrDefault();
             var totalRecord = 0;
             if (fistElement != null)

@@ -109,7 +109,9 @@
                              @foreach (var itemData in Model.DataAll.Data)
                             {
                                 var itemInfo = itemData as dynamic;
-                                 var datetimeCreate = @itemInfo.CreateAt.ToString("dd/MM/yyyy HH:mm");
+
+                                var tagetLink = "/OrderDetailNew?OrderId=" + itemInfo.OrderId;
+                                var datetimeCreate = @itemInfo.CreateAt.ToString("dd/MM/yyyy HH:mm");
 
                                   var datetimeOnboard = @itemInfo.OnboardDate.ToString("dd/MM/yyyy");
                                   var endDate = "";
@@ -121,8 +123,8 @@
                                    <tr>
                                     
                                 <td>@i</td>
-                                    <td>@itemInfo.OrderCode </td>
-                                <td><a href="javascript:void()">@itemInfo.CandidateName</a></td>
+                                    <td> <a href="@tagetLink" target="_blank" > @itemInfo.OrderCode  </a> </td>
+                                    <td><a href="javascript:void()">@itemInfo.CandidateName</a></td>
                            
                                     <td><a href="javascript:void()">@datetimeOnboard</a></td>
                                 

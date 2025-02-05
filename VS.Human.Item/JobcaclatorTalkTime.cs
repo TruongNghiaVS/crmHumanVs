@@ -56,11 +56,37 @@ namespace VS.Human.Item
         }
 
 
+
+        public string? FromText
+        {
+            get
+            {
+                if (From.HasValue)
+                {
+                    return From.Value.ToString("yyyy-MM-dd");
+                }
+                return "";
+            }
+        }
+        public string? ToText
+        {
+            get
+            {
+                if (To.HasValue)
+                {
+                    return To.Value.ToString("yyyy-MM-dd");
+                }
+                return "";
+            }
+        }
         public BaseSearchRequest()
         {
             Page = 1;
 
             Limit = 10;
+            FromTimeAss = DateTime.Now.AddMonths(-1);
+            ToTimeAss = DateTime.Now;
+
         }
     }
     public class GetAllRecordGroupByLineCodeRequest : BaseSearchRequest

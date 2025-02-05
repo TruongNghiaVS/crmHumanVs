@@ -320,6 +320,6 @@
 
 
 
-document.addEventListener("DOMContentLoaded", function(){
-    $( ".datepicker" ).datetimepicker({format: 'dd/MM/yyyy'});
-});
+// document.addEventListener("DOMContentLoaded", function(){
+//     $( ".datepicker" ).datetimepicker({format: 'dd/MM/yyyy'});
+// });

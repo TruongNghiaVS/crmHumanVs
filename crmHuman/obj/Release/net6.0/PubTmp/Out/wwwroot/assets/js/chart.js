@@ -280,14 +280,21 @@ function drawChartBasic(dataDraw)
 
 function renderChartCV(dataSource)
 {   
+  // console.log(dataSource)
   var htmlText = '';
   document.getElementById("tableDataChart").innerHTML ="";
  
+
+
   for (let index = 0; index < dataSource.length; index++) {
+
+    
+
       htmlText +=  '<tr>';
       let dataItem = dataSource[index];
+      var targetLink = "/OrderDetailNew?OrderId=" + dataItem.id;
       htmlText+= "<td>"+ (index+ 1) +"</td>";
-      htmlText+= "<td>"+ dataItem.code+"</td>";
+      htmlText+= "<td>"+   "<a href= '"+ targetLink +"' target = '_blank'>" + dataItem.code + "</a>" +"</td>";
       htmlText+= "<td>"+ dataItem.candidateFullName+"</td>";
       htmlText+= "<td>"+ dataItem.positionText+"</td>";
 
@@ -535,7 +542,6 @@ function changeTypeTime(itemSelect)
 function openCVOnboard(modeLoad) 
 {
 
-
   $('#dataOrderMember').modal('show'); 
 
   var htmlText = '';
@@ -558,7 +564,10 @@ function openCVOnboard(modeLoad)
         }
       }
       rowIndexSTT ++;
+      var targetLink = "/OrderDetailNew?OrderId=" + dataItem.orderId;
       htmlText+= "<td>"+ (rowIndexSTT) +"</td>";
+      htmlText+= "<td>"+   "<a href= '"+ targetLink +"' target = '_blank'>" + dataItem.orderCode + "</a>" +"</td>";
+
       htmlText+= "<td>"+ dataItem.candidateFullName+"</td>";
       htmlText+= "<td>"+ dataItem.onboardDate+"</td>";
       var textjob = "";

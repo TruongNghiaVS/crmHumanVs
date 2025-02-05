@@ -8,9 +8,9 @@ C:\vietbank\crm\services\VS.Human.Rep\obj\Release\net6.0\VS.Human.Rep.GeneratedM
 C:\vietbank\crm\services\VS.Human.Rep\obj\Release\net6.0\VS.Human.Rep.AssemblyInfoInputs.cache
 C:\vietbank\crm\services\VS.Human.Rep\obj\Release\net6.0\VS.Human.Rep.AssemblyInfo.cs
 C:\vietbank\crm\services\VS.Human.Rep\obj\Release\net6.0\VS.Human.Rep.csproj.CoreCompileInputs.cache
+C:\vietbank\crm\services\VS.Human.Rep\obj\Release\net6.0\VS.Human.Rep.sourcelink.json
 C:\vietbank\crm\services\VS.Human.Rep\obj\Release\net6.0\VS.Human.3F2A96D1.Up2Date
 C:\vietbank\crm\services\VS.Human.Rep\obj\Release\net6.0\VS.Human.Rep.dll
 C:\vietbank\crm\services\VS.Human.Rep\obj\Release\net6.0\refint\VS.Human.Rep.dll
 C:\vietbank\crm\services\VS.Human.Rep\obj\Release\net6.0\VS.Human.Rep.pdb
 C:\vietbank\crm\services\VS.Human.Rep\obj\Release\net6.0\ref\VS.Human.Rep.dll
-C:\vietbank\crm\services\VS.Human.Rep\obj\Release\net6.0\VS.Human.Rep.sourcelink.json

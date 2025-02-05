@@ -1,0 +1,148 @@
+﻿@page
+@model ReportTalkTimeModel
+@{
+    ViewData["Title"] = Model.TitlePage;   
+    var arraysource = new List<crmHuman.Model.SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="1", Name ="Facebook"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="2", Name ="Web"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="3", Name ="Form"
+            },
+            new Model.SelectDisplay()
+            {
+              Code ="5", Name ="khác"
+            }
+            ,
+            new Model.SelectDisplay()
+            {
+              Code ="6", Name ="HCNS"
+            }
+        };
+      string GetNameSource(string code)
+        {
+            if (string.IsNullOrEmpty(code))
+            {
+                return "TC";
+            }
+            string temp = "";
+            foreach (var item in arraysource)
+            {
+                if (item.Code == code.ToString())
+                {
+                    temp = item.Name;
+                    break;
+                }
+            }
+            if(temp =="")
+            {
+                return "TC";
+            }
+            return temp;
+        }
+}
+<div class="pagetitle">
+    <h1>@Model.TitlePage</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="/Employee">Nhân viên</a></li>
+            <li class="breadcrumb-item active">Danh sách</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+            
+                    @{
+                        Html.RenderPartial("formSearch/searchFormReportTime", Model);
+                    }
+
+                   
+                    <table class="table  table-striped">
+                        <thead>
+                            <tr>
+                                @foreach (var item in Model.TableColumnText)
+                                {
+                                    <th>
+                                        @item
+                                    </th>
+                                }     
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int i = 0;
+                            }
+                            @foreach (var itemData in Model.DataAll.Data)
+                            {
+                                var itemDisplay = itemData as dynamic;
+                                i++;
+                                var groupByDay = new DateTime(itemDisplay.YearR, itemDisplay.MonthR, itemDisplay.DayR);
+                                var datetimeCreate = groupByDay.ToString("dd/MM/yyyy");
+                                var timeCall = TimeSpan.FromSeconds(double.Parse( itemDisplay.TimCall.ToString()));
+                                var timeWaiting = TimeSpan.FromSeconds(double.Parse( itemDisplay.TimeWaiting.ToString()));
+                                var timeTalking = TimeSpan.FromSeconds(double.Parse( itemDisplay.TimeTalking.ToString()));
+                                var sumNoCall = itemDisplay.SumAn + itemDisplay.SumNOAswer + itemDisplay.SumNOCancel + 
+                                itemDisplay.SumNoBussy  +  itemDisplay.SumNoFail;
+                                <tr>
+                                <td>@i</td>
+                                <td>@itemDisplay.LineCode</td>
+                                <td>@itemDisplay.UserName</td>
+                                <td>@itemDisplay.SumNoAgree</td>
+                                <td>@datetimeCreate</td>
+                                <td>@sumNoCall</td>
+                                <td>@itemDisplay.PerPercent</td>
+                                <td>@timeCall.ToString("mm\\:ss")  </td>
+                                <td>@timeWaiting.ToString("mm\\:ss")  </td>
+                                <td>@timeTalking.ToString("mm\\:ss")  </td>
+                                <td>@itemDisplay.SumAn</td>
+                                <td>@itemDisplay.SumNOAswer</td>
+                                <td>@itemDisplay.SumNOCancel</td>
+                                <td>@itemDisplay.SumNoBussy</td>
+                                <td>@itemDisplay.SumNOChanel</td>
+                                <td>@itemDisplay.SumNoFail</td>
+                                <td>@itemDisplay.SumNOServe</td>
+                            
+                                </tr>
+                               
+                            }
+                            </tbody>
+                    </table>
+                    @{
+                        Html.RenderPartial("formSearch/pagination", Model);
+                    }
+                        
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="formModal" tabindex="-1" >
+    <div class="modal-dialog  modal-dialog-centered modal-lg" >
+        <div class="modal-content" id="contentModal">
+        </div>
+    </div>
+</div>
+
+
+ <script>
+    var groupSearch = "@Model.RequestSearch.GroupId";
+    var memberSearch = "@Model.RequestSearch.MemberId";
+   var extraSearchRequest  = {groupSearch,memberSearch};
+
+</script>

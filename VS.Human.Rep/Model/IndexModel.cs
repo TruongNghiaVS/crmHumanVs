@@ -62,13 +62,23 @@
 
     public class GetOverViewDashBoardIndexModel
     {
-        public int? SumCall { get; set; }
-        public int? SumNoAgree { get; set; }
-        public decimal? Perpercent { get; set; }
+        public int SumCall { get; set; }
+        public int SumNoAgree { get; set; }
+        public decimal Perpercent { get; set; }
 
-        public decimal? Timcall { get; set; }
-        public decimal? TimeWaiting { get; set; }
-        public decimal? TimeTalking { get; set; }
+        public decimal Timcall { get; set; }
+        public decimal TimeWaiting { get; set; }
+        public decimal TimeTalking { get; set; }
+
+        public GetOverViewDashBoardIndexModel()
+        {
+            SumCall = 0;
+            SumNoAgree = 0;
+            Perpercent = 0;
+            Timcall = 0;
+            TimeWaiting = 0;
+            TimeTalking = 0;
+        }
 
     }
 }

@@ -24,31 +24,30 @@ namespace crmHuman
 
             builder.Services.AddQuartz(q =>
             {
-                var jobKey = new JobKey("UpdateTrackingOnline");
+                var jobKey = new JobKey("UpdateMemberOnboardStatus");
                 q.AddJob<UpdateTrackingOnline>(opts => opts.WithIdentity(jobKey));
                 q.AddTrigger(opts => opts
                     .ForJob(jobKey)
-                    .WithIdentity("UpdateTrackingOnline-trigger")
-                    .WithCronSchedule(" 0/3 * * * * ? *")
-                );
-            });
-            builder.Services.AddQuartz(q =>
-            {
-                var jobKey = new JobKey("UpdateMemberOnboardStatus");
-                q.AddJob<UpdateOnboardStatus>(opts => opts.WithIdentity(jobKey));
-                q.AddTrigger(opts => opts
-                    .ForJob(jobKey)
                     .WithIdentity("UpdateMemberOnboardStatus-trigger")
-                     .WithCronSchedule(" 0/50 * * * * ? *")
+                     .WithCronSchedule(" 0/3 * * * * ? *")
                 );
             });
             builder.Services.AddQuartz(q =>
             {
-                var jobKey = new JobKey("CalculatorTime");
-
-                q.AddJob<CalculatorTime>(opts => opts.WithIdentity(jobKey));
+                var jobKey1 = new JobKey("UpdateOnboardStatus");
+                q.AddJob<UpdateOnboardStatus>(opts => opts.WithIdentity(jobKey1));
                 q.AddTrigger(opts => opts
-                    .ForJob(jobKey)
+                    .ForJob(jobKey1)
+                    .WithIdentity("UpdateOnboardStatus-trigger")
+                     .WithCronSchedule(" 0/20 * * * * ? *")
+                );
+            });
+            builder.Services.AddQuartz(q =>
+            {
+                var jobKey2 = new JobKey("CalculatorTime");
+                q.AddJob<CalculatorTime>(opts => opts.WithIdentity(jobKey2));
+                q.AddTrigger(opts => opts
+                    .ForJob(jobKey2)
                     .WithIdentity("CalculatorTime-trigger")
                     .WithCronSchedule(" 0/50 * * * * ? *")
                 );

@@ -1185,20 +1185,15 @@ function changeStatusQuick(cbbook){
           }
           
     }
-
-
-   
    function formatDateTime (datetimeConvert)
     {
-        
         return datetimeConvert;
-
     }
 
     function dowloadfileRecord (likFile ='') {
 
         const a = document.createElement('a')
-        a.href = "https://localhost:7224/api/file/getaudio9?filePath="  + likFile;
+        a.href = "http://192.168.1.3:7224/api/file/getaudio9?filePath="  + likFile;
         a.target ="_blank";
         document.body.appendChild(a)
         a.click()

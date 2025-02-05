@@ -43,12 +43,12 @@
     public class ReportCDRequest : BaseSearchRequest
     {
 
-        public string? LineCode { get; set; }
-        public string? Disposition { get; set; }
+        public string LineCode { get; set; }
+        public string Disposition { get; set; }
 
-        public string? PhoneLog { get; set; }
+        public string PhoneLog { get; set; }
 
-        public string? NoAgree { get; set; }
+        public string NoAgree { get; set; }
 
         public int? TimeTalkBegin { get; set; }
         public int? TimeTalkEnd { get; set; }
@@ -62,12 +62,16 @@
         public int? MemberId { get; set; }
 
         public int? ProjectId { get; set; }
+
+
         public ReportCDRequest()
         {
             TimeFrom2 = 64800;
             TimeFrom1 = 25200;
             TimeTalkEnd = 600;
             TimeTalkBegin = 0;
+
+
 
         }
     }
@@ -110,6 +114,7 @@
     }
     public class ReportCDRItem
     {
+        public int Orderid { get; set; }
         public int TotalRecord { get; set; }
         public int Id { get; set; }
         public DateTime? Calldate { get; set; }
@@ -120,6 +125,8 @@
         public string? Billsec { get; set; }
         public string? Duration { get; set; }
         public string? Recordingfile { get; set; }
+
+        public string? LineCode { get; set; }
         public int DurationBill { get; set; }
         public double DurationReal { get; set; }
         public string? NoAgree { get; set; }
@@ -381,6 +388,9 @@
             Total = 0;
         }
     }
+
+
+
 
 }
 

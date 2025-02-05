@@ -1,0 +1,55 @@
+﻿<form class="row g-3" method="get" action="/reportCDR">
+
+    <div class="col-md-3">
+        <label class="form-label">Từ khoá</label>
+        <input type="text" value="@Model.RequestSearch.Token" name="token" class="form-control">
+    </div>
+
+   <div class="col-md-3">
+        <label class="form-label">Từ Ngày</label>
+     <input  id ="fromDate" type="date"  value = "@Model.RequestSearch.FromText" name="from" class="form-control">
+    </div>
+    <div class="col-md-3">
+        <label class="form-label">Đến ngày</label>
+          <input   id ="toDate" type="date" value = "@Model.RequestSearch.ToText" name="to" class="form-control">
+    </div>
+
+
+
+
+  <div class="col-md-6" style="display:none">
+        <label class="form-label">Limit</label>
+        <input type="text" name="limit" value="@Model.RequestSearch.Limit" class="form-control">
+    </div>
+
+
+   
+    
+    @if(Model.Permision.SearchGrop == true)
+    {
+         <div class="col-md-3">
+                <label class="form-label">Nhóm</label>
+                <select id ="cbgroup" name="groupId"  class="form-select" aria-label="">
+                    <option value="tat-ca">Tất cả</option>
+
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label">Thành viên</label>
+                <select id ="cbmember" name="memberId" class="form-select" aria-label="">
+                    <option selected>Tất cả</option>
+                
+                </select>
+            </div>
+    }
+   
+
+
+
+
+    <div class="text-end">
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+        
+    </div>
+</form>

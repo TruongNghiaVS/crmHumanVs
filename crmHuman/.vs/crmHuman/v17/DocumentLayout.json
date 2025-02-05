@@ -3,30 +3,8 @@
   "WorkspaceRootPath": "C:\\vietbank\\crm\\services\\crmHuman\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{41B21759-818A-492D-95FF-23F973AE071B}|crmHuman.csproj|c:\\vietbank\\crm\\services\\crmhuman\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41B21759-818A-492D-95FF-23F973AE071B}|crmHuman.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3B571586-64A4-410D-988A-5EF8C4108227}|..\\VS.Human.Business\\VS.Human.Business.csproj|c:\\vietbank\\crm\\services\\vs.human.business\\imp\\callbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{41B21759-818A-492D-95FF-23F973AE071B}|crmHuman.csproj|c:\\vietbank\\crm\\services\\crmhuman\\pages\\call.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41B21759-818A-492D-95FF-23F973AE071B}|crmHuman.csproj|solutionrelative:pages\\call.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{41B21759-818A-492D-95FF-23F973AE071B}|crmHuman.csproj|c:\\vietbank\\crm\\services\\crmhuman\\pages\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41B21759-818A-492D-95FF-23F973AE071B}|crmHuman.csproj|solutionrelative:pages\\login.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{41B21759-818A-492D-95FF-23F973AE071B}|crmHuman.csproj|c:\\vietbank\\crm\\services\\crmhuman\\pages\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{41B21759-818A-492D-95FF-23F973AE071B}|crmHuman.csproj|solutionrelative:pages\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{41B21759-818A-492D-95FF-23F973AE071B}|crmHuman.csproj|c:\\vietbank\\crm\\services\\crmhuman\\pages\\indexadmin.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{41B21759-818A-492D-95FF-23F973AE071B}|crmHuman.csproj|solutionrelative:pages\\indexadmin.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{84596B43-5A59-4C19-8D92-16D0DAC96AC6}|..\\VS.Human.Item\\VS.Human.Item.csproj|c:\\vietbank\\crm\\services\\vs.human.item\\employeeindexmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{41B21759-818A-492D-95FF-23F973AE071B}|crmHuman.csproj|c:\\vietbank\\crm\\services\\crmhuman\\pages\\orderassignee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{41B21759-818A-492D-95FF-23F973AE071B}|crmHuman.csproj|solutionrelative:pages\\orderassignee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -36,105 +14,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CallBusiness.cs",
-              "DocumentMoniker": "C:\\vietbank\\crm\\services\\VS.Human.Business\\Imp\\CallBusiness.cs",
-              "RelativeDocumentMoniker": "..\\VS.Human.Business\\Imp\\CallBusiness.cs",
-              "ToolTip": "C:\\vietbank\\crm\\services\\VS.Human.Business\\Imp\\CallBusiness.cs",
-              "RelativeToolTip": "..\\VS.Human.Business\\Imp\\CallBusiness.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABQAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-17T08:15:59.353Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Call.cshtml.cs",
-              "DocumentMoniker": "C:\\vietbank\\crm\\services\\crmHuman\\Pages\\Call.cshtml.cs",
-              "RelativeDocumentMoniker": "Pages\\Call.cshtml.cs",
-              "ToolTip": "C:\\vietbank\\crm\\services\\crmHuman\\Pages\\Call.cshtml.cs",
-              "RelativeToolTip": "Pages\\Call.cshtml.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAAwBwAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-17T08:14:40.964Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Login.cshtml.cs",
-              "DocumentMoniker": "C:\\vietbank\\crm\\services\\crmHuman\\Pages\\Login.cshtml.cs",
-              "RelativeDocumentMoniker": "Pages\\Login.cshtml.cs",
-              "ToolTip": "C:\\vietbank\\crm\\services\\crmHuman\\Pages\\Login.cshtml.cs",
-              "RelativeToolTip": "Pages\\Login.cshtml.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAgwBwAAAA0AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-17T08:09:52.116Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\vietbank\\crm\\services\\crmHuman\\Pages\\Login.cshtml",
-              "RelativeDocumentMoniker": "Pages\\Login.cshtml",
-              "ToolTip": "C:\\vietbank\\crm\\services\\crmHuman\\Pages\\Login.cshtml",
-              "RelativeToolTip": "Pages\\Login.cshtml",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-01-17T08:09:48.994Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\vietbank\\crm\\services\\crmHuman\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\vietbank\\crm\\services\\crmHuman\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAAgwB8AAAA5AAAA",
+              "Title": "OrderAssignee.cs",
+              "DocumentMoniker": "C:\\vietbank\\crm\\services\\crmHuman\\Pages\\OrderAssignee.cs",
+              "RelativeDocumentMoniker": "Pages\\OrderAssignee.cs",
+              "ToolTip": "C:\\vietbank\\crm\\services\\crmHuman\\Pages\\OrderAssignee.cs",
+              "RelativeToolTip": "Pages\\OrderAssignee.cs",
+              "ViewState": "AQIAACwAAAAAAAAAAAAswD8AAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-17T08:06:23.762Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "EmployeeIndexModel.cs",
-              "DocumentMoniker": "C:\\vietbank\\crm\\services\\VS.Human.Item\\EmployeeIndexModel.cs",
-              "RelativeDocumentMoniker": "..\\VS.Human.Item\\EmployeeIndexModel.cs",
-              "ToolTip": "C:\\vietbank\\crm\\services\\VS.Human.Item\\EmployeeIndexModel.cs",
-              "RelativeToolTip": "..\\VS.Human.Item\\EmployeeIndexModel.cs",
-              "ViewState": "AQIAAMwAAAAAAAAAAAAuwOIAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-17T07:50:36.658Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IndexAdmin.cshtml.cs",
-              "DocumentMoniker": "C:\\vietbank\\crm\\services\\crmHuman\\Pages\\IndexAdmin.cshtml.cs",
-              "RelativeDocumentMoniker": "Pages\\IndexAdmin.cshtml.cs",
-              "ToolTip": "C:\\vietbank\\crm\\services\\crmHuman\\Pages\\IndexAdmin.cshtml.cs",
-              "RelativeToolTip": "Pages\\IndexAdmin.cshtml.cs",
-              "ViewState": "AQIAAKcAAAAAAAAAAAAuwLIAAAA9AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-17T06:36:10.881Z",
+              "WhenOpened": "2025-02-03T06:27:56.689Z",
               "EditorCaption": ""
             }
           ]

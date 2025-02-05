@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Human.CDN2.props" />
+</Project>

@@ -1,0 +1,76 @@
+﻿@page
+@model OverviewDashboardModel
+@{
+    ViewData["Title"] = Model.TitlePage;   
+    var dataGet =  Model.DataOverview.Data[0] as dynamic;
+
+     var timeTalking = TimeSpan.FromSeconds(double.Parse( dataGet.TimeTalking.ToString()));
+}
+<div class="pagetitle">
+    <h1>Dashboard</h1>
+   
+</div><!-- End Page Title -->
+@{
+Html.RenderPartial("formSearch/searchFormOverViewDashboard", Model);
+}
+
+
+
+
+
+<section class="section">
+   <div class="row">
+  <div class="col-sm-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Tổng cuộc gọi</h5>
+        <p class="card-text">@dataGet.SumCall</p>
+        <a href="javascript:void(0)" class="btn btn-primary">Xem chi tiết</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Tổng hợp đồng</h5>
+        <p class="card-text">@dataGet.SumNoAgree</p>
+        <a href="javascript:void(0)" class="btn btn-primary">Xem chi tiết</a>
+      </div>
+    </div>
+  </div>
+
+   <div class="col-sm-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Kết nối</h5>
+         <p class="card-text">@Math.Round(dataGet.Perpercent,2) %</p>
+        <a href="javascript:void(0)" class="btn btn-primary">Xem chi tiết</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Talktime</h5>
+        <p class="card-text">@timeTalking.ToString("mm\\:ss")</p>
+        <a href="javascript:void(0)" class="btn btn-primary">Xem chi tiết</a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="modal fade" id="formModal" tabindex="-1" >
+    <div class="modal-dialog  modal-dialog-centered modal-lg" >
+        <div class="modal-content" id="contentModal">
+        </div>
+    </div>
+</div>
+
+
+ <script>
+    var groupSearch = "@Model.RequestSearch.GroupId";
+    var memberSearch = "@Model.RequestSearch.MemberId";
+   var extraSearchRequest  = {groupSearch,memberSearch};
+
+</script>

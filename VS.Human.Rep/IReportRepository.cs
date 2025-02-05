@@ -32,5 +32,10 @@ namespace VS.Human.Rep
         Task<GetOverViewInfoReponse> GetOverViewInfo(GetOverViewInfoRequest request);
 
         Task<GetOverViewTalkingItemReponse> GetOverViewTimeTalking(GetOverViewInfoRequest request);
+
+
+
+
+
     }
 }

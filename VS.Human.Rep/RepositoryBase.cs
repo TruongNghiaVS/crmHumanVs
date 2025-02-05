@@ -300,7 +300,7 @@ namespace VS.Human.Rep
                 {
                     var result = await _con.QueryAsync<T>(sql, param: parameter);
 
-                    if (result == null)
+                    if (result != null)
                     {
                         return result.ToList();
                     }
@@ -462,7 +462,7 @@ namespace VS.Human.Rep
             {
                 return new BaseList()
                 {
-                    Data =  new List<Object>(),
+                    Data = new List<Object>(),
                     Total = 0,
                 };
             }

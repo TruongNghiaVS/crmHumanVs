@@ -85,6 +85,7 @@
             FromTimeAss = DateTime.Now.AddMonths(-1);
             ToTimeAss = DateTime.Now;
             Limit = 10;
+            Token = "";
         }
     }
 

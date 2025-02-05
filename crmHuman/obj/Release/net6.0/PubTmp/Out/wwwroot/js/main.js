@@ -1008,7 +1008,12 @@ function  getAllStatus (){
                 if( dataGroup != null)
 
                    {  
-                    datacbGroup.onchange();
+                    try {
+                        datacbGroup.onchange();
+                    } catch (error ) {
+                        
+                    }
+                 
                 
                 }                    
             }, 1000);
@@ -1187,5 +1192,16 @@ function changeStatusQuick(cbbook){
     {
         
         return datetimeConvert;
+
+    }
+
+    function dowloadfileRecord (likFile ='') {
+
+        const a = document.createElement('a')
+        a.href = "https://localhost:7224/api/file/getaudio9?filePath="  + likFile;
+        a.target ="_blank";
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
 
     }

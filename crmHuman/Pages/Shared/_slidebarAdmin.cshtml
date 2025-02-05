@@ -17,45 +17,56 @@
             </li><!-- End Dashboard Nav -->
 
             <li class="nav-heading">Thống kê và báo cáo</li>
-            <li class="nav-item">
-               
-                 <a class="nav-link" href="/OrderStatus">
-                    <i class="bi bi-grid"></i>
-                    <span>Theo trạng thái</span>
+
+             <li class="nav-item">
+                <a class="nav-link " data-bs-target="#components-nav-report" data-bs-toggle="collapse" href="javascript:void(0)" aria-expanded="true">
+                    <i class="bi bi-menu-button-wide"></i><span>Thống kê và báo cáo </span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-               
+                <ul id="components-nav-report" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="/OverviewDashboard">
+                            <i class="bi bi-circle"></i><span>Tổng quan cuộc gọi </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/reportTalkTime">
+                            <i class="bi bi-circle"></i><span>Báo cáo talk time </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/reportCDR">
+                            <i class="bi bi-circle"></i><span> Báo cáo ghi âm </span>
+                        </a>
+                    </li>
+                  
+                   <li>
+                        <a href="/historyImpact">
+                            <i class="bi bi-circle"></i><span> Báo cáo Tác động </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/OrderStatus">
+                            <i class="bi bi-circle"></i><span>Theo trạng thái </span>
+                        </a>
+                    </li>
+                   
+
+                      
+                   
+                </ul>
             </li><!-- End Components Nav -->
-
-            <li class="nav-item">
-                 <a class="nav-link"  href="/historyImpact">
-                    <i class="bi bi-grid"></i>
-                    <span> Báo cáo Tác động</span>
-                </a>
-                 <a class="nav-link"  href="/historyImpact">
-                    <i class="bi bi-grid"></i>
-                    <span> Báo cáo ghi âm</span>
-                </a>
-
-                <a class="nav-link"  href="/historyImpact">
-                    <i class="bi bi-grid"></i>
-                    <span> Báo cáo talk time</span>
-                </a>
-
-                  <a class="nav-link"  href="/historyImpact">
-                    <i class="bi bi-grid"></i>
-                    <span> Báo cáo tổng quan cuộc gọi</span>
-                </a>
-               
-            </li><!-- End Components Nav -->
-              <li class="nav-item">
-               
-                 <a class="nav-link" href="/OrderOnboard">
-                    <i class="bi bi-grid"></i>
-                    <span>Danh sách onboard</span>
-                </a>
-               
-            </li><!-- End Components Nav -->
-
+            
+           
+        <li class="nav-item">
+        
+            <a class="nav-link" href="/OrderOnboard">
+            <i class="bi bi-grid"></i>
+            <span>Danh sách onboard</span>
+        </a>
+        
+    </li><!-- End Components Nav -->
+        <li class="nav-heading">Nguồn Ứng tuyển</li>
         <li class="nav-item">
                     <a class="nav-link"  href="/OrderAssignee">
                 <i class="bi bi-circle"></i><span>Nguồn Marketing<span class="badgeIcon">@Model.GlobalData.TotalCaseSource</span></span>

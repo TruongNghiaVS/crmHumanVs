@@ -317,3 +317,9 @@
   }
 
 })();
+
+
+
+// document.addEventListener("DOMContentLoaded", function(){
+//     $( ".datepicker" ).datetimepicker({format: 'dd/MM/yyyy'});
+// });
