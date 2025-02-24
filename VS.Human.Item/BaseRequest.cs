@@ -19,6 +19,7 @@
                 if (From.HasValue)
                 {
                     return From.Value.ToString("yyyy-MM-dd");
+                    //return From.Value.ToString("dd/MM/yyyy");
                 }
                 return "";
             }
@@ -30,6 +31,7 @@
                 if (To.HasValue)
                 {
                     return To.Value.ToString("yyyy-MM-dd");
+                    //return To.Value.ToString("dd-MM-yyyy");
                 }
                 return "";
             }
@@ -55,8 +57,6 @@
 
             }
         }
-
-
         private DateTime? ToTimeAss { get; set; }
         public DateTime? To
         {
@@ -78,7 +78,6 @@
 
             }
         }
-
         public BaseRequest()
         {
             Page = 1;

@@ -108,15 +108,14 @@
                                 var datetimeUpdate = "";
                                 if (@itemInfo.UpdateAt != null)
                                 {
-                                    datetimeUpdate = @itemInfo.UpdateAt.ToString("dd/MM/yyyy HH:mm");
+                                        datetimeUpdate = @itemInfo.UpdateAt.ToString("dd/MM/yyyy HH:mm");
                                 }
                                 i++;
-                    
                                 <tr>
                                     <td>@i</td>
                                     <td><a href="javascript:void(0)" onclick="openFormEdit(@itemInfo.Id,'@Model.KeyPage')">@itemInfo.Name</a></td>
                                     <td>@Model.PhoneToXXX(itemInfo.Phone)</td>
-                                     <td>@itemInfo.SourceName</td>
+                                    <td>@itemInfo.SourceName</td>
                                     <td>@datetimeCreate</td>
                                     <td>@datetimeUpdate</td>
                                     <td>
@@ -124,9 +123,6 @@
                                     </td>
                                 </tr>
                             }
-                      
-                            
-                            
                         </tbody>
                     </table>
                     @{

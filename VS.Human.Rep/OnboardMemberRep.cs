@@ -21,7 +21,6 @@ namespace VS.Human.Rep
                 item.Id,
                 item.CVLink,
                 item.Source,
-
                 item.Status,
                 item.IsActive,
                 item.UpdatedBy,
@@ -104,7 +103,6 @@ namespace VS.Human.Rep
                 request.GroupId,
                 request.MemberId,
                 request.Page
-
             }, sqlText);
             return result;
         }

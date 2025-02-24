@@ -181,7 +181,6 @@ namespace crmHuman.Pages
 
             };
         }
-
         public async Task<IActionResult> OnPostAddWidthOrder(CandidateOrderAdd request)
         {
             var listEror = new List<object>();
@@ -236,7 +235,6 @@ namespace crmHuman.Pages
                 return Redirect("/Login");
             }
             GetInfoUser();
-
             return await GetAll(request);
         }
 
@@ -249,7 +247,6 @@ namespace crmHuman.Pages
             if (UserData.RoleCode == "4")
             {
                 this.Permision.ImportMasketting = true;
-
                 this.Permision.SearchGrop = false;
             }
             if (UserData.RoleCode == "2")

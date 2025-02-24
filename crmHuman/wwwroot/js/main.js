@@ -35,8 +35,6 @@
     }, 1000);
 }
 $(document).ready(function () {
-
-
     activeMenu();
     if (typeof(extraSearchRequest) != "undefined")
     {
@@ -48,10 +46,8 @@ $(document).ready(function () {
     getAllPartner("cbpartnerId3");
     if(window.location.href.includes("Detail")==true ||  window.location.href.includes("job")==true )
     {
-
         loadDataPartner();
     }
-
     if( window.location.pathname.includes("OrderDetail") ==true)
     {
         setTimeout(() => {
@@ -60,13 +56,10 @@ $(document).ready(function () {
     }
    var cbLimit = document.getElementById("cbLimit");
    if(cbLimit)
-   {
-    
-    cbLimit.dispatchEvent(new Event('change'));
-   }
-
+    {
+     cbLimit.dispatchEvent(new Event('change'));
+    }
   
-
 });
 
 function logout() {
@@ -1199,4 +1192,22 @@ function changeStatusQuick(cbbook){
         a.click()
         document.body.removeChild(a)
 
-    }
+}
+
+
+$(document).ready(function () {
+    var todayDate = new Date().getDate();
+    var endD = new Date(new Date().setDate(todayDate - 360));
+    var currDate = new Date();
+    //$('.datepickerInput').datepicker({
+    //    format: 'dd/mm/yyyy',
+    //    clear: "Clear",
+    //    autoclose: true
+
+    //})
+
+
+});
+
+
+

@@ -1,1 +1,30 @@
 .invalid-feedback-cs{display:none}.hasError .invalid-feedback-cs{font-size:.875em;display:block !important;color:var(--bs-form-invalid-color)}.hasError input{border-color:red}.buttonRight{float:right;margin-top:10px;margin-bottom:10px}.btn-primary{background-color:#98181c;border:#98181c}.btn-primary:hover{background-color:#98181c !important;opacity:.8}.header-nav .nav-profile{color:#98181c}.logo span{font-size:26px;font-weight:700;color:#98181c}.pagetitle h1{font-size:24px;margin-bottom:0;font-weight:600;color:#98181c}.sameline{display:flex;justify-content:space-between}.addButon{color:blue}.logo{justify-content:center !important}.logo img{max-height:50px !important}.iconResult img{width:32px;height:32px}.blueStatus{color:blue !important}.readStatus{color:#98181c !important}.colorApply{font-weight:bold;margin-top:10px;color:#98181c}.combobox input{width:100%;outline:none;border-radius:5px}.combobox datalist{position:absolute;background-color:#fff;border:1px solid blue;border-radius:0 0 5px 5px;border-top:none;font-family:sans-serif;width:100%;padding:5px;max-height:10rem;overflow-y:auto}.combobox option{background-color:#fff;padding:4px;margin-bottom:1px;cursor:pointer}.combobox option:hover,.combobox .active{background-color:#add8e6}.badgeIcon{background-color:red;color:#fff;padding:4px 8px;border-radius:50% !important;text-align:center;border-radius:5px;margin-left:10px}.show{display:block !important}
+
+input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-clear-button {
+    color: #fff;
+    position: relative;
+}
+
+input[type="date"]::-webkit-datetime-edit-year-field {
+    position: absolute !important;
+    border-left: 1px solid #8c8c8c;
+    padding: 2px;
+    color: #000;
+    left: 56px;
+}
+
+input[type="date"]::-webkit-datetime-edit-month-field {
+    position: absolute !important;
+    border-left: 1px solid #8c8c8c;
+    padding: 2px;
+    color: #000;
+    left: 26px;
+}
+
+
+input[type="date"]::-webkit-datetime-edit-day-field {
+    position: absolute !important;
+    color: #000;
+    padding: 2px;
+    left: 4px;
+}

@@ -1,7 +1,0 @@
-C:\vietbank\crm\services\Human.CDN2\obj\Release\net6.0\PubTmp\Out\Human.CDN2.exe
-C:\vietbank\crm\services\Human.CDN2\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
-C:\vietbank\crm\services\Human.CDN2\obj\Release\net6.0\PubTmp\Out\appsettings.json
-C:\vietbank\crm\services\Human.CDN2\obj\Release\net6.0\PubTmp\Out\Human.CDN2.dll
-C:\vietbank\crm\services\Human.CDN2\obj\Release\net6.0\PubTmp\Out\Human.CDN2.deps.json
-C:\vietbank\crm\services\Human.CDN2\obj\Release\net6.0\PubTmp\Out\Human.CDN2.runtimeconfig.json
-C:\vietbank\crm\services\Human.CDN2\obj\Release\net6.0\PubTmp\Out\Human.CDN2.pdb

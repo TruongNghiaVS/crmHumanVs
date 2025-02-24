@@ -159,7 +159,6 @@
 
         }
     }
-
     public class CandidateRequest : BaseRequest
     {
         public string Status { get; set; }
@@ -174,11 +173,7 @@
             LoadAll = 0;
             Limit = 100;
         }
-
-
     }
-
-
     public class OnboardMemberRequest : BaseRequest
     {
         public string Status { get; set; }
