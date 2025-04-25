@@ -26,6 +26,9 @@ namespace VS.Human.Rep
             services.AddSingleton<IReportTalkTimeGroupByDay, ReportTalkTimeGroupByDayRepository>();
             services.AddSingleton<IReportTalkTimeRepository, ReportTalkTimeRepository>();
             services.AddSingleton<IReportRepository, ReportRepository>();
+            services.AddSingleton<IScheduleInterviewRep, ScheduleInterviewRep>();
+            services.AddSingleton<IDocumentDataRep, DocumentDataRep>();
+            
         }
     }
 }

@@ -128,18 +128,11 @@ namespace crmHuman.Pages
         {
             if (code < 1)
             {
-                return "";
+                return "Không hoạt động";
             }
-            string temp = "";
-            foreach (var item in arrayStatus)
-            {
-                if (item.Code == code.ToString())
-                {
-                    temp = item.Name;
-                    break;
-                }
-            }
-            return temp;
+            return "Hoạt động";
+
+
         }
 
         public string PhoneToXXX(string phone)

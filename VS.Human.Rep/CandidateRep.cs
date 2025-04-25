@@ -22,7 +22,7 @@ namespace VS.Human.Rep
                 item.Name,
                 item.Dob,
                 item.Email,
-                item.AvatarLink,
+
                 item.CVLink,
                 item.Source,
                 item.Phone,
@@ -30,24 +30,33 @@ namespace VS.Human.Rep
                 item.IsActive,
                 item.UpdatedBy,
                 item.ShortDes,
+                item.DepartmentId,
+                item.Position,
+                item.StatusHuman,
+                item.ManagerId,
                 item.Noted
             };
             return await this.ExecuteSQL("sp_candidate_update", parameter);
         }
         private async Task<bool> Add(Candidate item)
         {
+
+            item.Status = 0;
+
             var parameter = new
             {
                 item.Name,
                 item.ShortDes,
                 item.Noted,
+                item.Position,
+                item.DepartmentId,
                 item.Phone,
                 item.Email,
                 item.Dob,
                 item.Source,
+                item.ManagerId,
                 item.Status,
                 item.CreatedBy,
-                item.AvatarLink,
                 item.CVLink,
                 item.IsActive
             };
@@ -63,30 +72,34 @@ namespace VS.Human.Rep
                 {
                     itemUpdate.Name = item.Name;
                     itemUpdate.CVLink = item.CVLink;
-                    itemUpdate.AvatarLink = item.AvatarLink;
                     itemUpdate.Status = item.Status;
                     itemUpdate.ShortDes = item.ShortDes;
                     itemUpdate.Noted = item.Noted;
                     itemUpdate.Status = item.Status;
                     itemUpdate.Email = item.Email;
                     itemUpdate.Source = item.Source;
-                    item.Dob = item.Dob;
+                    itemUpdate.ManagerId = item.ManagerId;
+                    itemUpdate.Dob = item.Dob;
                     itemUpdate.IsActive = item.IsActive;
                     itemUpdate.Phone = item.Phone;
                     itemUpdate.UpdatedBy = item.UpdatedBy;
+                    itemUpdate.StatusHuman = item.StatusHuman;
+                    itemUpdate.DepartmentId = item.DepartmentId;
+                    itemUpdate.Position = item.Position;
+                    itemUpdate.UpdatedBy = item.UpdatedBy;
+
                     return await Update(itemUpdate);
                 }
             }
             return await Add(item);
+
+
         }
 
         public async Task<BaseList> GetAll(CandidateRequest request)
         {
             var sqlText = "sp_candidate_getAll";
-            if (request.RoleCode == "4" || request.RoleCode == "6" || request.RoleCode == "7")
-            {
-                sqlText = "sp_candidate_getAllMarketting";
-            }
+
             var result = await GetBaseAll<CandidateIndexModel>(request,
             new
             {
@@ -96,7 +109,9 @@ namespace VS.Human.Rep
                 request.LoadAll,
                 request.GroupId,
                 request.MemberId,
-
+                request.ManagerId,
+                request.DocumentStatus,
+                request.CandidateStatus,
                 request.Page
 
             }, sqlText);

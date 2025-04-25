@@ -23,7 +23,10 @@
         public IReportTalkTimeRepository ReportTalkTimeRepository { get; set; }
         public IReportRepository ReportRepository { get; set; }
 
-      public   IReportTalkTimeGroupByDay ReportTalkTimeGroupByDay { get; }
+        public IReportTalkTimeGroupByDay ReportTalkTimeGroupByDay { get; }
+
+        public IScheduleInterviewRep ScheduleInterviewRep { get; set; }
+        public IDocumentDataRep DocumentDataRep { get; set; }
 
     }
 }

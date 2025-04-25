@@ -105,9 +105,9 @@ namespace crmHuman.Pages
             var allJob = await _jobItemBusiness.GetAll(new JobRequest()
             {
             });
-            var allCandidate = await _candidateBusiness.GetAll(new CandidateRequest()
-            {
-            });
+            //var allCandidate = await _candidateBusiness.GetAll(new CandidateRequest()
+            //{
+            //});
 
             var AllStatus = await _masterDataBussiness.GetAll(new CommonRequest()
             {
@@ -123,7 +123,7 @@ namespace crmHuman.Pages
             var resultObject = new
             {
                 allJob,
-                allCandidate,
+                //allCandidate,
                 resultView,
                 AllStatus,
                 allLinhvuc,

@@ -1,0 +1,40 @@
+﻿<form class="row g-3" method="get" action="@Model.NameController">
+
+    @* <div class="col-md-6">
+        <label class="form-label">Từ Ngày</label>
+        <input value="@Model.RequestSearch.FromText" type="date" name="from" class="form-control">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Đến ngày</label>
+        <input value="@Model.RequestSearch.ToText" type="date" name="to" class="form-control">
+    </div> *@
+
+    <div class="col-md-6">
+        <label class="form-label">Từ khoá</label>
+        <input type="text" value="@Model.RequestSearch.Token" name="token" class="form-control">
+    </div>
+
+
+    <input type="hidden" value="@Model.TypePageText" name="Type" class="form-control">
+
+
+
+    <div class="col-md-6" style="display:none">
+        <label class="form-label">Limit</label>
+        <input type="text" name="limit" value="@Model.RequestSearch.Limit" class="form-control">
+    </div>
+
+    
+
+    
+    <div class="text-end">
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+
+        @if (Model.Permision.Add == true)
+        {
+            <button type="button" class="btn btn-primary" onclick="openFormMasterData(-1,'@Model.NameController','@Model.TypePage')">Thêm mới</button>
+        }
+
+
+    </div>
+</form>

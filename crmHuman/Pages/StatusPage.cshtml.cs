@@ -13,16 +13,12 @@ namespace crmHuman.Pages
         private readonly ImasterDataBussiness _empBusiness;
         public CommonRequest RequestSearch { get; set; }
         public BaseList DataAll { get; set; }
-
-
-
         public int TotalRecord
         {
 
             get
             {
                 return DataAll.Total;
-
             }
         }
         public StatusPageModel(ILogger<StatusPageModel> logger,
@@ -31,7 +27,7 @@ namespace crmHuman.Pages
         {
             _logger = logger;
             _empBusiness = empBusiness;
-            TitlePage = "Danh sách trạng thái";
+            TitlePage = "Danh sách";
             KeyPage = "statusPage";
             TableColumnText = new List<string>()
             {
@@ -39,8 +35,6 @@ namespace crmHuman.Pages
             };
             NameController = "StatusPage";
             TitleList = "Trạng thái";
-
-
         }
 
         public async Task<IActionResult> OnPostAdd

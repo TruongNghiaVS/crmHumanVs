@@ -23,6 +23,7 @@ namespace VS.Human.Rep
                 item.Name,
                 item.Noted,
                 item.Extra,
+                item.IsActive,
                 item.ApplyFor,
                 item.UpdatedBy,
 
@@ -54,6 +55,8 @@ namespace VS.Human.Rep
                     itemUpdate.Extra = item.Extra;
                     itemUpdate.ApplyFor = item.ApplyFor;
                     itemUpdate.UpdatedBy = item.UpdatedBy;
+                    itemUpdate.Noted = item.Noted;
+                    itemUpdate.IsActive = item.IsActive;
                     return await Update(itemUpdate);
                 }
             }
@@ -78,9 +81,9 @@ namespace VS.Human.Rep
             return result;
         }
 
-        //public async Task<bool> Delete(int id)
-        //{
-        //    return await DeleteBase(id, tableDelete: "Partner");
-        //}
+
+
+
+
     }
 }

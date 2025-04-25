@@ -12,8 +12,8 @@ namespace VS.Human.Business
         Task<bool> Add(EmployeeAdd item);
         Task<bool> Update(EmployeeAdd item);
         Task<bool> ChangePassword(string password, int id);
-        Task<bool> Delete(int id, bool reactive =false );
-
+        Task<bool> Delete(int id, bool reactive = false);
+        Task<BaseList> GetAllManager();
 
         Task<BaseList> GetAll(EmployeeRequest request);
     }

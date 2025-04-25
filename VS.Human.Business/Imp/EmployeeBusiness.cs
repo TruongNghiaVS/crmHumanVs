@@ -74,6 +74,13 @@ namespace VS.Human.Business.Imp
             return await _unitOfWork.EmployeeRep.GetAll(request);
         }
 
+        public async Task<BaseList> GetAllManager()
+        {
+            return await _unitOfWork.EmployeeRep.GetAllManager();
+        }
+
+
+
         public async Task<Employee> Login(string userName, string password)
         {
             var passwordGen = getMD5(password);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using crmHuman.DisplayModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VS.Human.Business;
 using VS.Human.Business.Model;
@@ -11,18 +12,15 @@ namespace crmHuman.Pages
     public class CandidateModel : BaseModel2
     {
         private readonly ILogger<CandidateModel> _logger;
-        private readonly ICandidateBusiness _business;
-        private readonly ImasterDataBussiness imasterDataBussiness;
-        private readonly IOrderBussiness orderBussiness;
-        private readonly IJobItemBusiness _jobbussines;
-        private readonly IEmpBusiness _empBusiness;
+        private readonly ICandidateBusiness _empBusiness;
 
-
+        private readonly IEmpBusiness _iempl;
+        public List<string> TableColumnTextAdmin { get; set; }
         public CandidateRequest RequestSearch { get; set; }
         public BaseList DataAll { get; set; }
-
-
-
+        public List<DataMasterItem> DataMasterData { get; set; }
+        private readonly ImasterDataBussiness _masterDataBussiness;
+        public BaseList DataManager { get; set; }
         public int TotalRecord
         {
 
@@ -32,164 +30,47 @@ namespace crmHuman.Pages
 
             }
         }
-        public CandidateModel(
-            ILogger<CandidateModel> logger,
-            ICandidateBusiness business,
-            IEmpBusiness empBusiness,
-            ImasterDataBussiness _masterDataBussiness,
-            IJobItemBusiness jobbussines,
-            IOrderBussiness _orderBussiness
+        public CandidateModel(ILogger<CandidateModel> logger,
+            ICandidateBusiness empBusiness,
+            IEmpBusiness empBusiness1,
+            ImasterDataBussiness imasterDataBussiness
             )
         {
-            TitlePage = "Danh sách ứng cử viên";
-            KeyPage = "candidate";
             _logger = logger;
-            _business = business;
             _empBusiness = empBusiness;
-            _jobbussines = jobbussines;
-            imasterDataBussiness = _masterDataBussiness;
-            orderBussiness = _orderBussiness;
+            _masterDataBussiness = imasterDataBussiness;
+            TitlePage = "Danh sách ứng viên";
+            KeyPage = "Candidate";
+            _iempl = empBusiness1;
             TableColumnText = new List<string>()
-             {
-                "STT",
-                "Tên ứng cử viên",
-
-                "Số điện thoại",
-
-                "Người tạo",
-                "Ngày tạo",
-                "Cập nhật gần nhất",
-                "Thao tác"
+            {
+                "STT","UserName","Họ tên", "Vị trí", "Bộ phận", "Loại tài khoản",
+                "Người quản lý",
+                "Trạng thái",
+                "Trạng thái chứng từ"
+               ,"Cập nhật gần nhất", "Người tạo","Thao tác"
             };
+
+            TableColumnTextAdmin = new List<string>()
+            {
+                "STT","Họ tên", "Vị trí", "Bộ phận",
+                 "Người quản lý","Trạng thái", "Trạng thái chứng từ",
+                "Cập nhật gần nhất","Người tạo","Thao tác"
+            };
+            DataMasterData = new List<DataMasterItem>();
+
         }
 
-        public async Task<IActionResult> OnPostAddCandidateOrderMarketting(OrderCandidateMarkettingItemAdd request)
-        {
-            var listEror = new List<object>();
-
-            if (request.JobId > 0)
-            {
-
-            }
-
-            var checkDuplicate = await _empBusiness.CheckDuplicate(request.Email,
-                request.PhoneNumber);
-            if (checkDuplicate.Id > 0)
-            {
-                var itemError = new
-                {
-                    name = "txtPhone",
-                    Content = "Thông tin số điện thoại hoặc email bị trùng thông tin"
-                };
-                listEror.Add(itemError);
-            }
-            if (listEror.Count > 0)
-            {
-                return new JsonResult(listEror)
-                {
-                    StatusCode = StatusCodes.Status400BadRequest
-                };
-            }
-
-            var result = await orderBussiness.AddCandidateOrderMarketting(request);
-            var dataReponse = new
-            {
-                success = result
-            };
-            return new JsonResult(dataReponse)
-            {
-                StatusCode = StatusCodes.Status200OK
-            };
-        }
-        public async Task<IActionResult> OnPostImportSource(ImportSourceFileAdd request)
-        {
-            GetInfoUser();
-            var listEror = new List<object>();
-            var fileRequest = request.FileRequest;
-            if (string.IsNullOrEmpty(fileRequest.FileName))
-            {
-                var itemError = new
-                {
-                    name = "txtFileRequest",
-                    Content = "Thiếu thông tin file "
-                };
-                listEror.Add(itemError);
-            }
-            if (listEror.Count > 0)
-            {
-                return new JsonResult(listEror)
-                {
-                    StatusCode = StatusCodes.Status400BadRequest
-                };
-            }
-            var dataReponse = await _business.ImportSource(request.FileRequest);
-            return new JsonResult(dataReponse)
-            {
-                StatusCode = StatusCodes.Status200OK
-
-            };
-        }
-        public async Task<IActionResult> OnPostAdd(CandidateAdd request)
-        {
-            var listEror = new List<object>();
-
-            if (string.IsNullOrEmpty(request.Name))
-            {
-                var itemError = new
-                {
-                    name = "txtName",
-                    Content = "Thiếu thông tin tiêu đề"
-                };
-                listEror.Add(itemError);
-            }
-            if (request.Id < 1)
-            {
-                var checkDuplicate = await _empBusiness.CheckDuplicate(request.Email, request.Phone);
-                if (checkDuplicate.Id > 0)
-                {
-                    var itemError = new
-                    {
-                        name = "txtPhone",
-                        Content = "Thông tin số điện thoại hoặc email bị trùng thông tin"
-                    };
-                    listEror.Add(itemError);
-                }
-                if (listEror.Count > 0)
-                {
-                    return new JsonResult(listEror)
-                    {
-                        StatusCode = StatusCodes.Status400BadRequest
-                    };
-                }
-            }
-            GetInfoUser();
-            request.CreatedBy = UserData.UserId;
-            request.UpdatedBy = UserData.UserId;
-            if (UserData.RoleCode != "4")
-            {
-                request.Source = 0;
-            }
-
-            var result = await _business.AddOrUpdate(request);
-            var dataReponse = new
-            {
-                success = result
-            };
-            return new JsonResult(dataReponse)
-            {
-                StatusCode = StatusCodes.Status200OK
-
-            };
-        }
-        public async Task<IActionResult> OnPostAddWidthOrder(CandidateOrderAdd request)
+        public async Task<IActionResult> OnPostAdd
+            (CandidateAdd request)
         {
             var listEror = new List<object>();
             if (string.IsNullOrEmpty(request.Name))
             {
                 var itemError = new
                 {
-                    name = "txtName",
-                    Content = "Thiếu thông tin tiêu đề"
+                    name = "txtFullName",
+                    Content = "Thiếu thông tin họ và tên"
                 };
                 listEror.Add(itemError);
             }
@@ -203,30 +84,33 @@ namespace crmHuman.Pages
                 };
                 listEror.Add(itemError);
             }
-
-
-            if (string.IsNullOrEmpty(request.CVLink) && string.IsNullOrEmpty(request.ShortDes))
+            if (listEror.Count > 0)
             {
-                var itemError = new
+                return new JsonResult(listEror)
                 {
-                    name = "txtShortDes",
-                    Content = "Thiếu thông tin file CV hoặc link CV liên quan"
+                    StatusCode = StatusCodes.Status400BadRequest
                 };
-                listEror.Add(itemError);
             }
-            GetInfoUser();
             var result = true;
+            if (request.Id < 0)
+            {
+                result = await _empBusiness.Add(request);
+            }
+            else
+            {
+                //result = await _empBusiness.Update(request);
+            }
             var dataReponse = new
             {
-                success = result
+                success = result,
             };
-            await _business.AddCandidateWidthOrder(request);
             return new JsonResult(dataReponse)
             {
                 StatusCode = StatusCodes.Status200OK
-
             };
         }
+
+
 
         public async Task<ActionResult> OnGet([FromQuery] CandidateRequest request)
         {
@@ -235,45 +119,69 @@ namespace crmHuman.Pages
                 return Redirect("/Login");
             }
             GetInfoUser();
+            if (UserData.RoleCode == "2")
+            {
+                return Redirect("/");
+            }
+
+
+            var temp = await _masterDataBussiness.GetAll(new CommonRequest()
+            {
+
+            });
+
+
+            foreach (var item in temp.Data)
+            {
+
+                var tempItem = item as dynamic;
+
+                var itemInsert = new DataMasterItem()
+                {
+                    Name = tempItem.Name,
+                    TypeData = tempItem.TypeData,
+                    Code = tempItem.Code,
+                    IsActive = tempItem.IsActive
+                };
+                DataMasterData.Add(itemInsert);
+            }
+
+            DataManager = await _iempl.GetAllManager();
+
+
             return await GetAll(request);
         }
 
         public async Task<ActionResult> GetAll(CandidateRequest request2)
         {
-
-
-
-            request2.UserId = UserData.UserId;
-            if (UserData.RoleCode == "4")
-            {
-                this.Permision.ImportMasketting = true;
-                this.Permision.SearchGrop = false;
-            }
-            if (UserData.RoleCode == "2")
-            {
-                this.Permision.SearchGrop = false;
-            }
-
-            request2.RoleCode = UserData.RoleCode;
             RequestSearch = request2;
-            if (UserData.RoleCode == "3")
+            request2.UserId = UserData.UserId;
+            if (UserData.RoleCode == "1")
+            {
+                request2.IsDeleted = true;
+            }
+            else
             {
 
-                if (UserData.UserId == 37)
-                {
-                    request2.GroupId = 6;
-
-
-                }
-                else if (UserData.UserId == 38)
-                {
-                    request2.GroupId = 7;
-
-                }
+            }
+            {
+                request2.IsDeleted = false;
             }
 
+            DataAll = await _empBusiness.GetAll(request2);
 
-            DataAll = await _business.GetAll(request2);
+            if (UserData.RoleCode == "6")
+            {
+                TableColumnText = new List<string>()
+                    {
+                        "STT","Họ tên","Tài khoản","Vai trò","Nhóm", "Ngày Onboard","Cập nhật gần nhất","Thao tác"
+                    };
+
+                TableColumnTextAdmin = new List<string>()
+                    {
+                        "STT","Họ tên","Tài khoản","Vai trò","Nhóm","Trạng thái", "Ngày Onboard","Cập nhật gần nhất","Thao tác"
+                    };
+            }
             return Page();
         }
 
@@ -284,52 +192,68 @@ namespace crmHuman.Pages
             var resultView = new Candidate()
             {
                 Id = id,
-                Name = "",
-                Email = "",
+
                 IsActive = 1,
+                Phone = "",
                 Status = 1,
+                CVLink = "",
+
                 Deleted = false,
                 Noted = ""
+
             };
+
+            var temp = await _masterDataBussiness.GetAll(new CommonRequest()
+            {
+
+            });
+
+            foreach (var item in temp.Data)
+            {
+
+                var tempItem = item as dynamic;
+
+                var itemInsert = new DataMasterItem()
+                {
+                    Name = tempItem.Name,
+                    TypeData = tempItem.TypeData,
+                    Code = tempItem.Code,
+                    IsActive = tempItem.IsActive
+                };
+                DataMasterData.Add(itemInsert);
+            }
+
+            DataManager = await _iempl.GetAllManager();
+
+            var resultModel = new
+            {
+                DataManager,
+                resultView,
+                DataMasterData
+            };
+
+
+            if (id < 1)
+            {
+                return Partial("EditOrUpdateCandidate", resultModel);
+            }
             if (id > 0)
             {
-                resultView = await _business.GetById(id);
+                resultView = await _empBusiness.GetById(id);
             }
 
-            var allJob = await _jobbussines.GetAll(new JobRequest()
-            {
-            });
+            return Partial("editOrUpdateEmployee", resultView);
+        }
 
-            var allStatus = await imasterDataBussiness.GetAll(new CommonRequest()
-            {
-                Type = 4
-            });
+        public virtual async Task<PartialViewResult> OnGetFormChangePassword(int id)
 
-            var allTinhThanh = await imasterDataBussiness.GetallRegional();
-            var allOrder = await orderBussiness
-            .GetALlHistory(new OrderRequest()
-            {
-                Phone = resultView.Phone,
-                Email = resultView.Email
-            });
-            var resultObject = new
-            {
-                allJob,
-                resultView,
-                allStatus,
-                allOrder,
-                allTinhThanh
+        {
 
+            var resultView = new
+            {
+                Id = id
             };
-            if (UserData.RoleCode == "4")
-            {
-                return Partial("EditOrUpdateCandidateMar", resultObject);
-            }
-            else if (UserData.RoleCode == "6" || UserData.RoleCode == "7")
-            {
-                return Partial("EditOrUpdateCandidateCTV", resultObject);
-            }
-            return Partial("EditOrUpdateCandidate", resultObject);
+            return Partial("formChangePassword", resultView);
         }
 
         public async Task<IActionResult> OnPostDelete
@@ -355,8 +279,10 @@ namespace crmHuman.Pages
                     StatusCode = StatusCodes.Status400BadRequest
                 };
             }
+
             var result = true;
-            result = await _business.Delete(Id);
+
+            result = await _empBusiness.Delete(Id);
             var dataReponse = new
             {
                 success = result,
@@ -369,6 +295,45 @@ namespace crmHuman.Pages
             };
         }
 
+
+        public async Task<IActionResult> OnPostReactive
+     (int Id = -1)
+        {
+
+            var listEror = new List<object>();
+
+            if (Id < 0)
+            {
+                var itemError = new
+                {
+                    name = "id",
+                    Content = "Thiếu thông tin cần xoá"
+                };
+                listEror.Add(itemError);
+
+            }
+            if (listEror.Count > 0)
+            {
+                return new JsonResult(listEror)
+                {
+                    StatusCode = StatusCodes.Status400BadRequest
+                };
+            }
+
+            var result = true;
+
+            result = await _empBusiness.Delete(Id, true);
+            var dataReponse = new
+            {
+                success = result,
+
+            };
+            return new JsonResult(dataReponse)
+            {
+                StatusCode = StatusCodes.Status200OK
+
+            };
+        }
 
 
 

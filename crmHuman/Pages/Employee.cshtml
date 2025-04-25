@@ -72,21 +72,20 @@
                                 i++;
                                 <tr>
                                     <td>@i</td>
-                                    <td><a href="javascript:void(0)" onclick="openFormEdit(@itemInfo.Id)">@itemInfo.FullName</a></td>
+                                  
                                     <td>@itemInfo.UserName</td>
+                                    <td><a href="javascript:void(0)" onclick="openFormEdit(@itemInfo.Id)">@itemInfo.FullName</a></td>
                                     <td>@Model.GetNameRoleCode(itemInfo.RoleCode)</td>
-                                     @if(Model.UserData.RoleCode != "6")
+                                    @*  @if(Model.UserData.RoleCode != "6")
                                      {
                                             <td>@itemInfo.LineCode</td>
-                                     }
-                                   
+                                     } *@
+                                    <td>Nhân viên</td>
+                                    <td>Tuyển dụng</td>
+                                    <td>Nhân viên</td>
                                      <td>@itemInfo.GroupName</td>
-                                    @if(Model.UserData.RoleCode == "1")
-
-                                    {
-                                        <td>@Model.GetStatusDelete(itemInfo.Deleted) </td>
-                                    }
-                                
+                                      <td> Online</td>
+                                    <td> Bổ sung</td>
                                     <td>@onBoardext</td>
                                     <td>@datetimeCreate</td>
                                     <td>

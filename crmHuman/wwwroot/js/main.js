@@ -259,12 +259,10 @@ function successUpload(dataReponse, fileInput) {
     var taga = document.createElement('a');
     taga.href = linkResult;
     taga.target = "_blank";
-    taga.textContent = "Link file";
+    taga.textContent = "Thông tin file";
     fileResult1.appendChild(taga);
-
     var fileValue = x.querySelector(".valuefile");
     fileValue.value = linkResult;
-
 
 }
 

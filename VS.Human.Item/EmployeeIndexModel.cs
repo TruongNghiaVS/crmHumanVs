@@ -17,6 +17,15 @@
         public string? GroupName { get; set; }
 
         public string? LineCode { get; set; }
+        public string TypeAccount { get; set; }
+        public string DepartmentCode { get; set; }
+        public string DocumentStatus { get; set; }
+        public string PositionCode { get; set; }
+
+        public string? TypeAccountText { get; set; }
+        public string? DepartmentText { get; set; }
+        public string? PositionText { get; set; }
+        public string? DocumentStatusText { get; set; }
     }
 
     public class GroupIndexModel : BaseIndexModel
@@ -43,6 +52,8 @@
         public int IsActive { get; set; }
 
         public string? Extra { get; set; }
+
+        public int TypeData { get; set; }
 
 
     }
@@ -103,6 +114,48 @@
         public int Id { get; set; }
     }
 
+
+    public class ScheduleInterviewIndexModel : BaseIndexModel
+    {
+
+        public int? RelId { get; set; }
+
+        public string? RelCode { get; set; }
+        public int? Type { get; set; }
+
+        public DateTime? ScheduleDate { get; set; }
+
+        public string? AddressInfo { get; set; }
+
+        public string? Noted { get; set; }
+
+        public string ScheduleDateDisplay
+        {
+            get
+            {
+                if (ScheduleDate == null || !ScheduleDate.HasValue)
+                {
+                    return string.Empty;
+                }
+                return ScheduleDate.Value.ToString("dd/MM/yyyy");
+            }
+        }
+
+    }
+
+
+    public class DocumentDataIndexModel : BaseIndexModel
+    {
+        public int? RelId { get; set; }
+        public string? RelCode { get; set; }
+        public int? Type { get; set; }
+        public string Code { get; set; }
+        public string DisplayText { get; set; }
+
+        public string ValueFile { get; set; }
+
+    }
+
     public class CandidateIndexModel : BaseIndexModel
     {
         public string? Code { get; set; }
@@ -119,9 +172,35 @@
         {
             get; set;
         }
+
         public int? Status { get; set; }
+        public int? StatusHuman { get; set; }
+        public int? ManagerId { get; set; }
+        public string? ManagerName { get; set; }
 
         public string? SourceName { get; set; }
+        public int? Position { get; set; }
+        public int? DepartmentId { get; set; }
+
+        public string DepartmentName { get; set; }
+
+        public string PostionName { get; set; }
+
+        public string DocumentStatusName { get; set; }
+
+        public string DocumentStatusText
+        {
+
+            get
+            {
+                return "Đang bổ sung";
+            }
+        }
+
+        public string StatusName
+        {
+            get; set;
+        }
 
     }
 

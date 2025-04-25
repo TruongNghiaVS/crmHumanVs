@@ -21,6 +21,29 @@
     }
 
 
+    public class MasterRequestInput : BaseRequest
+    {
+
+        public string? Code { get; set; }
+        public string? Name { get; set; }
+
+        public string? Type { get; set; }
+
+        public int? ApplyFor { get; set; }
+
+
+
+
+        public MasterRequestInput() : base()
+        {
+            Type = "hdld";
+
+        }
+
+
+    }
+
+
     public class CommonRequest : BaseRequest
     {
 
@@ -30,9 +53,6 @@
         public int? Type { get; set; }
 
         public int? ApplyFor { get; set; }
-
-
-
         public CommonRequest() : base()
         {
             Type = -1;
@@ -40,6 +60,34 @@
 
         }
 
+
+    }
+
+
+     public class ScheduleInterviewRquest : BaseRequest
+    {
+
+        public int? RelId { get; set; }
+        public string? RelCode { get; set; }
+
+        public int? Type { get; set; }
+        
+        public ScheduleInterviewRquest() : base()
+        {
+
+        }
+
+    }
+
+    public class DocumentDataRquest : BaseRequest
+    {
+        public int? RelId { get; set; }
+        public string? RelCode { get; set; }
+
+        public DocumentDataRquest() : base()
+        {
+
+        }
 
     }
 }

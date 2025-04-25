@@ -12,5 +12,19 @@
         public int Id { get; set; }
 
         public string AuthorName { get; set; }
+
+
+        public string CreateAtDisplay
+        {
+            get
+            {
+                if (CreateAt == null)
+                {
+                    return string.Empty;
+                }
+                return CreateAt.ToString("dd/MM/yyyy");
+            }
+        }
+
     }
 }

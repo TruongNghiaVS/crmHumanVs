@@ -15,133 +15,6 @@
                     <span>Dashboard</span>
                 </a>
             </li><!-- End Dashboard Nav -->
-
-            <li class="nav-heading">Thống kê và báo cáo</li>
-
-             <li class="nav-item">
-                <a class="nav-link " data-bs-target="#components-nav-report" data-bs-toggle="collapse" href="javascript:void(0)" aria-expanded="true">
-                    <i class="bi bi-menu-button-wide"></i><span>Thống kê và báo cáo </span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="components-nav-report" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="/OverviewDashboard">
-                            <i class="bi bi-circle"></i><span>Tổng quan cuộc gọi </span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/reportTalkTime">
-                            <i class="bi bi-circle"></i><span>Báo cáo talk time </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/reportCDR">
-                            <i class="bi bi-circle"></i><span> Báo cáo ghi âm </span>
-                        </a>
-                    </li>
-                  
-                   <li>
-                        <a href="/historyImpact">
-                            <i class="bi bi-circle"></i><span> Báo cáo Tác động </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/OrderStatus">
-                            <i class="bi bi-circle"></i><span>Theo trạng thái </span>
-                        </a>
-                    </li>
-                   
-
-                      
-                   
-                </ul>
-            </li><!-- End Components Nav -->
-            
-           
-        <li class="nav-item">
-        
-            <a class="nav-link" href="/OrderOnboard">
-            <i class="bi bi-grid"></i>
-            <span>Danh sách onboard</span>
-        </a>
-        
-    </li><!-- End Components Nav -->
-        <li class="nav-heading">Nguồn Ứng tuyển</li>
-        <li class="nav-item">
-                    <a class="nav-link"  href="/OrderAssignee">
-                <i class="bi bi-circle"></i><span>Nguồn Marketing<span class="badgeIcon">@Model.GlobalData.TotalCaseSource</span></span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                    <a class="nav-link"  href="/OrderSourceCTV">
-                <i class="bi bi-circle"></i><span>Nguồn CTV<span class="badgeIcon">@Model.GlobalData.TotalCaseSourceCTV</span></span>
-                </a>
-            </li>
-            <li class="nav-heading">Ứng viên</li>
-
-             <li class="nav-item">
-
-            <a class="nav-link" href="/checkDuplicate">
-            <i class="bi bi-grid"></i>
-            <span>Kiểm tra trùng</span>
-            </a>
-
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " data-bs-target="#components-nav" data-bs-toggle="collapse" href="javascript:void(0)" aria-expanded="true">
-                    <i class="bi bi-menu-button-wide"></i><span>Quản lý ứng viên</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                      <li>
-                        <a href="/OrderNew">
-                            <i class="bi bi-circle"></i><span>Danh sách ứng viên </span>
-                           
-                        </a>
-                    </li>
-
-                  
-
-                    <li>
-                        <a href="/OrderReturn">
-                            <i class="bi bi-circle"></i><span>Danh sách khai thác lại</span>
-                        </a>
-                    </li>
-                   
-
-                      
-                   
-                </ul>
-            </li><!-- End Components Nav -->
-
-             
-            <li class="nav-heading">Ứng tuyển</li>
-            <li class="nav-item">
-                <a class="nav-link " data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-journal-text"></i><span>Quản lý ứng tuyển</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="/OrderApply">
-                            <i class="bi bi-circle"></i><span>Danh sách đang process</span>
-                           
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/OrderClose">
-                            <i class="bi bi-circle"></i><span>Danh sách kết thúc</span>
-                           
-                        </a>
-                    </li>
-                    
-                    
-                    
-                </ul>
-            </li>
-
-
-
-
              <li class="nav-heading">Việc làm</li>
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#forms-job" data-bs-toggle="collapse" href="#">
@@ -170,9 +43,10 @@
                     
                 </ul>
             </li>
-          
 
-             <li class="nav-heading">Đối tác và việc làm </li>
+            
+           
+            <li class="nav-heading">Đối tác và việc làm </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#tabPartner" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-layout-text-window-reverse"></i><span>Quản lý đối tác</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -193,9 +67,32 @@
                 </ul>
             </li>
 
+            <li class="nav-heading">Lịch phỏng vấn </li>
+                    <li class="nav-item">
+                    <a class="nav-link collapsed" href="/MasterDataPage?Type=loai-hdld">
+                    <i class="bi bi-bar-chart"></i><span>Danh sách phỏng vấn</span>
+
+                    </a>
+            </li>
+
 
 
             <!-- End Tables Nav -->
+          <li class="nav-heading">Ứng viên</li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Quẩn lý ứng viên</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="/candidate">
+                        <i class="bi bi-circle"></i><span>Danh sách ứng viên</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li><!-- End Tables Nav -->
 
             
             <li class="nav-heading">Nhân sự</li>
@@ -240,25 +137,53 @@
                 
             </li><!-- End Charts Nav -->
 
+
+        <li class="nav-heading">MasterData</li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/MasterDataPage?Type=loai-hdld">
+                <i class="bi bi-bar-chart"></i><span>Loại HĐLĐ</span>
+
+            </a>
+
+            <a class="nav-link collapsed" href="/MasterDataPage?Type=vi-tri-viec-lam">
+                <i class="bi bi-bar-chart"></i><span>Vị trí việc làm</span>
+            </a>
+
+            <a class="nav-link collapsed" href="/MasterDataPage?Type=bo-phan">
+                <i class="bi bi-bar-chart"></i><span>Bộ phận</span>
+            </a>
+            <a class="nav-link collapsed" href="/MasterDataPage?Type=quan-he-nguoi-than">
+                <i class="bi bi-bar-chart"></i><span>quan hệ người thân</span>
+            </a>
+
+             <a class="nav-link collapsed" href="/MasterDataPage?Type=trang-thai-ung-vien">
+                <i class="bi bi-bar-chart"></i><span>Trạng thái Ứng viên </span>
+            </a>
+
+            <a class="nav-link collapsed" href="/MasterDataPage?Type=trang-thai-chung-tu">
+                <i class="bi bi-bar-chart"></i><span>trạng thái chứng từ </span>
+            </a>
+
+            <a class="nav-link collapsed" href="/MasterDataPage?Type=Loai-chung-tu">
+                <i class="bi bi-bar-chart"></i><span>Loại chứng từ </span>
+            </a>
+
+
+        </li><!-- End Charts Nav -->
+
           <li class="nav-item">
                 <a class="nav-link collapsed"  href="/StatusPage">
                     <i class="bi bi-bar-chart"></i><span>Danh sách trạng thái</span>
                     
                 </a>
                 
-            </li><!-- End Charts Nav -->
-
-    
-          
+            </li>
              <li class="nav-item">
                 <a class="nav-link collapsed" onclick ="logout()"  data-bs-toggle="collapse" href="#">
                     <i class="bi bi-bar-chart"></i><span>Đăng xuất tài khoản</span>
                     
                 </a>
-                
             </li><!-- End Charts Nav -->
-            
-
         </ul>
 
     </aside>

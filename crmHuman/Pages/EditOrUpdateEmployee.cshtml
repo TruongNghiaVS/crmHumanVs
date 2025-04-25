@@ -86,7 +86,13 @@
         <div class="modal-body">
 
             <form id="mainForm" class="needs-validation" novalidate>
+                <div class="col-12 form-group">
+                    <label class="form-label">Tên đăng nhập</label>
+                    <input type="text" value="@Model.FullName" name="fullName" id="txtUserName" class="form-control" required placeholder="" />
+                    <div class="invalid-feedback-cs">
+                    </div>
 
+                </div>
                 <div class="col-12 form-group">
                     <label class="form-label">Họ và tên</label>
             <input type="text" value="@Model.FullName" name="fullName" id="txtFullName" class="form-control" required placeholder="" />
@@ -102,11 +108,186 @@
                 </div>
 
         <div class="col-12 form-group">
-            <label class="form-label">Ngày vào làm</label>
+            <label class="form-label">Chức vụ</label>
+            <input type="text" value="@Model.FullName" name="fullName" id="txtPostion" class="form-control" required placeholder="" />
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+        <div class="col-12 form-group">
+            <label class="form-label">Bộ phận </label>
+            <input type="text" value="@Model.FullName" name="fullName" id="txtDepartment" class="form-control" required placeholder="" />
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+        <div class="col-12 form-group">
+            <label class="form-label">Số điện thoại </label>
+            <input type="text" value="@Model.FullName" name="fullName" class="form-control" required placeholder="" />
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+
+        <div class="col-12 form-group">
+            <label class="form-label">Email cá nhân </label>
+            <input type="text" value="@Model.FullName" name="fullName" class="form-control" required placeholder="" />
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+
+        <div class="col-12 form-group">
+            <label class="form-label">Căn cước công dân </label>
+            <input type="text" value="@Model.FullName" name="fullName" id="txtNationNalId" class="form-control" required placeholder="" />
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+        <div class="col-12 form-group">
+            <label class="form-label">Ngày cấp cccd </label>
+            <input type="date"
+                   value="@dateOnboard"
+                   name="dob" class="form-control">
+        </div>
+
+        <div class="col-12 form-group">
+            <label class="form-label">Địa chỉ tạm trú </label>
+            <input type="text" value="@Model.FullName" name="fullName" id="txtDepartment" class="form-control" required placeholder="" />
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+        <div class="col-12 form-group">
+            <label class="form-label">Địa chỉ thường trú </label>
+            <input type="text" value="@Model.FullName" name="fullName" id="txtDepartment" class="form-control" required placeholder="" />
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+
+        <div class="col-12 form-group">
+            <label class="form-label">Họ và tên (tham chiếu) </label>
+            <input type="text" value="@Model.FullName" name="fullName" class="form-control" required placeholder="" />
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+        <div class="col-12 form-group">
+            <label class="form-label">Mối quan hệ (tham chiếu) </label>
+            <input type="text" value="@Model.FullName" name="fullName" class="form-control" required placeholder="" />
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+        <div class="col-12 form-group">
+            <label class="form-label">Số điện thoại(tham chiếu) </label>
+            <input type="text" value="@Model.FullName" name="fullName" class="form-control" required placeholder="" />
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+        <div class="col-12 form-group">
+            <label class="form-label">Địa chỉ(tham chiếu) </label>
+            <input type="text" value="@Model.FullName" name="fullName" class="form-control" required placeholder="" />
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+
+
+        <div class="col-12 form-group">
+            <label class="form-label">số HĐLĐ </label>
+            <input type="text" value="@Model.FullName" name="fullName" class="form-control" required placeholder="" />
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+        <div class="col-12 form-group">
+            <label class="form-label">Loại hợp đồng</label>
+            <input type="text" value="@Model.FullName" name="fullName" class="form-control" required placeholder="" />
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+        <div class="col-12 form-group">
+            <label class="form-label">Ngày bắt đầu</label>
             <input type="date" id="dateOnboard"
                    value="@dateOnboard"
                    name="dob" class="form-control">
         </div>
+
+        <div class="col-12 form-group">
+            <label class="form-label">Ngày kết thúc</label>
+            <input type="date" id="dateOnboard"
+                   value="@dateOnboard"
+                   name="dob" class="form-control">
+        </div>
+
+
+
+        <div class="col-12 form-group">
+            <label class="form-label">MÃ SỐ BHXH </label>
+            <input type="text" value="@Model.FullName" name="fullName" class="form-control" required placeholder="" />
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+        <div class="col-12 form-group">
+            <label class="form-label">Tờ rơi</label>
+            <input type="text" value="@Model.FullName" name="fullName" class="form-control" required placeholder="" />
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+        <div class="col-12 form-group">
+            <label class="form-label">Bìa sổ</label>
+            <input type="date" id="dateOnboard"
+                   value="@dateOnboard"
+                   name="dob" class="form-control">
+        </div>
+
+
+
+
+        <div class="col-12 form-group">
+            <label class="form-label">Mã số thuế </label>
+            <input type="text" value="@Model.FullName" name="fullName" class="form-control" required placeholder="" />
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+        <div class="col-12 form-group">
+            <label class="form-label">Thư xác nhận thu nhập </label>
+            <input type="text" value="@Model.FullName" name="fullName" class="form-control" required placeholder="" />
+            <div class="invalid-feedback-cs">
+            </div>
+
+        </div>
+
+
+        <div class="col-12 form-group">
+            <label class="form-label">Chứng từ thuế</label>
+            <input type="date" id="dateOnboard"
+                   value="@dateOnboard"
+                   name="dob" class="form-control">
+        </div>
+        
 
                 <div class="col-12 form-group">
                     <label for="inputAddress2" class="form-label">Số điện thoại</label>

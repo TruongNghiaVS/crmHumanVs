@@ -9,6 +9,7 @@ namespace VS.Human.Business
 
         public static void Config(this IServiceCollection services)
         {
+            
             services.ConfigRep();
             services.AddSingleton<ILoginBussiness, LoginBusiness>();
             services.AddSingleton<IEmpBusiness, EmployeeBusiness>();
@@ -28,9 +29,8 @@ namespace VS.Human.Business
             services.AddSingleton<ICalculateTimeBusiness, CalculateTimeBusiness>();
             services.AddSingleton<IHandleReportBussiness, HandleReportBussiness>();
             services.AddSingleton<IReportCDRBussiness, ReportCDRBussiness>();
-
-
-
+            services.AddSingleton<IScheduleInterviewBussiness, ScheduleInterviewBusiness>();
+            services.AddSingleton<IDocumentDataBussiness, DocumentDataBussiness>();
 
         }
     }

@@ -68,6 +68,37 @@ namespace VS.Human.Business.Model
             ApplyFor = 2;
         }
     }
+
+
+    public class ScheduleInterviewAdd : ScheduleInterview
+    {
+
+        public ScheduleInterviewAdd()
+        {
+
+        }
+    }
+
+
+
+    public class DocumentDataAdd : DocumentData
+    {
+
+        public DocumentDataAdd()
+        {
+
+        }
+    }
+
+    public class MasterData2Add : MasterData
+    {
+
+        public MasterData2Add()
+        {
+            ApplyFor = 2;
+        }
+    }
+
     public class JobItemAdd : JobItem
     {
         public JobItemAdd()
@@ -91,7 +122,57 @@ namespace VS.Human.Business.Model
     }
     public class CandidateAdd : Candidate
     {
+        public int ManagerId {get;set;}
         public CandidateAdd()
+        {
+
+        }
+    }
+
+    public class CandidateDetailUpdate : Candidate
+    {
+
+        public int CandidateId { get; set; }
+
+         public int ManagerId {get;set;}
+
+        public CandidateDetailUpdate()
+        {
+
+        }
+    }
+
+    public class DocumentDataAddRequest
+    {
+
+        public int RelId { get; set; }
+
+        public List<DocumentDataItem> Data { get; set; }
+
+        public DocumentDataAddRequest()
+        {
+            Data = new List<DocumentDataItem>();
+
+        }
+    }
+
+    public class DocumentDataItem
+    {
+
+        public string Code { get; set; }
+
+        public string DisplayText { get; set; }
+
+        public string ValueFile { get; set; }
+        public int Id { get; set; }
+    }
+
+
+    public class CandidateScheduleAdd : ScheduleInterview
+    {
+
+
+        public CandidateScheduleAdd()
         {
 
         }

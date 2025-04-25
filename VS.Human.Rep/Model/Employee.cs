@@ -3,13 +3,9 @@
     public class Employee : BaseModel
     {
         public string? UserName { get; set; }
-
         public string? Email { get; set; }
-
         public string? LineCode { get; set; }
-
         public string? ColorCode { get; set; }
-
         public DateTime? Onboard { get; set; }
         public string? FullName { get; set; }
         public string? Phone { get; set; }
@@ -20,5 +16,11 @@
         public int Status { get; set; }
         public int IsActive { get; set; }
         public string? AvatarFile { get; set; }
+        public string TypeAccount { get; set; }
+        public string DepartmentCode { get; set; }
+        public string DocumentStatus { get; set; }
+        public string PositionCode { get; set; }
+
+
     }
 }

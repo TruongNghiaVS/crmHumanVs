@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text;
 using VS.Human.Item;
 using VS.Human.Rep.Model;
 
@@ -427,9 +428,6 @@ namespace VS.Human.Rep
                 //parameter.Limit = request.Limit;
                 //parameter.Page = request.Page;
             }
-
-
-
             try
             {
                 using (var con = GetConnection())
@@ -467,5 +465,68 @@ namespace VS.Human.Rep
                 };
             }
         }
+
+        public async Task<int> AddAndReturnIdAsync<T>(T entity, string tableName, string keyColumn,
+
+             params string[] ignoredFields
+            ) where T : class
+        {
+
+            if (ignoredFields.Length < 1 || !ignoredFields.Contains("id"))
+            {
+                ignoredFields.Append("id");
+            }
+            var properties = typeof(T).GetProperties()
+                .Where(p => ignoredFields.Contains(p.Name)).ToList();
+            var columns = string.Join(", ", properties.Select(p => p.Name));
+            var values = string.Join(", ", properties.Select(p => $"@{p.Name}"));
+
+            var query = new StringBuilder($"INSERT INTO {tableName} ({columns}) VALUES ({values}); SELECT SCOPE_IDENTITY();");
+            using (var con = GetConnection())
+            {
+                return await con.ExecuteScalarAsync<int>(query.ToString(), entity);
+
+            }
+        }
+
+        public async Task<int> UpdateAsync<T>(T entity, string tableName, string keyColumn, params string[] ignoredFields)
+        {
+
+
+            var properties = typeof(T).GetProperties()
+                                      .Where(p => p.Name != keyColumn && !ignoredFields.Contains(p.Name)) // Loại bỏ cột khóa chính và các trường bị bỏ qua
+                                      .ToList();
+
+            var setClause = string.Join(", ", properties.Select(p => $"{p.Name} = @{p.Name}"));
+            var query = new StringBuilder($"UPDATE {tableName} SET {setClause} WHERE {keyColumn} = @{keyColumn}");
+            using (var con = GetConnection())
+            {
+                return await con.ExecuteAsync(query.ToString(), entity);
+
+            }
+
+        }
+
+
+        public async Task<int> AddAsync<T>(T entity, string tableName, string keyColumn,
+
+           params string[] ignoredFields
+          ) where T : class
+        {
+            var properties = typeof(T).GetProperties().Where(p => p.Name != keyColumn
+            && !ignoredFields.Contains(p.Name)
+            ).ToList();
+            var columns = string.Join(", ", properties.Select(p => p.Name));
+            var values = string.Join(", ", properties.Select(p => $"@{p.Name}"));
+
+            var query = new StringBuilder($"INSERT INTO {tableName} ({columns}) VALUES ({values}); SELECT SCOPE_IDENTITY();");
+            using (var con = GetConnection())
+            {
+                return await con.ExecuteScalarAsync<int>(query.ToString(), entity);
+
+            }
+        }
+
+
     }
 }
