@@ -145,10 +145,7 @@ namespace crmHuman.Pages
                 };
                 DataMasterData.Add(itemInsert);
             }
-
             DataManager = await _iempl.GetAllManager();
-
-
             return await GetAll(request);
         }
 

@@ -1,0 +1,433 @@
+﻿@page
+@model CandidateDetailModel
+@{
+    ViewData["Title"] = Model.TitlePage;   
+    var itemResult = Model.ResultModel;
+    var dataSchedulelist = Model.DataHistory;
+    var dataFile = Model.DataFile;
+
+}
+<div class="pagetitle">
+    <h1>@Model.TitlePage</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/candidate">Ứng viên</a></li>
+            <li class="breadcrumb-item active">@itemResult.Name</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+
+
+                     <ul class="nav nav-tabs d-flex" id="myTabjustified" role="tablist">
+                <li class="nav-item flex-fill" role="presentation">
+                  <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-justified" type="button" role="tab" aria-controls="home" aria-selected="true">Thông tin Ứng viên</button>
+                </li>
+                <li class="nav-item flex-fill" role="presentation">
+                  <button class="nav-link w-100" id="infomationDocument-tab" data-bs-toggle="tab" data-bs-target="#infomationDocument" type="button" role="tab" aria-controls="infomationDocument" aria-selected="false">thông tin chứng từ</button>
+                </li>
+                <li class="nav-item flex-fill" role="presentation">
+                  <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-justified" type="button" role="tab" aria-controls="contact" aria-selected="false">Lịch phỏng vấn</button>
+                </li>
+                
+              </ul>
+              <div class="tab-content pt-2" >
+                <div class="tab-pane fade show active" id="home-justified" role="tabpanel" aria-labelledby="home-tab">
+                  
+                        <input type="hidden" value="@itemResult.Id" name="id" id ="inputId"   class="form-control" required placeholder="" />
+
+                                  <div class="col-12 ">
+                             <div class="form-group">
+                                <label class="form-label">Tên ứng cử viên</label>
+                                <input type="text" value="@itemResult.Name" name="fullName" id="txtFullName" class="form-control" required placeholder="" />
+                                <div class="invalid-feedback-cs">
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Ngày sinh</label>
+                                <input type="date" value="@itemResult.DayOfBirthDisplay" name="dob" id="dob" class="form-control" required placeholder="" />
+                                <div class="invalid-feedback-cs">
+                                </div>
+                            </div>
+                            <div class=" form-group ">
+                                <label class="form-label">Số điện thoại</label>
+                                <input type="text" value="@itemResult.Phone" name="txtPhone" id="txtPhone" class="form-control phonecall" required placeholder="" />
+                                <div class="invalid-feedback-cs">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Người hướng dẫn</label>
+                                <select name="Manager" class="form-select" id="cbManager" aria-label="">
+                                    @foreach (var item in Model.DataLead.Data)
+                                    {
+
+                                        var itemMasterData = item as dynamic;
+                                        if (itemMasterData.Id.ToString() == (itemResult.ManagerId.HasValue==true?itemResult.ManagerId.ToString():"-1"))
+                                        {
+                                               <option selected value="@itemMasterData.Id">@itemMasterData.FullName </option>
+                                        }
+                                        else
+                                        {
+                                              <option value="@itemMasterData.Id">@itemMasterData.FullName </option>
+                                        }
+                                    }
+                                </select>
+                                <div class="invalid-feedback-cs">
+                                    Please choose a username.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Bộ phận</label>
+                                <select name="DepartmentId" class="form-select" id="cbDepartmentId" aria-label="">
+                                    @foreach (var item in Model.DataDepartment)
+                                    {
+
+                                        var itemMasterData = item;
+
+                                        var dataType = itemMasterData.TypeData;
+                                      if(dataType != 5)
+                                        {
+                                            continue;
+                                        }
+                                        var departmentCheck = itemResult.DepartmentId;
+                                        var departmentCheckText = "-1";
+                                        if(itemResult.DepartmentId.HasValue)
+                                        {
+                                            departmentCheckText = itemResult.DepartmentId.Value.ToString();
+                                        }
+                                        if (itemMasterData.Code == departmentCheckText)
+                                        {
+                                            <option selected value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option  value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <div class="invalid-feedback-cs">
+                                    Please choose a username.
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="form-label">Vị trí</label>
+                                <select name="position" id="cbPosition" class="form-select"  aria-label="">
+                                    @foreach (var item in Model.DataDepartment)
+                                    {
+                                        var itemMasterData = item;
+                                        if(itemMasterData.TypeData != 2)
+                                        {
+                                            continue;
+                                        }
+                                        var departmentCheck = itemResult.Position;
+                                        var departmentCheckText = "-1";
+                                        if (itemResult.Position.HasValue)
+                                        {
+                                            departmentCheckText = itemResult.Position.Value.ToString();
+                                        }
+                                        if (itemMasterData.Code == departmentCheckText)
+                                        {
+                                            <option selected value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <div class="invalid-feedback-cs">
+                                    Please choose a username.
+                                </div>
+                            </div>
+                          
+                            <div class=" form-group">
+                                <label class="form-label">Email</label>
+                                <input type="text" value="@itemResult.Email" name="email" id="txtEmail" class="form-control" required placeholder="" />
+                                <div class="invalid-feedback-cs">
+                                </div>
+
+                            </div>
+
+                                @{
+                                Html.RenderPartial("ControlForm/FileInputCs",new
+                                {
+                                ValueControl = @itemResult.CVLink,
+                                NameControl = "inputCvlinkName",
+                                IdControl ="inputCvlink",
+                                Lable = "File CV ( ưu tiên file pdf, file hình)"
+
+                                });
+                                }
+                            <div class=" form-group">
+                            <label for="inputAddress2" class="form-label">Ghi chú ứng cử viên</label>
+                            <textarea name="noted" id="txtNotedCand"  class="form-control" style="height: 50px">@itemResult.Noted</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Trạng thái chứng từ</label>
+                                <select name="StatusHuman" id="cbStatusHuman" class="form-select" aria-label="">
+                                    @foreach (var item in Model.DataDepartment)
+                                    {
+                                       
+                                         var itemMasterData = item;
+                                        if(itemMasterData.TypeData != 8)
+                                        {
+                                            continue;
+                                        }
+
+                                        var departmentCheck = itemResult.StatusHuman;
+                                        var departmentCheckText = "-1";
+                                        if (itemResult.StatusHuman != null & itemResult.StatusHuman.HasValue)
+                                        {
+                                            departmentCheckText = itemResult.StatusHuman.Value.ToString();
+                                        }
+                                        if (itemMasterData.Code == departmentCheckText)
+                                        {
+                                            <option selected value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <div class="invalid-feedback-cs">
+                                    Please choose a username.
+                                </div>
+                            </div>
+                          <div class="form-group">
+                                <label class="form-label">Trạng thái ứng viên</label>
+                                <select name="Status" id="cbStatus" class="form-select" aria-label="">
+                                    @foreach (var item in Model.DataDepartment)
+                                    {
+                                         var itemMasterData = item;
+                                        if(itemMasterData.TypeData != 9)
+                                        {
+                                            continue;
+                                        }
+
+                                        var departmentCheck = itemResult.Status;
+                                        var departmentCheckText = "-1";
+                                         if (itemResult.Status != null & itemResult.Status.HasValue)
+                                      
+                                        {
+                                            departmentCheckText = itemResult.Status.Value.ToString();
+                                        }
+                                        if (itemMasterData.Code == departmentCheckText)
+                                        {
+                                            <option selected value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <div class="invalid-feedback-cs">
+                                    Please choose a username.
+                                </div>
+                            </div
+                   
+               <br />
+                  <br />
+             <button type="button" onclick="saveCanddiateDetail(@itemResult.Id)" class="btn btn-primary">Lưu thông tin </button>
+                 </div>
+
+
+                </div>
+
+                <div class="tab-pane fade" id="contact-justified" role="tabpanel" aria-labelledby="contact-tab">
+                 
+                
+                            <div class="form-group">
+                                <label class="form-label">Ngày phỏng vấn</label>
+                                <input type="date" value="" name="ScheduleDate" id="dateScheduleDate" class="form-control" required placeholder="" />
+                                <div class="invalid-feedback-cs">
+                                </div>
+                            </div>
+                              <div class="form-group">
+                                <label class="form-label">Địa điểm phỏng vấn </label>
+                                 <input type="text" value="" name="AddressInfo" id="txtAddressInfo" class="form-control" required placeholder="" />
+                                <div class="invalid-feedback-cs">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Ghi chú</label>
+                                <input type="text" value="" name="Noted" id="txtScheduleNoted"
+                                 class="form-control" required placeholder="" />
+                                <div class="invalid-feedback-cs">
+                                </div>
+
+                            </div>
+
+                            <button type="button" onclick="saveSchedule(@itemResult.Id)" class="btn btn-primary">Lên lịch phỏng vấn </button>
+                            <div class="form-group">
+                               
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Ngày phỏng vấn</th>
+                    <th scope="col"> Địa điểm</a></th>
+                    <th scope="col">Nội dung</th>
+                    <th scope="col">Tạo ngày</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                     @foreach (var item in dataSchedulelist.Data)
+                            {
+                            var itemDraw = item as dynamic;
+                            <tr>
+                            <th scope="row">1</th>
+                            <td>@itemDraw.ScheduleDateDisplay</td>
+                            <td>@itemDraw.AddressInfo</td>
+                            <td>@itemDraw.Noted</td>
+                            <td>@itemDraw.CreateAtDisplay</td>
+                            </tr>
+                            }
+
+                  
+              
+                    
+                 
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+
+                               
+                            </div>
+
+                </div>
+
+
+              
+
+                <div class="tab-pane fade" id="infomationDocument" role="tabpanel" aria-labelledby="infomationDocument-tab">
+    <div class="floatRight">
+        <button type="button" class=" btn btn-primary" 
+        data-bs-toggle="modal" 
+        data-bs-target="#verticalycentered">
+        Thêm file
+        <i class="fa fa-cloud-upload"></i>
+
+        </button>
+     </div>
+  
+                    <div id ="documnetList">
+
+ @foreach (var item in Model.DataFile.Data)
+{
+                                var itemDraw = item as dynamic;
+                                Html.RenderPartial("ControlForm/FileInputDocument",new
+                                {
+                                ValueControl = itemDraw.ValueFile,
+                                NameControl =  itemDraw.Code,
+                                IdControl = itemDraw.Code,
+                                Lable = itemDraw.DisplayText, 
+                                ValueId =  itemDraw.Id
+                                });
+}
+                    </div>
+                
+                                         
+
+    <div class="divblock">
+
+          <button type="button" onclick = "AddDocument(@itemResult.Id)"  class="btn btn-primary"> Câp nhật chứng từ</button>     
+    </div>
+
+                                      
+      
+ 
+
+                                          <div class="card">
+            <div class="card-body">
+
+              <!-- Vertically centered Modal -->
+             
+              <div class="modal fade" id="verticalycentered" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Chọn loại chứng từ cần thêm</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                     
+                            <div class="form-group">
+                                <label class="form-label">Chọn loại chứng từ</label>
+                                <select name="DocumentType" id="cbDocumentType" class="form-select" aria-label="">
+                                                @foreach (var item in Model.DataDepartment)
+                                                {
+                                                    var itemMasterData = item as dynamic;
+
+                                                    var departmentCheck = itemResult.Status;
+                                                    var departmentCheckText = "-1";
+                                                    if (itemResult.Position.HasValue)
+                                                    {
+                                                        departmentCheckText = itemResult.Status.Value.ToString();
+                                                    }
+                                                    if (itemMasterData.Code == departmentCheckText)
+                                                    {
+                                                        <option selected 
+                                                           value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                                    }
+                                                }
+                                            </select>
+                            </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                      <button type="button" class="btn btn-primary" onclick="addDocumentSelect()">Thêm</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Vertically centered Modal-->
+
+            </div>
+          </div>
+        
+                           
+                 </div>
+            
+              
+              </div>
+            
+
+                
+        </div>
+                            
+                         
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="formModal" tabindex="-1" >
+    <div class="modal-dialog  modal-dialog-centered modal-lg" >
+        <div class="modal-content" id="contentModal">
+        </div>
+    </div>
+</div><!-- End Large Modal-->
+
+
