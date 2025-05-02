@@ -50,40 +50,22 @@ namespace VS.Human.Rep
         }
         private async Task<bool> Add(Employee item)
         {
-            var itemInsert = new Employee()
-            {
-                FullName = item.FullName,
-                IsActive = 1,
-                Noted = item.Noted,
-                Phone = item.Phone,
-                UserName = item.UserName,
-                RoleCode = item.RoleCode,
-                Dob = item.Dob,
-                Pass = item.Pass,
-                CreatedBy = item.CreatedBy,
-                UpdatedBy = item.UpdatedBy,
-                CreateAt = DateTime.Now,
-                UpdateAt = DateTime.Now,
-                Onboard = item.Onboard,
-                LineCode = item.LineCode,
-                ColorCode = item.ColorCode
 
-            };
             var parameter = new
             {
-                itemInsert.Onboard,
-                itemInsert.LineCode,
-                itemInsert.UserName,
-                itemInsert.Pass,
-                itemInsert.FullName,
-                itemInsert.Phone,
-                itemInsert.Dob,
-                itemInsert.CreatedBy,
-                itemInsert.UpdatedBy,
-                itemInsert.CreateAt,
-                itemInsert.UpdateAt,
-                itemInsert.RoleCode,
-                itemInsert.ColorCode,
+                item.Onboard,
+                item.LineCode,
+                item.UserName,
+                item.Pass,
+                item.FullName,
+                item.Phone,
+                item.Dob,
+                item.CreatedBy,
+                item.UpdatedBy,
+                item.CreateAt,
+                item.UpdateAt,
+                item.RoleCode,
+                item.ColorCode,
                 item.Noted,
                 item.IsActive
             };
@@ -125,6 +107,7 @@ namespace VS.Human.Rep
                     itemUpdate.IsActive = item.IsActive;
                     itemUpdate.Noted = item.Noted;
                     itemUpdate.ColorCode = item.ColorCode;
+
 
                     itemUpdate.Onboard = item.Onboard;
                     itemUpdate.LineCode = item.LineCode;

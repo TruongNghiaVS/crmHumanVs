@@ -17,6 +17,13 @@ namespace VS.Human.Business.Model
 
     }
 
+    public class EmployeeInfoAdd : Employee
+    {
+            
+
+
+    }
+
     public class UploadFileAdd
     {
         public IFormFile FileRequest { get; set; }

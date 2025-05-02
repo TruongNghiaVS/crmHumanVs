@@ -9,8 +9,8 @@ namespace VS.Human.Business
         Task<Employee> Login(string userName, string password);
         Task<Employee> GetById(int Id);
         Task<Employee> CheckDuplicate(string email, string phone);
-        Task<bool> Add(EmployeeAdd item);
-        Task<bool> Update(EmployeeAdd item);
+        Task<bool> Add(EmployeeInfoAdd item);
+        Task<bool> Update(EmployeeInfoAdd item);
         Task<bool> ChangePassword(string password, int id);
         Task<bool> Delete(int id, bool reactive = false);
         Task<BaseList> GetAllManager();

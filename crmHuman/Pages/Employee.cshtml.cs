@@ -129,7 +129,7 @@ namespace crmHuman.Pages
             var employee = await _empBusiness.GetById(userId);
             employee.FullName = request.FullName;
             employee.Noted = request.Noted;
-            var itemUpdate = new EmployeeAdd()
+            var itemUpdate = new EmployeeInfoAdd()
             {
                 Status = employee.Status,
                 Phone = employee.Phone,
@@ -169,79 +169,79 @@ namespace crmHuman.Pages
             };
         }
 
-        public async Task<IActionResult> OnPostAddEmployeee
-            (EmployeeAdd request)
-        {
-            var listEror = new List<object>();
+        //public async Task<IActionResult> OnPostAddEmployeee
+        //    (EmployeeAdd request)
+        //{
+        //    var listEror = new List<object>();
 
-            if (string.IsNullOrEmpty(request.FullName))
-            {
-                var itemError = new
-                {
-                    name = "txtFullName",
-                    Content = "Thiếu thông tin họ và tên"
-                };
-                listEror.Add(itemError);
+        //    if (string.IsNullOrEmpty(request.FullName))
+        //    {
+        //        var itemError = new
+        //        {
+        //            name = "txtFullName",
+        //            Content = "Thiếu thông tin họ và tên"
+        //        };
+        //        listEror.Add(itemError);
 
-            }
-            if (string.IsNullOrEmpty(request.Pass) && request.Id < 0)
-            {
-                var itemError = new
-                {
-                    name = "txtPass",
-                    Content = "Thiếu thông tin mật khẩu"
-                };
-                listEror.Add(itemError);
+        //    }
+        //    if (string.IsNullOrEmpty(request.Pass) && request.Id < 0)
+        //    {
+        //        var itemError = new
+        //        {
+        //            name = "txtPass",
+        //            Content = "Thiếu thông tin mật khẩu"
+        //        };
+        //        listEror.Add(itemError);
 
-            }
-            if (string.IsNullOrEmpty(request.Phone))
-            {
-                var itemError = new
-                {
-                    name = "txtPhone",
-                    Content = "Thiếu thông tin số điện thoại"
-                };
-                listEror.Add(itemError);
+        //    }
+        //    if (string.IsNullOrEmpty(request.Phone))
+        //    {
+        //        var itemError = new
+        //        {
+        //            name = "txtPhone",
+        //            Content = "Thiếu thông tin số điện thoại"
+        //        };
+        //        listEror.Add(itemError);
 
-            }
-            if (string.IsNullOrEmpty(request.RoleCode))
-            {
-                var itemError = new
-                {
-                    name = "txtRoleCode",
-                    Content = "Thiếu thông tin vai trò"
-                };
-                listEror.Add(itemError);
+        //    }
+        //    if (string.IsNullOrEmpty(request.RoleCode))
+        //    {
+        //        var itemError = new
+        //        {
+        //            name = "txtRoleCode",
+        //            Content = "Thiếu thông tin vai trò"
+        //        };
+        //        listEror.Add(itemError);
 
-            }
-            if (listEror.Count > 0)
-            {
-                return new JsonResult(listEror)
-                {
-                    StatusCode = StatusCodes.Status400BadRequest
-                };
-            }
+        //    }
+        //    if (listEror.Count > 0)
+        //    {
+        //        return new JsonResult(listEror)
+        //        {
+        //            StatusCode = StatusCodes.Status400BadRequest
+        //        };
+        //    }
 
-            var result = true;
-            if (request.Id < 0)
-            {
-                result = await _empBusiness.Add(request);
-            }
-            else
-            {
-                result = await _empBusiness.Update(request);
-            }
-            var dataReponse = new
-            {
-                success = result,
+        //    var result = true;
+        //    if (request.Id < 0)
+        //    {
+        //        result = await _empBusiness.Add(request);
+        //    }
+        //    else
+        //    {
+        //        result = await _empBusiness.Update(request);
+        //    }
+        //    var dataReponse = new
+        //    {
+        //        success = result,
 
-            };
-            return new JsonResult(dataReponse)
-            {
-                StatusCode = StatusCodes.Status200OK
+        //    };
+        //    return new JsonResult(dataReponse)
+        //    {
+        //        StatusCode = StatusCodes.Status200OK
 
-            };
-        }
+        //    };
+        //}
 
         public async Task<ActionResult> OnGet([FromQuery] EmployeeRequest request)
         {
@@ -292,7 +292,6 @@ namespace crmHuman.Pages
         }
 
         public virtual async Task<PartialViewResult> OnGetFormEdit(int id)
-
         {
             GetInfoUser();
             var resultView = new Employee()
@@ -306,14 +305,11 @@ namespace crmHuman.Pages
                 RoleCode = UserData.RoleCode,
                 Deleted = false,
                 Noted = ""
-
-
             };
             if (id > 0)
             {
                 resultView = await _empBusiness.GetById(id);
             }
-
             return Partial("editOrUpdateEmployee", resultView);
         }
 

@@ -109,6 +109,57 @@ namespace crmHuman.Pages
             };
         }
 
+
+        public async Task<IActionResult> OnPostAddEmployee
+            (EmployeeInfoAdd request)
+        {
+            var listEror = new List<object>();
+            if (request.Id < 1)
+            {
+                var itemError = new
+                {
+                    name = "txtFullName",
+                    Content = "Thiếu thông tin đối tượng Id"
+                };
+                listEror.Add(itemError);
+            }
+
+            if (string.IsNullOrEmpty(request.Phone))
+            {
+                var itemError = new
+                {
+                    name = "txtPhone",
+                    Content = "Thiếu thông tin số điện thoại"
+                };
+                listEror.Add(itemError);
+            }
+            if (listEror.Count > 0)
+            {
+                return new JsonResult(listEror)
+                {
+                    StatusCode = StatusCodes.Status400BadRequest
+                };
+            }
+            var result = true;
+            request.Id = request.Id;
+            if (request.Id < 0)
+            {
+                result = await _empBusiness1.Update(request);
+            }
+            else
+            {
+                result = await _empBusiness1.Update(request);
+            }
+            var dataReponse = new
+            {
+                success = result,
+            };
+            return new JsonResult(dataReponse)
+            {
+                StatusCode = StatusCodes.Status200OK
+            };
+        }
+
         public async Task<IActionResult> OnPostUpdate
             (CandidateDetailUpdate request)
         {

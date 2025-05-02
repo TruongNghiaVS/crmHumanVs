@@ -41,7 +41,7 @@ namespace crmHuman.Pages
         }
 
         public async Task<IActionResult> OnPostAddEmployeee
-            (EmployeeAdd request)
+            (EmployeeInfoAdd request)
         {
             var listEror = new List<object>();
 

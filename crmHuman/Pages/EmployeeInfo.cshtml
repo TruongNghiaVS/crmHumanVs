@@ -27,7 +27,7 @@
 
                      <ul class="nav nav-tabs d-flex" id="myTabjustified" role="tablist">
                 <li class="nav-item flex-fill" role="presentation">
-                  <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-justified" type="button" role="tab" aria-controls="home" aria-selected="true">Thông tin Ứng viên</button>
+                  <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-justified" type="button" role="tab" aria-controls="home" aria-selected="true">Thông tin nhân viên</button>
                 </li>
                 <li class="nav-item flex-fill" role="presentation">
                   <button class="nav-link w-100" id="infomationDocument-tab" data-bs-toggle="tab" data-bs-target="#infomationDocument" type="button" role="tab" aria-controls="infomationDocument" aria-selected="false">thông tin chứng từ</button>
@@ -66,7 +66,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="form-label">Ngày cấp</label>
+                                <label class="form-label">Ngày cấp căn cước công dân</label>
                                 <input type="date" value="@itemResult.DayOfBirthDisplay" name="dob" id="dob" class="form-control" required placeholder="" />
                                 <div class="invalid-feedback-cs">
                                 </div>
@@ -258,7 +258,7 @@
                                 </div>
                             </div>
                           <div class="form-group">
-                                <label class="form-label">Trạng thái ứng viên</label>
+                                <label class="form-label">Trạng thái</label>
                                 <select name="Status" id="cbStatus" class="form-select" aria-label="">
                                     @foreach (var item in Model.DataDepartment)
                                     {

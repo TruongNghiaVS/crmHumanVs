@@ -17,7 +17,7 @@ namespace VS.Human.Business.Imp
 
         }
 
-        public async Task<bool> Add(EmployeeAdd itemAdd)
+        public async Task<bool> Add(EmployeeInfoAdd itemAdd)
         {
             var item = new Employee();
             item.FullName = itemAdd.FullName;
@@ -32,6 +32,14 @@ namespace VS.Human.Business.Imp
             item.Noted = itemAdd.Noted;
             item.Dob = itemAdd.Dob;
             item.IsActive = itemAdd.IsActive;
+
+            item.PermanentAddress = itemAdd.PermanentAddress;
+            item.TemporaryAddress = itemAdd.TemporaryAddress;
+            item.Noted = itemAdd.Noted;
+            item.NationalId = itemAdd.NationalId;
+            item.NationalDate = itemAdd.NationalDate;
+            item.NationalPlace = itemAdd.NationalPlace;
+            item.Phone = itemAdd.Phone;
             var passNew = getMD5(itemAdd.Pass);
             item.Pass = passNew;
             item.CreateAt = DateTime.Now;
@@ -46,7 +54,7 @@ namespace VS.Human.Business.Imp
 
             return await _unitOfWork.EmployeeRep.ChangePassword(passwordNew, id);
         }
-        public async Task<bool> Update(EmployeeAdd itemUpdate)
+        public async Task<bool> Update(EmployeeInfoAdd itemUpdate)
         {
             var item = new Employee();
             item.FullName = itemUpdate.FullName;
@@ -60,6 +68,13 @@ namespace VS.Human.Business.Imp
             item.Onboard = itemUpdate.Onboard;
             item.LineCode = itemUpdate.LineCode;
             item.ColorCode = itemUpdate.ColorCode;
+
+            item.PermanentAddress = itemUpdate.PermanentAddress;
+            item.TemporaryAddress = itemUpdate.TemporaryAddress;
+            item.Noted = itemUpdate.Noted;
+            item.NationalId = itemUpdate.NationalId;
+            item.NationalDate = itemUpdate.NationalDate;
+            item.NationalPlace = itemUpdate.NationalPlace;
             item.UpdatedBy = GetUserId();
             return await _unitOfWork.EmployeeRep.AddOrUpdate(item);
         }
