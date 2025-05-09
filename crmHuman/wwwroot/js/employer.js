@@ -2148,7 +2148,7 @@ function saveCanddiateDetail(idEmp) {
         Status  : txtStatusInput
     };
 
-    debugger;
+
       $.ajax({
         headers: {
             "RequestVerificationToken":
@@ -2982,3 +2982,134 @@ function AddDocument( idCandidate)
 
 
 
+function saveEmployeeDetail(idEmp) {
+
+    var employeeIdIdInput = getValueControl("inputId");
+    var txtFullName = getValueControl("txtFullName");
+    var txtNationnalInput = getValueControl("txtNationnal");
+    var txtNationnalDateInput = getValueControl("txtNationnalDate");
+    var txtNationalPlaceInput = getValueControl("txtNationalPlace");
+    var dobInput = getValueControl("dob");
+    var onboardDateInput = getValueControl("onboardDate");
+    var txtPhoneInput = getValueControl("txtPhone");
+    var cbManagerInput = getValueControl("cbManager");
+    var cbDepartmentIdInput = getValueControl("cbDepartmentId");
+    var cbPositionInput = getValueControl("cbPosition");
+    var txtEmailInput = getValueControl("txtEmail");
+    var txtfileCV = getValueControl("inputCvlink");
+    var cbRoleCodeInput = getValueControl("cbRoleCode");
+    
+    var txtNotedCandInput = getValueControl("txtNotedCand");
+    var txtPermanentAddressInput = getValueControl("txtPermanentAddress");
+    var txtTemporaryAddressInput = getValueControl("txtTemporaryAddress");
+     var cbStatusHumanInput = getValueControl("cbStatusHuman");
+     var txtStatusInput = getValueControl("cbStatus");
+    if (txtFullName == "") {
+        addError("txtFullName", "yêu cầu nhập họ và tên");
+        return;
+    }
+    else {
+        removeError("txtFullName");
+    }
+    
+    var bodyRequest = {
+        EmployeeId: employeeIdIdInput,
+        id: employeeIdIdInput,
+        fullName: txtFullName,
+        NationalId : txtNationnalInput,
+        NationalDate: txtNationnalDateInput,
+        NationalPlace : txtNationalPlaceInput,
+        PermanentAddress : txtPermanentAddressInput,
+        TemporaryAddress : txtTemporaryAddressInput,
+        Dob: dobInput,
+        Onboard : onboardDateInput,
+        Phone:  txtPhoneInput,
+        ManagerId: cbManagerInput,
+        DepartmentCode :  cbDepartmentIdInput,
+        Email: txtEmailInput,
+        CVLink:  txtfileCV,
+        Noted : txtNotedCandInput,
+        DocumentStatus :cbStatusHumanInput,
+        Status  : txtStatusInput,
+        RoleCode : cbRoleCodeInput
+    };
+
+      $.ajax({
+        headers: {
+            "RequestVerificationToken":
+                $('input[name="__RequestVerificationToken"]').val()
+        },
+        type: "POST",
+        datatype: "JSON",
+        url: '/EmployeeInfo?handler=Update',
+        data:  bodyRequest,
+        success: function (data) {
+            successAdd(idEmp);
+        },
+        error: function (jqXHR, exception) {
+            showError(jqXHR);
+        },
+        complete: function () {
+        }
+    });
+}
+
+
+function changePassword(reloadPage =true) {
+    var currentPassword = getValueControl("txtPasswordCurrent");
+    var newPassword = getValueControl("txtPasswordNew");
+    var renewPassword = getValueControl("txtrenewPassword");
+    removeAllEror("updateChangePassword");
+    if (newPassword == "") {
+        addError("txtnewPassword", "yêu cầu nhập mật khẩu mới");
+        return;
+    }
+    else {
+        removeError("txtnewPassword");
+    }
+
+    if (renewPassword == "") {
+        addError("txtrenewPassword", "yêu cầu nhập lại mật khẩu mới");
+        return;
+    }
+    else {
+        removeError("txtrenewPassword");
+    }
+
+    if (newPassword != renewPassword) {
+        addError("txtrenewPassword", "Hai mật khẩu không trùng khớp");
+    }
+
+    $.ajax({
+        headers: {
+            "RequestVerificationToken":
+                $('input[name="__RequestVerificationToken"]').val()
+        },
+        type: "POST",
+        datatype: "JSON",
+        url: '/employee?handler=ChangePassword',
+        data: {
+
+            newPassword: newPassword
+           
+
+
+        },
+        success: function (data) {
+
+            if (reloadPage == true) {
+                successAdd(1);
+            }
+            else {
+                openAlertAndClosePopup(1);
+            }
+           
+        },
+        error: function (jqXHR, exception) {
+            showError(jqXHR);
+        },
+        complete: function () {
+
+        }
+    });
+}

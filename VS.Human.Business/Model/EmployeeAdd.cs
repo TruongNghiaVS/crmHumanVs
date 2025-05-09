@@ -136,6 +136,21 @@ namespace VS.Human.Business.Model
         }
     }
 
+
+      public class DocumentInfoUpdate : Employee
+    {
+
+        public int EmployeeId { get; set; }
+
+      
+
+        public DocumentInfoUpdate()
+        {
+
+        }
+    }
+
+
     public class CandidateDetailUpdate : Candidate
     {
 
@@ -148,6 +163,22 @@ namespace VS.Human.Business.Model
 
         }
     }
+
+
+    
+    public class EmployeeDetailUpdate : Employee
+    {
+
+        public int CandidateId { get; set; }
+
+         public int ManagerId {get;set;}
+
+        public EmployeeDetailUpdate()
+        {
+
+        }
+    }
+
 
     public class DocumentDataAddRequest
     {

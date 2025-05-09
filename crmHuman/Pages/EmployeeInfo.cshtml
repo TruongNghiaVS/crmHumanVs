@@ -13,7 +13,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item"><a href="/employee">Nhân viên</a></li>
-            <li class="breadcrumb-item active">@itemResult.Name</li>
+            <li class="breadcrumb-item active">Nhân viên A</li>
         </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -51,7 +51,7 @@
                                   <div class="col-12 ">
                              <div class="form-group">
                                 <label class="form-label">Họ và tên</label>
-                                <input type="text" value="@itemResult.Name" name="fullName" id="txtFullName" class="form-control" required placeholder="" />
+                                <input type="text" value="@itemResult.FullName" name="fullName" id="txtFullName" class="form-control" required placeholder="" />
                                 <div class="invalid-feedback-cs">
                                 </div>
 
@@ -59,7 +59,7 @@
 
                              <div class="form-group">
                                 <label class="form-label">CCCD</label>
-                                <input type="text" value="@itemResult.Name" name="fullName" id="txtFullName" class="form-control" required placeholder="" />
+                                <input type="text" value="@itemResult.NationalId" name="fullName" id="txtNationnal" class="form-control" required placeholder="" />
                                 <div class="invalid-feedback-cs">
                                 </div>
 
@@ -67,14 +67,14 @@
 
                             <div class="form-group">
                                 <label class="form-label">Ngày cấp căn cước công dân</label>
-                                <input type="date" value="@itemResult.DayOfBirthDisplay" name="dob" id="dob" class="form-control" required placeholder="" />
+                                <input type="date" value="@itemResult.NationalDateDisplay" name="dob" id="txtNationnalDate" class="form-control" required placeholder="" />
                                 <div class="invalid-feedback-cs">
                                 </div>
                             </div>
 
                               <div class="form-group">
                                 <label class="form-label">Nơi cấp</label>
-                                <input type="text" value="@itemResult.Name" name="fullName" id="txtFullName" class="form-control" required placeholder="" />
+                                <input type="text" value="@itemResult.NationalPlace"  id="txtNationalPlace" class="form-control" required placeholder="" />
                                 <div class="invalid-feedback-cs">
                                 </div>
 
@@ -88,7 +88,9 @@
 
                              <div class="form-group">
                                 <label class="form-label">Ngày Onboard</label>
-                                <input type="date" value="@itemResult.DayOfBirthDisplay" name="dob" id="dob" class="form-control" required placeholder="" />
+                                <input type="date" value="@itemResult.OnboardDateDisplay"
+                                 name="dob" id="onboardDate" class="form-control" 
+                                 required placeholder="" />
                                 <div class="invalid-feedback-cs">
                                 </div>
                             </div>
@@ -134,13 +136,10 @@
                                         {
                                             continue;
                                         }
-                                        var departmentCheck = itemResult.DepartmentId;
-                                        var departmentCheckText = "-1";
-                                        if(itemResult.DepartmentId.HasValue)
-                                        {
-                                            departmentCheckText = itemResult.DepartmentId.Value.ToString();
-                                        }
-                                        if (itemMasterData.Code == departmentCheckText)
+
+                                      
+                                        var departmentCheck = itemResult.DepartmentCode;
+                                        if (itemMasterData.Code == departmentCheck)
                                         {
                                             <option selected value="@itemMasterData.Code">@itemMasterData.Name</option>
                                         }
@@ -155,10 +154,36 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label class="form-label">Vai trò</label>
+                                <select name="roleCode" id="cbRoleCode" class="form-select"  aria-label="">
+                                    @foreach (var item in Model.ArrayRol)
+                                    {
+                                        var itemMasterData = item;
+                                       
+                                        var departmentCheck = itemResult.RoleCode;
+                               
+                                      
+                                        if (itemMasterData.Code == departmentCheck)
+                                        {
+                                            <option selected value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <div class="invalid-feedback-cs">
+                                    Please choose a username.
+                                </div>
+                            </div>
+
 
                             <div class="form-group">
                                 <label class="form-label">Vị trí</label>
                                 <select name="position" id="cbPosition" class="form-select"  aria-label="">
+                                      <option  value="-1">Chọn vị trí</option>
                                     @foreach (var item in Model.DataDepartment)
                                     {
                                         var itemMasterData = item;
@@ -166,13 +191,9 @@
                                         {
                                             continue;
                                         }
-                                        var departmentCheck = itemResult.Position;
-                                        var departmentCheckText = "-1";
-                                        if (itemResult.Position.HasValue)
-                                        {
-                                            departmentCheckText = itemResult.Position.Value.ToString();
-                                        }
-                                        if (itemMasterData.Code == departmentCheckText)
+                                     
+                                        var departmentCheck = itemResult.PositionCode;
+                                        if (itemMasterData.Code == departmentCheck)
                                         {
                                             <option selected value="@itemMasterData.Code">@itemMasterData.Name</option>
                                         }
@@ -213,12 +234,12 @@
 
                                  <div class=" form-group">
                             <label for="inputAddress2" class="form-label">Địa chỉ thường trú</label>
-                            <textarea name="noted" id="txtNotedCand"  class="form-control" style="height: 50px">@itemResult.Noted</textarea>
+                            <textarea name="noted" id="txtPermanentAddress"  class="form-control" style="height: 50px">@itemResult.PermanentAddress</textarea>
                             </div>
 
                             <div class=" form-group">
                             <label for="inputAddress2" class="form-label">Địa chỉ hiện tại</label>
-                            <textarea name="noted" id="txtNotedCand"  class="form-control" style="height: 50px">@itemResult.Noted</textarea>
+                            <textarea name="noted" id="txtTemporaryAddress"  class="form-control" style="height: 50px">@itemResult.TemporaryAddress</textarea>
                             </div>
 
 
@@ -236,15 +257,12 @@
                                         {
                                             continue;
                                         }
-
-                                        var departmentCheck = itemResult.StatusHuman;
-                                        var departmentCheckText = "-1";
-                                        if (itemResult.StatusHuman != null & itemResult.StatusHuman.HasValue)
-                                        {
-                                            departmentCheckText = itemResult.StatusHuman.Value.ToString();
-                                        }
-                                        if (itemMasterData.Code == departmentCheckText)
-                                        {
+                                      
+                                        var departmentCheck = itemResult.DocumentStatus;
+                                     
+                                        
+                                        if (itemMasterData.Code ==departmentCheck)
+                                        { 
                                             <option selected value="@itemMasterData.Code">@itemMasterData.Name</option>
                                         }
                                         else
@@ -270,12 +288,8 @@
 
                                         var departmentCheck = itemResult.Status;
                                         var departmentCheckText = "-1";
-                                         if (itemResult.Status != null & itemResult.Status.HasValue)
                                       
-                                        {
-                                            departmentCheckText = itemResult.Status.Value.ToString();
-                                        }
-                                        if (itemMasterData.Code == departmentCheckText)
+                                        if (itemMasterData.Code == departmentCheck.ToString())
                                         {
                                             <option selected value="@itemMasterData.Code">@itemMasterData.Name</option>
                                         }
@@ -292,7 +306,7 @@
                    
                <br />
                   <br />
-             <button type="button" onclick="saveCanddiateDetail(@itemResult.Id)" class="btn btn-primary">Lưu thông tin </button>
+             <button type="button" onclick="saveEmployeeDetail(@itemResult.Id)" class="btn btn-primary">Lưu thông tin </button>
                  </div>
 
 
@@ -304,14 +318,14 @@
                 
                             <div class="form-group">
                                 <label class="form-label">Tài đăng nhập</label>
-                                <input type="date" value="" name="ScheduleDate" id="dateScheduleDate" class="form-control" required placeholder="" />
+                                <input type="text" value="@itemResult.UserName" name="ScheduleDate" id="txtUserName" class="form-control" required placeholder="" />
                                 <div class="invalid-feedback-cs">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="form-label">Mật khẩu hiện tại </label>
-                                <input type="text" value="" name="Noted" id="txtScheduleNoted"
+                                <input type="password" value="" id="txtPasswordCurrent"
                                  class="form-control" required placeholder="" />
                                 <div class="invalid-feedback-cs">
                                 </div>
@@ -321,22 +335,24 @@
 
                              <div class="form-group">
                                 <label class="form-label">Mật khẩu mới </label>
-                                <input type="text" value="" name="Noted" id="txtScheduleNoted"
+                                <input type="password" value="" name="Noted" id="txtPasswordNew"
                                  class="form-control" required placeholder="" />
                                 <div class="invalid-feedback-cs">
                                 </div>
 
                             </div>
+
                             <div class="form-group">
-                                <label class="form-label">Ghi chú</label>
-                                <input type="text" value="" name="Noted" id="txtScheduleNoted"
+                                <label class="form-label">Nhập lại mật khẩu mới </label>
+                                <input type="password" value="" name="Noted" id="txtRepeatPasswordNew"
                                  class="form-control" required placeholder="" />
                                 <div class="invalid-feedback-cs">
                                 </div>
 
                             </div>
-
-                            <button type="button" onclick="saveSchedule(@itemResult.Id)" class="btn btn-primary">Thay dổi mật khẩu </button>
+                          
+                          
+                            <button type="button" onclick="changePassword(@itemResult.Id)" class="btn btn-primary">Thay dổi mật khẩu </button>
                           
 
                 </div>
@@ -522,7 +538,7 @@
                                                 {
                                                     var itemMasterData = item as dynamic;
 
-                                                    var departmentCheck = itemResult.Status;
+                                                   @*  var departmentCheck = itemResult.Status;
                                                     var departmentCheckText = "-1";
                                                     if (itemResult.Position.HasValue)
                                                     {
@@ -536,7 +552,7 @@
                                                     else
                                                     {
                                                         <option value="@itemMasterData.Code">@itemMasterData.Name</option>
-                                                    }
+                                                    } *@
                                                 }
                                             </select>
                             </div>

@@ -22,6 +22,10 @@
         public string PositionCode { get; set; }
 
         public string? NationalId { get; set; }
+
+        public string? CVLink { get; set; }
+
+        public int? ManagerId {get;set;}
         public DateTime? NationalDate { get; set; }
         public string? NationalPlace { get; set; }
         public string? PermanentAddress { get; set; }

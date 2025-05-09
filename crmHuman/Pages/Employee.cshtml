@@ -61,24 +61,20 @@
                                         datetimeCreate = datetimeUpdate;
                                     }
                                 }
-                                var onBoardext = "";
-                                if (@itemInfo.Onboard != null)
-                                {
-                                    onBoardext = @itemInfo.Onboard.ToString("dd/MM/yyyy HH:mm");
-                                }
-                                i++;
+                              
                                 <tr>
                                     <td>@i</td>
                                   
                                     <td>@itemInfo.UserName</td>
                                     <td><a href="/EmployeeInfo?id=@itemInfo.Id" >@itemInfo.FullName</a></td>
                                     <td>@Model.GetNameRoleCode(itemInfo.RoleCode)</td>
-                                    <td>Nhân viên</td>
-                                    <td>Tuyển dụng</td>
+                                    <td>@itemInfo.PositionText</td>
+                                    <td>@itemInfo.DepartmentText</td>
+                                  
                                     <td>@itemInfo.GroupName</td>
-                                    <td> Online</td>
-                                    <td> Bổ sung</td>
-                                    <td>@onBoardext</td>
+                                    <td> @itemInfo.StatusText</td>
+                                    <td>  @itemInfo.DocumentStatusText</td>
+                                    <td>@itemInfo.OnboardDateDisplay</td>
                                     <td>@datetimeCreate</td>
                                     <td>
                                        
@@ -92,7 +88,7 @@
                                         }
                                         else  
                                         {
-                                        <a href="javascript:void(0)" onclick="confirmDelete(@itemInfo.Id)">
+                                            <a href="javascript:void(0)" onclick="confirmDelete(@itemInfo.Id)">
                                                                                     <i class="bi bi-trash-fill">
 
                                                                             </i>

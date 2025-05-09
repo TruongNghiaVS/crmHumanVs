@@ -31,18 +31,26 @@ namespace VS.Human.Rep
             var parameter = new
             {
                 item.Id,
-                item.LineCode,
-
                 item.FullName,
-                item.Phone,
+                item.NationalDate,
+                item.NationalId,
+                item.NationalPlace,
                 item.Dob,
-                item.ColorCode,
-
-                item.UpdatedBy,
-
-                item.UpdateAt,
+                item.Onboard,
+                item.Phone,
+                item.PositionCode,
                 item.RoleCode,
+                item.ManagerId,
+                item.DepartmentCode,
+                item.Email,
+                item.CVLink,
                 item.Noted,
+                item.PermanentAddress,
+                item.TemporaryAddress,
+                item.DocumentStatus,
+                item.Status,
+                item.UpdatedBy,
+                item.UpdateAt,
                 item.IsActive
             };
 
@@ -50,23 +58,36 @@ namespace VS.Human.Rep
         }
         private async Task<bool> Add(Employee item)
         {
+            item.CreateAt = DateTime.Now;
+            item.UpdateAt = DateTime.Now;
+
 
             var parameter = new
             {
+                item.FullName,
+                item.NationalDate,
+                item.NationalId,
+                item.NationalPlace,
+                item.Dob,
                 item.Onboard,
-                item.LineCode,
+                item.Phone,
+                item.PositionCode,
+                item.RoleCode,
                 item.UserName,
                 item.Pass,
-                item.FullName,
-                item.Phone,
-                item.Dob,
+                item.ManagerId,
+                item.DepartmentCode,
+                item.Email,
+                item.CVLink,
+                item.Noted,
+                item.PermanentAddress,
+                item.TemporaryAddress,
+                item.DocumentStatus,
+                item.Status,
                 item.CreatedBy,
                 item.UpdatedBy,
                 item.CreateAt,
                 item.UpdateAt,
-                item.RoleCode,
-                item.ColorCode,
-                item.Noted,
                 item.IsActive
             };
 
@@ -77,6 +98,7 @@ namespace VS.Human.Rep
             var parameter = new
             {
                 email,
+
                 phone
             };
             var result = await ExecuteSQL<Employee>("sp_Check_Duplicate", parameter);
@@ -100,17 +122,28 @@ namespace VS.Human.Rep
                 if (itemUpdate != null)
                 {
                     itemUpdate.FullName = item.FullName;
-                    itemUpdate.UpdatedBy = item.UpdatedBy;
+                    itemUpdate.CreatedBy = item.CreatedBy;
+                    itemUpdate.Id = item.Id;
                     itemUpdate.RoleCode = item.RoleCode;
                     itemUpdate.Dob = item.Dob;
+                    itemUpdate.ManagerId = item.ManagerId;
+                    itemUpdate.DepartmentCode = item.DepartmentCode;
+                    itemUpdate.PositionCode = item.PositionCode;
+                    itemUpdate.Email = item.Email;
+                    itemUpdate.CVLink = item.CVLink;
                     itemUpdate.Phone = item.Phone;
                     itemUpdate.IsActive = item.IsActive;
                     itemUpdate.Noted = item.Noted;
-                    itemUpdate.ColorCode = item.ColorCode;
-
-
                     itemUpdate.Onboard = item.Onboard;
-                    itemUpdate.LineCode = item.LineCode;
+                    itemUpdate.PermanentAddress = item.PermanentAddress;
+                    itemUpdate.TemporaryAddress = item.TemporaryAddress;
+                    itemUpdate.Noted = item.Noted;
+                    itemUpdate.NationalId = item.NationalId;
+                    itemUpdate.NationalDate = item.NationalDate;
+                    itemUpdate.NationalPlace = item.NationalPlace;
+                    itemUpdate.UpdatedBy = item.UpdatedBy;
+                    itemUpdate.DocumentStatus = item.DocumentStatus;
+                    itemUpdate.Status = item.Status;
                     return await Update(itemUpdate);
                 }
             }

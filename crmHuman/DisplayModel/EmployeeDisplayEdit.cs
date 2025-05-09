@@ -17,7 +17,7 @@ namespace crmHuman.DisplayModel
         }
 
 
-          public string NationalDateDisplay
+        public string NationalDateDisplay
         {
             get
             {
@@ -28,5 +28,18 @@ namespace crmHuman.DisplayModel
                 return string.Empty;
             }
         }
+        public string OnboardDateDisplay
+        {
+            get
+            {
+                if (Onboard.HasValue)
+                {
+                    return Onboard.Value.ToString("yyyy-MM-dd");
+                }
+                return string.Empty;
+            }
+        }
+
+
     }
 }

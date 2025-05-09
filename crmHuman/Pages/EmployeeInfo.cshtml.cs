@@ -1,10 +1,10 @@
 ﻿using crmHuman.DisplayModel;
+using crmHuman.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VS.Human.Business;
 using VS.Human.Business.Model;
 using VS.Human.Item;
-using VS.Human.Rep.Model;
 
 namespace crmHuman.Pages
 {
@@ -12,12 +12,13 @@ namespace crmHuman.Pages
     public class EmployeeInfoModel : BaseModel2
     {
         private readonly ILogger<CandidateModel> _logger;
-        private readonly ICandidateBusiness _empBusiness;
+        private readonly IEmpBusiness _empBusiness;
         private readonly ImasterDataBussiness _masterDataBussiness;
         private readonly IScheduleInterviewBussiness _scheduleInterviewBussiness;
         private readonly IDocumentDataBussiness _documentDataBussiness;
 
-        private readonly IEmpBusiness _empBusiness1;
+        public List<SelectDisplay> ArrayRol {get;set;}
+
         public List<string> TableColumnTextAdmin { get; set; }
         public CandidateRequest RequestSearch { get; set; }
         public BaseList DataAll { get; set; }
@@ -30,7 +31,7 @@ namespace crmHuman.Pages
 
         public BaseList DataHistory { get; set; }
 
-        public CandidateDisplayEdit ResultModel { get; set; }
+        public EmployeeDisplayEdit ResultModel { get; set; }
 
         public List<DataMasterItem> DataDepartment { get; set; }
 
@@ -47,7 +48,7 @@ namespace crmHuman.Pages
             }
         }
         public EmployeeInfoModel(ILogger<CandidateModel> logger,
-            ICandidateBusiness empBusiness,
+            IEmpBusiness empBusiness,
             ImasterDataBussiness masterDataBussiness,
             IScheduleInterviewBussiness scheduleInterviewBussiness,
             IDocumentDataBussiness documentDataBussiness,
@@ -56,14 +57,43 @@ namespace crmHuman.Pages
         {
             _logger = logger;
             _empBusiness = empBusiness;
-            TitlePage = "Thông tin ứng viên";
+            TitlePage = "Thông tin nhân viên";
             KeyPage = "CandidateDetail";
             _masterDataBussiness = masterDataBussiness;
             DataPostion = new BaseList();
             DataDepartment = new List<DataMasterItem>();
             _scheduleInterviewBussiness = scheduleInterviewBussiness;
             _documentDataBussiness = documentDataBussiness;
-            _empBusiness1 = empBusiness1;
+            
+
+          ArrayRol =  new List<SelectDisplay>()
+        {
+            new Model.SelectDisplay()
+            {
+                Code ="1", Name ="Admin"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="2", Name ="TC"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="3", Name ="TL"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="4", Name ="Marketing"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="6", Name ="Trưởng CTV"
+            },
+            new Model.SelectDisplay()
+            {
+            Code ="7", Name ="CTV"
+            }
+        };
+
         }
 
         public async Task<IActionResult> OnPostAddSchedule
@@ -144,11 +174,11 @@ namespace crmHuman.Pages
             request.Id = request.Id;
             if (request.Id < 0)
             {
-                result = await _empBusiness1.Update(request);
+                result = await _empBusiness.Update(request);
             }
             else
             {
-                result = await _empBusiness1.Update(request);
+                result = await _empBusiness.Update(request);
             }
             var dataReponse = new
             {
@@ -161,19 +191,9 @@ namespace crmHuman.Pages
         }
 
         public async Task<IActionResult> OnPostUpdate
-            (CandidateDetailUpdate request)
+            (EmployeeDetailUpdate request)
         {
             var listEror = new List<object>();
-            if (request.CandidateId < 1)
-            {
-                var itemError = new
-                {
-                    name = "txtFullName",
-                    Content = "Thiếu thông tin đối tượng Id"
-                };
-                listEror.Add(itemError);
-            }
-
             if (string.IsNullOrEmpty(request.Phone))
             {
                 var itemError = new
@@ -191,14 +211,35 @@ namespace crmHuman.Pages
                 };
             }
             var result = true;
-            request.Id = request.CandidateId;
+            var bodyRequest = new EmployeeInfoAdd()
+            {
+                Id = request.Id,
+                RoleCode = request.RoleCode,
+                FullName = request.FullName,
+                NationalDate = request.NationalDate,
+                NationalId = request.NationalId,
+                NationalPlace = request.NationalPlace,
+                Dob = request.Dob,
+                Onboard = request.Onboard,
+                Phone = request.Phone,
+                ManagerId = request.ManagerId,
+                DepartmentCode = request.DepartmentCode,
+                PositionCode = request.PositionCode,
+                Email = request.Email,
+                Noted = request.Noted,
+                PermanentAddress = request.PermanentAddress,
+                TemporaryAddress = request.TemporaryAddress,
+                DocumentStatus = request.DocumentStatus,
+                Status = request.Status,
+                CVLink = request.CVLink
+            };
             if (request.Id < 0)
             {
-                result = await _empBusiness.Update(request);
+                result = await _empBusiness.Update(bodyRequest);
             }
             else
             {
-                result = await _empBusiness.Update(request);
+                result = await _empBusiness.Update(bodyRequest);
             }
             var dataReponse = new
             {
@@ -277,26 +318,33 @@ namespace crmHuman.Pages
             DataPostion = dataAllMaster;
 
             var candidateInfo = await _empBusiness.GetById(idInput);
-            var resultView = new CandidateDisplayEdit()
+            var resultView = new EmployeeDisplayEdit()
             {
                 Id = idInput,
-                IsActive = candidateInfo.IsActive,
+                UserName = candidateInfo.UserName,
+                FullName = candidateInfo.FullName,
+                NationalDate = candidateInfo.NationalDate,
+                NationalId = candidateInfo.NationalId,
+                NationalPlace = candidateInfo.NationalPlace,
                 Phone = candidateInfo.Phone,
-                Status = candidateInfo.Status,
-                StatusHuman = candidateInfo.StatusHuman,
                 CVLink = candidateInfo.CVLink,
-                Name = candidateInfo.Name,
                 Dob = candidateInfo.Dob,
-                DepartmentId = candidateInfo.DepartmentId,
-                Position = candidateInfo.Position,
                 Email = candidateInfo.Email,
-
+                Onboard = candidateInfo.Onboard,
                 Deleted = false,
                 CreateAt = candidateInfo.CreateAt,
                 UpdateAt = candidateInfo.UpdateAt,
                 Noted = candidateInfo.Noted,
-                ManagerId = candidateInfo.ManagerId
-
+                ManagerId = candidateInfo.ManagerId,
+                DocumentStatus = candidateInfo.DocumentStatus,
+                PositionCode = candidateInfo.PositionCode,
+                DepartmentCode = candidateInfo.DepartmentCode,
+                Status = candidateInfo.Status,
+                IsActive = candidateInfo.IsActive,
+                TemporaryAddress = candidateInfo.TemporaryAddress,
+                PermanentAddress = candidateInfo.PermanentAddress,
+                RoleCode = candidateInfo.RoleCode,
+                
             };
             ResultModel = resultView;
             var dataAllHistory = await _scheduleInterviewBussiness.GetAll(new ScheduleInterviewRquest()
@@ -310,39 +358,11 @@ namespace crmHuman.Pages
             {
 
             });
-            DataLead = await _empBusiness1.GetAllManager();
+            DataLead = await _empBusiness.GetAllManager();
 
             return Page();
         }
-        public virtual async Task<PartialViewResult> OnGetFormEdit(int id)
 
-        {
-            GetInfoUser();
-            var resultView = new Candidate()
-            {
-                Id = id,
-
-                IsActive = 1,
-                Phone = "",
-                Status = 1,
-                CVLink = "",
-
-                Deleted = false,
-                Noted = ""
-
-            };
-
-            if (id < 1)
-            {
-                return Partial("EditOrUpdateCandidate", resultView);
-            }
-            if (id > 0)
-            {
-                resultView = await _empBusiness.GetById(id);
-            }
-
-            return Partial("editOrUpdateEmployee", resultView);
-        }
 
         public virtual async Task<PartialViewResult> OnGetFormChangePassword(int id)
 

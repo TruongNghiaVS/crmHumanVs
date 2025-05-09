@@ -62,19 +62,24 @@ namespace VS.Human.Business.Imp
             item.Id = itemUpdate.Id;
             item.RoleCode = itemUpdate.RoleCode;
             item.Dob = itemUpdate.Dob;
+            item.ManagerId = itemUpdate.ManagerId;
+            item.DepartmentCode = itemUpdate.DepartmentCode;
+            item.PositionCode = itemUpdate.PositionCode;
+            item.Email = itemUpdate.Email;
+            item.CVLink = itemUpdate.CVLink;
             item.Phone = itemUpdate.Phone;
             item.IsActive = itemUpdate.IsActive;
             item.Noted = itemUpdate.Noted;
             item.Onboard = itemUpdate.Onboard;
-            item.LineCode = itemUpdate.LineCode;
-            item.ColorCode = itemUpdate.ColorCode;
-
             item.PermanentAddress = itemUpdate.PermanentAddress;
             item.TemporaryAddress = itemUpdate.TemporaryAddress;
             item.Noted = itemUpdate.Noted;
             item.NationalId = itemUpdate.NationalId;
             item.NationalDate = itemUpdate.NationalDate;
             item.NationalPlace = itemUpdate.NationalPlace;
+            item.DocumentStatus = itemUpdate.DocumentStatus;
+
+            item.Status = itemUpdate.Status;
             item.UpdatedBy = GetUserId();
             return await _unitOfWork.EmployeeRep.AddOrUpdate(item);
         }
