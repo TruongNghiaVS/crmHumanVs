@@ -13,6 +13,8 @@ namespace crmHuman.Pages
         private readonly ILogger<EmployeeModel> _logger;
         private readonly IEmpBusiness _empBusiness;
 
+        private readonly ICandidateBusiness _candidateBusiness;
+
         public List<string> TableColumnTextAdmin { get; set; }
         public EmployeeRequest RequestSearch { get; set; }
         public BaseList DataAll { get; set; }
@@ -29,7 +31,8 @@ namespace crmHuman.Pages
             }
         }
         public EmployeeModel(ILogger<EmployeeModel> logger,
-            IEmpBusiness empBusiness
+            IEmpBusiness empBusiness,
+            ICandidateBusiness candidateBusiness
             )
         {
             _logger = logger;
@@ -49,6 +52,7 @@ namespace crmHuman.Pages
                 "STT","UserName","Họ tên"
                 ,"Vai trò", "Vị trí", "Bộ phận","Nhóm","Trạng thái", "Trạng thái chứng từ", "Ngày Onboard","Cập nhật gần nhất","Thao tác"
             };
+            _candidateBusiness = candidateBusiness;
 
         }
 
@@ -169,89 +173,48 @@ namespace crmHuman.Pages
             };
         }
 
-        //public async Task<IActionResult> OnPostAddEmployeee
-        //    (EmployeeAdd request)
-        //{
-        //    var listEror = new List<object>();
+        public async Task<IActionResult> OnPostConvertToEmployee
+          (ConvertToEmployeeAdd request)
+        {
+            var listEror = new List<object>();
+            if (request.Id.Value < 1)
+            {
+                var itemError = new
+                {
 
-        //    if (string.IsNullOrEmpty(request.FullName))
-        //    {
-        //        var itemError = new
-        //        {
-        //            name = "txtFullName",
-        //            Content = "Thiếu thông tin họ và tên"
-        //        };
-        //        listEror.Add(itemError);
+                    Content = "Thiếu đối tượng ID"
+                };
+                listEror.Add(itemError);
+            }
+            if (listEror.Count > 0)
+            {
+                return new JsonResult(listEror)
+                {
+                    StatusCode = StatusCodes.Status400BadRequest
+                };
+            }
+            // GetInfoUser();
+            // var userId = UserData.UserId;
 
-        //    }
-        //    if (string.IsNullOrEmpty(request.Pass) && request.Id < 0)
-        //    {
-        //        var itemError = new
-        //        {
-        //            name = "txtPass",
-        //            Content = "Thiếu thông tin mật khẩu"
-        //        };
-        //        listEror.Add(itemError);
 
-        //    }
-        //    if (string.IsNullOrEmpty(request.Phone))
-        //    {
-        //        var itemError = new
-        //        {
-        //            name = "txtPhone",
-        //            Content = "Thiếu thông tin số điện thoại"
-        //        };
-        //        listEror.Add(itemError);
+            var result = await _empBusiness.ConvertToEmployeeFromCandidate(request.Id.Value);
+            var dataReponse = new
+            {
+                success = result,
 
-        //    }
-        //    if (string.IsNullOrEmpty(request.RoleCode))
-        //    {
-        //        var itemError = new
-        //        {
-        //            name = "txtRoleCode",
-        //            Content = "Thiếu thông tin vai trò"
-        //        };
-        //        listEror.Add(itemError);
+            };
+            return new JsonResult(dataReponse)
+            {
+                StatusCode = StatusCodes.Status200OK
 
-        //    }
-        //    if (listEror.Count > 0)
-        //    {
-        //        return new JsonResult(listEror)
-        //        {
-        //            StatusCode = StatusCodes.Status400BadRequest
-        //        };
-        //    }
-
-        //    var result = true;
-        //    if (request.Id < 0)
-        //    {
-        //        result = await _empBusiness.Add(request);
-        //    }
-        //    else
-        //    {
-        //        result = await _empBusiness.Update(request);
-        //    }
-        //    var dataReponse = new
-        //    {
-        //        success = result,
-
-        //    };
-        //    return new JsonResult(dataReponse)
-        //    {
-        //        StatusCode = StatusCodes.Status200OK
-
-        //    };
-        //}
+            };
+        }
 
         public async Task<ActionResult> OnGet([FromQuery] EmployeeRequest request)
         {
-
-
             if (!HttpContext.User.Identity.IsAuthenticated)
             {
                 return Redirect("/Login");
-
-
             }
             GetInfoUser();
             if (UserData.RoleCode == "2")

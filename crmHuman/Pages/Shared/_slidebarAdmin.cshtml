@@ -3,7 +3,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
 
-           <li class="nav-item">
+          @*  <li class="nav-item">
                 <a class="nav-link " href="/indexAdmin">
                     <i class="bi bi-grid"></i>
                     <span>Static</span>
@@ -14,75 +14,23 @@
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
-            </li><!-- End Dashboard Nav -->
-             <li class="nav-heading">Việc làm</li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#forms-job" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-journal-text"></i><span>Quản lý việc làm</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="forms-job" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="/job">
-                            <i class="bi bi-circle"></i><span>Danh sách Việc làm</span>
-                           
-                        </a>
-                    </li>
-                    <li>
-                            
-                        <a href="/linhvuc">
-                                <i class="bi bi-circle"></i><span>Lĩnh vực việc làm</span>
-                
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="/job?action=add">
-                            <i class="bi bi-circle"></i><span>Tạo mới việc làm</span>
-                            </a>
-                    </li>
-                    
-                </ul>
-            </li>
-
-            
+            </li><!-- End Dashboard Nav --> *@
            
-            <li class="nav-heading">Đối tác và việc làm </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#tabPartner" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-layout-text-window-reverse"></i><span>Quản lý đối tác</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="tabPartner" class="nav-content collapse " data-bs-parent="#sidebar-nav2">
-                    <li>
-                        <a href="/Partner">
-                            <i class="bi bi-circle"></i><span>Danh sách đối tác</span>
-                        </a>
-                    </li>
 
-                     <li>
-                        <a href="/Partner?action=add">
-                            <i class="bi bi-circle"></i><span>Thêm mới</span>
-                        </a>
-                    </li>
-                    
-                </ul>
-            </li>
-
-            <li class="nav-heading">Lịch phỏng vấn </li>
+          @*   <li class="nav-heading">Lịch phỏng vấn </li>
                     <li class="nav-item">
                     <a class="nav-link collapsed" href="/MasterDataPage?Type=loai-hdld">
                     <i class="bi bi-bar-chart"></i><span>Danh sách phỏng vấn</span>
 
                     </a>
-            </li>
-
-
+            </li> *@
 
             <!-- End Tables Nav -->
           <li class="nav-heading">Ứng viên</li>
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-layout-text-window-reverse"></i><span>Quẩn lý ứng viên</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-layout-text-window-reverse"></i><span>Quản lý ứng viên</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
@@ -113,9 +61,11 @@
                             <i class="bi bi-circle"></i><span>Danh sách nhóm</span>
                         </a>
                     </li>
+
+                      
                     
                 </ul>
-            </li><!-- End Tables Nav -->
+            </li>
 
 
             <li class="nav-heading">Thông tin chung</li>
@@ -125,20 +75,13 @@
                     <i class="bi bi-person"></i>
                     <span>Thông tin tài khoản</span>
                 </a>
-            </li><!-- End Profile Page Nav -->
+            </li>
             
 
-            <li class="nav-heading">Hệ thống</li>
-            <li class="nav-item">
-                <a class="nav-link collapsed"   href="/setting">
-                    <i class="bi bi-bar-chart"></i><span>Cài đặt</span>
-                    
-                </a>
-                
-            </li><!-- End Charts Nav -->
+           
 
 
-        <li class="nav-heading">MasterData</li>
+        <li class="nav-heading">Dữ liệu MasterData</li>
         <li class="nav-item">
             <a class="nav-link collapsed" href="/MasterDataPage?Type=loai-hdld">
                 <i class="bi bi-bar-chart"></i><span>Loại HĐLĐ</span>
@@ -153,17 +96,29 @@
                 <i class="bi bi-bar-chart"></i><span>Bộ phận</span>
             </a>
             <a class="nav-link collapsed" href="/MasterDataPage?Type=quan-he-nguoi-than">
-                <i class="bi bi-bar-chart"></i><span>quan hệ người thân</span>
+                <i class="bi bi-bar-chart"></i><span>Quan hệ người thân</span>
             </a>
 
              <a class="nav-link collapsed" href="/MasterDataPage?Type=trang-thai-ung-vien">
-                <i class="bi bi-bar-chart"></i><span>Trạng thái Ứng viên </span>
+                <i class="bi bi-bar-chart"></i><span>Trạng thái Hồ Sơ</span>
             </a>
 
+            <a class="nav-link collapsed" href="/MasterDataPage?Type=trang-thai-lam-viec">
+                <i class="bi bi-bar-chart"></i><span>Trạng thái làm việc</span>
+            </a>
+
+             <a class="nav-link collapsed" href="/MasterDataPage?Type=trang-thai-hon-nhan">
+                <i class="bi bi-bar-chart"></i><span>Trạng thái hôn nhân</span>
+
+            </a>
+             <a class="nav-link collapsed" href="/MasterDataPage?Type=trinh-do-hoc-van">
+                <i class="bi bi-bar-chart"></i><span>Trình độ học vấn</span>
+
+            </a>
             <a class="nav-link collapsed" href="/MasterDataPage?Type=trang-thai-chung-tu">
-                <i class="bi bi-bar-chart"></i><span>trạng thái chứng từ </span>
+                <i class="bi bi-bar-chart"></i><span>Trạng thái chứng từ </span>
             </a>
-
+        
             <a class="nav-link collapsed" href="/MasterDataPage?Type=Loai-chung-tu">
                 <i class="bi bi-bar-chart"></i><span>Loại chứng từ </span>
             </a>
@@ -178,6 +133,14 @@
                 </a>
                 
             </li>
+             <li class="nav-heading">Hệ thống</li>
+            <li class="nav-item">
+                <a class="nav-link collapsed"   href="/setting">
+                    <i class="bi bi-bar-chart"></i><span>Cài đặt</span>
+                    
+                </a>
+                
+            </li><!-- End Charts Nav -->
              <li class="nav-item">
                 <a class="nav-link collapsed" onclick ="logout()"  data-bs-toggle="collapse" href="#">
                     <i class="bi bi-bar-chart"></i><span>Đăng xuất tài khoản</span>
@@ -185,5 +148,8 @@
                 </a>
             </li><!-- End Charts Nav -->
         </ul>
+
+
+        
 
     </aside>

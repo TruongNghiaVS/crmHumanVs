@@ -81,85 +81,7 @@
         <div class="col-lg-8 ">
             <section class="reportSection">
                 <p class="title">BÁO CÁO  <span id="lableText">HÀNG NGÀY</span> </p>
-                    <span>Số lượng CV theo ngày tạo</span>
-
-                    <div class="row">
-                    <div class="pieChart">
-                        <canvas id="myChart"></canvas>
-
-                        <p>Dựa trên CV</p>
-                    </div>
-                    <div class="pieChart">
-                        <canvas id="myChart2"></canvas>
-                        <p>Dưa trên ứng tuyển</p>
-                    </div>
-
-
-
-                </div>
-
-                <table class="table">
-
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Tổng Số CV</th>
-                            <th scope="col">Số CV ứng tuyển</th>
-                            <th scope="col">Số CV Onboard</th>
-                           
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                            @{
-                                var rateOnboard  = infoDashboard.rateOB;
-                                var rateUV = infoDashboard.rateUV;
-
-                               
-                            }
-
-                       
-                        <tr>
-                            <th scope="row">Số lượng</th>
-                             <td>@infoDashboard.sumTotalCV</td>
-                             <td>@infoDashboard.totalCVAply</td>
-                             <td>@infoDashboard.sumOnboard</td>
-                           
-                        </tr>
-
-                            <tr>
-                                <th scope="row">Tỉ lệ</th>
-                                <td></td>
-                                <td>@infoDashboard.rateUV</td>
-                                <td>@infoDashboard.rateOB</td>
-
-                            </tr>
-
-
-                        </tbody>
-                </table>
-
-                <span >Số lượng CV onboard</span>   
-                 
-                <table class="table">
-            
-                        <tr>
-                             <th scope="row">Số CV onboard</th>
-                              <th >Số CV pass</th>
-                              <th scope="row">Tỉ lệ pass(%)</th>
-                        
-                          
-                        </tr>
-                         <tr>
-
-                            <td><a href="javascript:void(0)" onclick="openCVOnboard(0)"> @infoDashboard.sumOnboardcV </a></td>
-                       
-                            <td> <a href="javascript:void(0)" onclick="openCVOnboard(1)">@infoDashboard.SumcvPass </a></td>
-                       
-                            <td>@infoDashboard.rateCVPass</td>
-                       
-                        </tr>  
-                </table>
+                <span>Số lượng CV theo ngày tạo</span>
                
             </section>
 
@@ -192,46 +114,7 @@
                 </div>
 
             </section>
-            <section class="reportSection">
-                <p class="title">Biểu đồ theo dõi tỉ lệ </p>
-                <div class="row">
-                    <div class="row col-lg-12">
-                       
-
-
-                    </div>
-
-                </div>
-
-                <div>
-                    
-                  <canvas id="myChart3"></canvas>
-
-
-                </div>
-
-                <div>
-
-                    <canvas id="myChart4"></canvas>
-
-
-                </div>
-
-                <div>
-
-                    <canvas id="myChart5"></canvas>
-
-
-                </div>
-
-
-
-        </div>
-
-
-
-
-</section>
+         
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" >
  <div class="modal-dialog modal-xl" >
     <div class="modal-content">

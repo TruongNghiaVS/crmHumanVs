@@ -5,6 +5,17 @@
     var itemResult = Model.ResultModel;
     var dataSchedulelist = Model.DataHistory;
     var dataFile = Model.DataFile;
+    var dataRelation = itemResult.DataRelation;
+    var hdld = itemResult.HDLD;
+    var bhxhItem = itemResult.BHXHItem;
+    var taxtItem = itemResult.TaxItem;
+
+    var textTiltel  =  "Thông tin nhân viên";
+    if(itemResult.Id < 1)
+    {
+        textTiltel = "Thêm mới nhân viên";
+    }
+    
 
 }
 <div class="pagetitle">
@@ -13,7 +24,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item"><a href="/employee">Nhân viên</a></li>
-            <li class="breadcrumb-item active">Nhân viên A</li>
+            <li class="breadcrumb-item active">@itemResult.FullName</li>
         </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -24,13 +35,16 @@
             <div class="card">
                 <div class="card-body">
 
-
+ @if( itemResult.Id > 0)
+                {
                      <ul class="nav nav-tabs d-flex" id="myTabjustified" role="tablist">
-                <li class="nav-item flex-fill" role="presentation">
+              
+               
+                  <li class="nav-item flex-fill" role="presentation">
                   <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-justified" type="button" role="tab" aria-controls="home" aria-selected="true">Thông tin nhân viên</button>
                 </li>
-                <li class="nav-item flex-fill" role="presentation">
-                  <button class="nav-link w-100" id="infomationDocument-tab" data-bs-toggle="tab" data-bs-target="#infomationDocument" type="button" role="tab" aria-controls="infomationDocument" aria-selected="false">thông tin chứng từ</button>
+                 <li class="nav-item flex-fill" role="presentation">
+                  <button class="nav-link w-100" id="infomationDocument-tab" data-bs-toggle="tab" data-bs-target="#infomationDocument" type="button" role="tab" aria-controls="infomationDocument" aria-selected="false">Thông tin chứng từ</button>
                 </li>
                 <li class="nav-item flex-fill" role="presentation">
                   <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-justified" type="button" role="tab" aria-controls="contact" aria-selected="false">Thông tin khác</button>
@@ -40,24 +54,45 @@
                   <button class="nav-link w-100" id="account_tab" data-bs-toggle="tab" data-bs-target="#account_info" type="button" role="tab" aria-controls="account" aria-selected="false">Thông tin tài khoản</button>
                 </li>
 
+                
+          
          
                 
               </ul>
+              }
               <div class="tab-content pt-2" >
                 <div class="tab-pane fade show active" id="home-justified" role="tabpanel" aria-labelledby="home-tab">
                   
                         <input type="hidden" value="@itemResult.Id" name="id" id ="inputId"   class="form-control" required placeholder="" />
 
-                                  <div class="col-12 ">
-                             <div class="form-group">
-                                <label class="form-label">Họ và tên</label>
-                                <input type="text" value="@itemResult.FullName" name="fullName" id="txtFullName" class="form-control" required placeholder="" />
-                                <div class="invalid-feedback-cs">
-                                </div>
+                    <div class="col-12 ">
+                            
+<div class="row">
+            <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                            <label class="form-label">Họ và tên</label>
+                                            <input type="text" value="@itemResult.FullName" name="fullName" id="txtFullName" class="form-control" required placeholder="" />
+                                            <div class="invalid-feedback-cs">
+                                            </div>
 
-                            </div>
+                                        </div>
 
-                             <div class="form-group">
+            </div>
+            <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                            <label class="form-label">Ngày sinh</label>
+                                            <input type="date" value="@itemResult.DayOfBirthDisplay" name="dob" id="dob" class="form-control" required placeholder="" />
+                                            <div class="invalid-feedback-cs">
+                                            </div>
+                                        </div>
+            </div>
+</div>
+
+
+
+<div class="row">
+            <div class="col-12 col-md-6">
+                                             <div class="form-group">
                                 <label class="form-label">CCCD</label>
                                 <input type="text" value="@itemResult.NationalId" name="fullName" id="txtNationnal" class="form-control" required placeholder="" />
                                 <div class="invalid-feedback-cs">
@@ -65,28 +100,38 @@
 
                             </div>
 
-                            <div class="form-group">
+            </div>
+            <div class="col-12 col-md-6">
+                                            <div class="form-group">
                                 <label class="form-label">Ngày cấp căn cước công dân</label>
                                 <input type="date" value="@itemResult.NationalDateDisplay" name="dob" id="txtNationnalDate" class="form-control" required placeholder="" />
                                 <div class="invalid-feedback-cs">
                                 </div>
                             </div>
 
+
                               <div class="form-group">
                                 <label class="form-label">Nơi cấp</label>
                                 <input type="text" value="@itemResult.NationalPlace"  id="txtNationalPlace" class="form-control" required placeholder="" />
                                 <div class="invalid-feedback-cs">
                                 </div>
-
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">Ngày sinh</label>
-                                <input type="date" value="@itemResult.DayOfBirthDisplay" name="dob" id="dob" class="form-control" required placeholder="" />
+                            
+            </div>
+</div>
+
+
+                           
+                            
+<div class="row">
+            <div class="col-12 col-md-6">
+                     <div class=" form-group ">
+                                <label class="form-label">Số điện thoại</label>
+                                <input type="text" value="@itemResult.Phone" name="txtPhone" id="txtPhone" class="form-control phonecall" required placeholder="" />
                                 <div class="invalid-feedback-cs">
                                 </div>
-                            </div>
-
-                             <div class="form-group">
+                            </div>                 
+                    <div class="form-group">
                                 <label class="form-label">Ngày Onboard</label>
                                 <input type="date" value="@itemResult.OnboardDateDisplay"
                                  name="dob" id="onboardDate" class="form-control" 
@@ -94,14 +139,36 @@
                                 <div class="invalid-feedback-cs">
                                 </div>
                             </div>
-                            <div class=" form-group ">
-                                <label class="form-label">Số điện thoại</label>
-                                <input type="text" value="@itemResult.Phone" name="txtPhone" id="txtPhone" class="form-control phonecall" required placeholder="" />
+
+
+                             <div class="form-group">
+                                <label class="form-label">Vai trò</label>
+                                <select name="roleCode" id="cbRoleCode" class="form-select"  aria-label="">
+                                    @foreach (var item in Model.ArrayRol)
+                                    {
+                                        var itemMasterData = item;
+                                       
+                                        var departmentCheck = itemResult.RoleCode;
+                               
+                                      
+                                        if (itemMasterData.Code == departmentCheck)
+                                        {
+                                            <option selected value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                        }
+                                    }
+                                </select>
                                 <div class="invalid-feedback-cs">
+                                    Please choose a username.
                                 </div>
                             </div>
-                            
-                            <div class="form-group">
+            </div>
+            <div class="col-12 col-md-6">
+                                         
+                             <div class="form-group">
                                 <label class="form-label">Người hướng dẫn</label>
                                 <select name="Manager" class="form-select" id="cbManager" aria-label="">
                                     @foreach (var item in Model.DataLead.Data)
@@ -123,7 +190,8 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
+
+                             <div class="form-group">
                                 <label class="form-label">Bộ phận</label>
                                 <select name="DepartmentId" class="form-select" id="cbDepartmentId" aria-label="">
                                     @foreach (var item in Model.DataDepartment)
@@ -154,59 +222,38 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="form-label">Vai trò</label>
-                                <select name="roleCode" id="cbRoleCode" class="form-select"  aria-label="">
-                                    @foreach (var item in Model.ArrayRol)
-                                    {
-                                        var itemMasterData = item;
-                                       
-                                        var departmentCheck = itemResult.RoleCode;
-                               
-                                      
-                                        if (itemMasterData.Code == departmentCheck)
+    <div class="form-group">
+                                    <label class="form-label">Vị trí</label>
+                                    <select name="position" id="cbPosition" class="form-select"  aria-label="">
+                                        <option  value="-1">Chọn vị trí</option>
+                                        @foreach (var item in Model.DataDepartment)
                                         {
-                                            <option selected value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                            var itemMasterData = item;
+                                            if(itemMasterData.TypeData != 2)
+                                            {
+                                                continue;
+                                            }
+                                        
+                                            var departmentCheck = itemResult.PositionCode;
+                                            if (itemMasterData.Code == departmentCheck)
+                                            {
+                                                <option selected value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                            }
                                         }
-                                        else
-                                        {
-                                            <option value="@itemMasterData.Code">@itemMasterData.Name</option>
-                                        }
-                                    }
-                                </select>
-                                <div class="invalid-feedback-cs">
-                                    Please choose a username.
+                                    </select>
+                                    <div class="invalid-feedback-cs">
+                                        Please choose a username.
+                                    </div>
                                 </div>
-                            </div>
 
-
-                            <div class="form-group">
-                                <label class="form-label">Vị trí</label>
-                                <select name="position" id="cbPosition" class="form-select"  aria-label="">
-                                      <option  value="-1">Chọn vị trí</option>
-                                    @foreach (var item in Model.DataDepartment)
-                                    {
-                                        var itemMasterData = item;
-                                        if(itemMasterData.TypeData != 2)
-                                        {
-                                            continue;
-                                        }
-                                     
-                                        var departmentCheck = itemResult.PositionCode;
-                                        if (itemMasterData.Code == departmentCheck)
-                                        {
-                                            <option selected value="@itemMasterData.Code">@itemMasterData.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@itemMasterData.Code">@itemMasterData.Name</option>
-                                        }
-                                    }
-                                </select>
-                                <div class="invalid-feedback-cs">
-                                    Please choose a username.
-                                </div>
-                            </div>
+                </div>
+    </div>
+                            
+    
                           
                             <div class=" form-group">
                                 <label class="form-label">Email</label>
@@ -241,24 +288,24 @@
                             <label for="inputAddress2" class="form-label">Địa chỉ hiện tại</label>
                             <textarea name="noted" id="txtTemporaryAddress"  class="form-control" style="height: 50px">@itemResult.TemporaryAddress</textarea>
                             </div>
-
-
-                      
-
-
-                            <div class="form-group">
-                                <label class="form-label">Trạng thái chứng từ</label>
-                                <select name="StatusHuman" id="cbStatusHuman" class="form-select" aria-label="">
+ <div class="form-group">
+                                <label class="form-label">Trình độ học vấn</label>
+                                <select name="EducationLevel:" id="cBEducationLevel" class="form-select" aria-label="">
                                     @foreach (var item in Model.DataDepartment)
                                     {
                                        
                                          var itemMasterData = item;
-                                        if(itemMasterData.TypeData != 8)
+                                        if(itemMasterData.TypeData != 14)
+                                        {
+                                            continue;
+                                        }
+
+                                          if(itemMasterData.ApplyFor == 0)
                                         {
                                             continue;
                                         }
                                       
-                                        var departmentCheck = itemResult.DocumentStatus;
+                                        var departmentCheck = itemResult.EducationLevel;
                                      
                                         
                                         if (itemMasterData.Code ==departmentCheck)
@@ -275,6 +322,149 @@
                                     Please choose a username.
                                 </div>
                             </div>
+
+
+                             <div class="form-group">
+                                <label class="form-label">Tình trạng hôn nhân</label>
+                                <select name="Maritalstatus:" id="cBMaritalStatus" class="form-select" aria-label="">
+                                    @foreach (var item in Model.DataDepartment)
+                                    {
+                                       
+                                         var itemMasterData = item;
+                                        if(itemMasterData.TypeData != 13)
+                                        {
+                                            continue;
+                                        }
+
+                                          if(itemMasterData.ApplyFor == 0)
+                                        {
+                                            continue;
+                                        }
+                                      
+                                        var departmentCheck = itemResult.Maritalstatus;
+                                     
+                                        
+                                        if (itemMasterData.Code ==departmentCheck)
+                                        { 
+                                            <option selected value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <div class="invalid-feedback-cs">
+                                    Please choose a username.
+                                </div>
+                            </div>
+
+
+                      
+
+
+                           
+                            <!-- Checklist danh mục hồ sơ -->
+                            @{
+                                    var allDocuments = new List<string> {
+                                    "CCCD", "SYLL", "DonXinViec", "BangCap", "CamKetNoiQuy", "CamKetThue"
+                                    };
+
+                                      var selectedDocs = itemResult.DataCheckList ?? new List<string>();
+                            }
+                                <div class="form-group mt-3">
+                                    <label class="form-label">Danh mục hồ sơ</label>
+                                    @foreach (var doc in allDocuments)
+                                    {
+                                    var label = doc switch
+                                    {
+                                    "CCCD" => "CCCD",
+                                    "SYLL" => "Sơ yếu lý lịch",
+                                    "DonXinViec" => "Đơn xin việc",
+                                    "BangCap" => "Bằng cấp",
+                                    "CamKetNoiQuy" => "Cam kết nội quy",
+                                    "CamKetThue" => "Cam kết thuế",
+                                    _ => doc
+                                    };
+                                    <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="Documents" value="@doc" id="chk@doc"
+                                    @(selectedDocs.Contains(doc) ? "checked" : "") />
+                                    <label class="form-check-label" for="chk@doc">@label</label>
+                                    </div>
+                                    }
+                            </div>
+
+
+                                <div class="form-group">
+                                <label class="form-label">Trạng thái làm việc </label>
+                                <select name="StatusWork" id="cbStatusWork" class="form-select" aria-label="">
+                                    @foreach (var item in Model.DataDepartment)
+                                    {
+                                       
+                                         var itemMasterData = item;
+                                        if(itemMasterData.TypeData != 11)
+                                        {
+                                            continue;
+                                        }
+
+                                          if(itemMasterData.ApplyFor == 0)
+                                        {
+                                            continue;
+                                        }
+                                      
+                                        var departmentCheck = itemResult.StatusWork.ToString();
+                                     
+                                        
+                                        if (itemMasterData.Code ==departmentCheck)
+                                        { 
+                                            <option selected value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <div class="invalid-feedback-cs">
+                                    Please choose a username.
+                                </div>
+                            </div>
+
+                             <div class="form-group">
+                                <label class="form-label">Trạng thái chứng từ</label>
+                                <select name="StatusHuman" id="cbStatusHuman" class="form-select" aria-label="">
+                                    @foreach (var item in Model.DataDepartment)
+                                    {
+                                       
+                                         var itemMasterData = item;
+                                        if(itemMasterData.TypeData != 8)
+                                        {
+                                            continue;
+                                        }
+
+                                          if(itemMasterData.ApplyFor == 0)
+                                        {
+                                            continue;
+                                        }
+                                      
+                                        var departmentCheck = itemResult.DocumentStatus.ToString();
+                                     
+                                        
+                                        if (itemMasterData.Code ==departmentCheck)
+                                        { 
+                                            <option selected value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                        }
+                                    }
+                                </select>
+                                <div class="invalid-feedback-cs">
+                                    Please choose a username.
+                                </div>
+                            </div>
+
                           <div class="form-group">
                                 <label class="form-label">Trạng thái</label>
                                 <select name="Status" id="cbStatus" class="form-select" aria-label="">
@@ -285,6 +475,11 @@
                                         {
                                             continue;
                                         }
+                                        if(itemMasterData.ApplyFor == 0)
+                                        {
+                                            continue;
+                                        }
+                                      
 
                                         var departmentCheck = itemResult.Status;
                                         var departmentCheckText = "-1";
@@ -307,63 +502,67 @@
                <br />
                   <br />
              <button type="button" onclick="saveEmployeeDetail(@itemResult.Id)" class="btn btn-primary">Lưu thông tin </button>
+
+              
+
+            
                  </div>
 
 
                 </div>
 
 
-                     <div class="tab-pane fade" id="account_info" role="tabpanel" aria-labelledby="contact-tab">
+                <div class="tab-pane fade" id="account_info" role="tabpanel" aria-labelledby="contact-tab">
                  
                 
-                            <div class="form-group">
-                                <label class="form-label">Tài đăng nhập</label>
-                                <input type="text" value="@itemResult.UserName" name="ScheduleDate" id="txtUserName" class="form-control" required placeholder="" />
-                                <div class="invalid-feedback-cs">
-                                </div>
-                            </div>
+                        
+<div class="form-group">
+    <label class="form-label">Tài đăng nhập</label>
+    <input type="text" value="@itemResult.UserName" name="ScheduleDate" id="txtUserName" class="form-control" required
+        placeholder="" />
+    <div class="invalid-feedback-cs">
+    </div>
+</div>
 
-                            <div class="form-group">
-                                <label class="form-label">Mật khẩu hiện tại </label>
-                                <input type="password" value="" id="txtPasswordCurrent"
-                                 class="form-control" required placeholder="" />
-                                <div class="invalid-feedback-cs">
-                                </div>
+<div class="form-group">
+    <label class="form-label">Mật khẩu hiện tại </label>
+    <input type="password" value="" id="txtPasswordCurrent" class="form-control" required placeholder="" />
+    <div class="invalid-feedback-cs">
+    </div>
 
-                            </div>
-                              
+</div>
 
-                             <div class="form-group">
-                                <label class="form-label">Mật khẩu mới </label>
-                                <input type="password" value="" name="Noted" id="txtPasswordNew"
-                                 class="form-control" required placeholder="" />
-                                <div class="invalid-feedback-cs">
-                                </div>
 
-                            </div>
+<div class="form-group">
+    <label class="form-label">Mật khẩu mới </label>
+    <input type="password" value="" name="Noted" id="txtnewPassword" class="form-control" required placeholder="" />
+    <div class="invalid-feedback-cs">
+    </div>
 
-                            <div class="form-group">
-                                <label class="form-label">Nhập lại mật khẩu mới </label>
-                                <input type="password" value="" name="Noted" id="txtRepeatPasswordNew"
-                                 class="form-control" required placeholder="" />
-                                <div class="invalid-feedback-cs">
-                                </div>
+</div>
 
-                            </div>
-                          
-                          
-                            <button type="button" onclick="changePassword(@itemResult.Id)" class="btn btn-primary">Thay dổi mật khẩu </button>
+<div class="form-group">
+    <label class="form-label">Nhập lại mật khẩu mới </label>
+    <input type="password" value="" name="Noted" id="txtRepeatPasswordNew" class="form-control" required
+        placeholder="" />
+    <div class="invalid-feedback-cs">
+    </div>
+
+</div>
+
+
+<button type="button" onclick="changePassword(@itemResult.Id)" class="btn btn-primary">Thay dổi mật khẩu </button>
                           
 
                 </div>
 
 
                 <div class="tab-pane fade" id="contact-justified" role="tabpanel" aria-labelledby="contact-tab">
-                 
+                            
                              <strong> Thông tin Người tham chiếu   </strong>
                               <div class="form-group">
                                 <label class="form-label">Họ và tên</label>
-                                <input type="text" value="" name="Noted" id="txtScheduleNoted"
+                                <input type="text" value="@dataRelation.Name"  name="Noted" id="txtRelaFullName"
                                  class="form-control" required placeholder="" />
                                 <div class="invalid-feedback-cs">
                                 </div>
@@ -373,106 +572,168 @@
                             
                             <div class="form-group">
                                <label class="form-label">Mối quan hệ</label>
-                                <input type="text" value="" name="Noted" id="txtScheduleNoted"
+                                <input type="text" value="@dataRelation.Relationcode" id="txtRelaRelationCode"
                                  class="form-control" required placeholder="" />
-                                <div class="invalid-feedback-cs">
-                            </div>
+                                <div class="invalid-feedback-cs"> </div>
+                              </div>
 
                              <div class="form-group">
                                <label class="form-label">SĐT</label>
-                                <input type="text" value="" name="Noted" id="txtScheduleNoted"
+                                <input type="text" value="@dataRelation.Phone" name="Noted" id="txtRelaPhone"
                                  class="form-control" required placeholder="" />
                                 <div class="invalid-feedback-cs">
+                                 </div>
                             </div>
 
                              <div class="form-group">
                                <label class="form-label">Địạ chỉ</label>
-                                <input type="text" value="" name="Noted" id="txtScheduleNoted"
+                                <input type="text" value="@dataRelation.AddressInfo" name="Noted" id="txtRelaAddress"
                                  class="form-control" required placeholder="" />
                                 <div class="invalid-feedback-cs">
                             </div>
+                            </div>
 
-                            <button type="button" onclick="saveCanddiateDetail(@itemResult.Id)" class="btn btn-primary">Cập nhật</button> </br>
-                             <strong> Thông tin hợp đồng lao động  </strong>
+                              <button type="button" onclick="saveRelaionItem(@itemResult.Id)" class="btn btn-primary">Cập nhật</button> </br>
+                               <strong> Thông tin thanh toán  </strong>
+                              <div class="form-group">
+                                <label class="form-label">Số tài khoản</label>
+                                <input type="text" value="@itemResult.BankAccount"  name="Noted" id="txtBankAccount"
+                                 class="form-control" required placeholder="" />
+                                <div class="invalid-feedback-cs">
+                                </div>
 
+                            </div>
 
+                             <div class="form-group">
+                                <label class="form-label">Tên ngân hàng</label>
+                                <input type="text" value="@itemResult.BankName"  name="Noted" id="txtBankName"
+                                 class="form-control" required placeholder="" />
+                                <div class="invalid-feedback-cs">
+                                </div>
+
+                            </div>
+                            <button type="button" onclick="UpdateOtherInfoEmployee(@itemResult.Id,3)" class="btn btn-primary">Cập nhật</button> </br>
+                            <strong> Thông tin HĐLĐ </strong>
                               <div class="form-group">
                                <label class="form-label">Số HĐLĐ</label>
-                                <input type="text" value="" name="Noted" id="txtScheduleNoted"
+                                <input type="text" value="@hdld.NoAgree" name="Noted" id="txtSoHDLD"
                                  class="form-control" required placeholder="" />
-                                <div class="invalid-feedback-cs">
-                            </div>
+                                <div class="invalid-feedback-cs"> </div>
+                               </div>
+
+                                 <div class="form-group">
+                               <label class="form-label">Loại hợp đồng</label>
+                                        <select name="DocumentType" id="cbLoaiHopDong" class="form-select" aria-label="">
+                                        @foreach (var item in Model.DataDepartment)
+                                        {
+                                            var itemMasterData = item as dynamic;
+                                            if (itemMasterData.Code == hdld.CodeId)
+                                            {
+                                                <option selected value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                            }
+                                            
+                                        }
+
+                                        </select>
+                                        <div class="invalid-feedback-cs">
+
+
+                                        
+                                        </div>
+                                 </div>
 
                              <div class="form-group">
                                <label class="form-label">Ngày bắt đầu</label>
-                                <input type="text" value="" name="Noted" id="txtScheduleNoted"
+                                <input type="date" value="@hdld.StartText" name="Noted" id="dtpHDLDBeginDate"
                                  class="form-control" required placeholder="" />
                                 <div class="invalid-feedback-cs">
-                            </div>
+                                  </div>
+                             </div>
 
                              <div class="form-group">
                                <label class="form-label">Ngày kết thúc</label>
-                                <input type="text" value="" name="Noted" id="txtScheduleNoted"
+                                <input type="date" value="@hdld.EndText" name="Noted" id="dtpHDLDEndDate"
                                  class="form-control" required placeholder="" />
-                                <div class="invalid-feedback-cs">
+                                <div class="invalid-feedback-cs"> </div>
                             </div>
-                              <button type="button" onclick="saveCanddiateDetail(@itemResult.Id)" class="btn btn-primary">Cập nhật</button> </br>
-
-                            <strong> Thông tin hợp BHXH </strong>
-
-
+                              <button type="button" onclick="SaveHDLD(@itemResult.Id)" class="btn btn-primary">Cập nhật</button> </br>
+                            <form id ="formInputOther">
+                              <strong> Thông tin BHXH </strong>
                               <div class="form-group">
                                <label class="form-label">Mã số BHXH</label>
-                                <input type="text" value="" name="Noted" id="txtScheduleNoted"
+                                <input type="text" value="@taxtItem.CodeId" name="Noted" id="txtMaSoBaoHiem"
                                  class="form-control" required placeholder="" />
-                                <div class="invalid-feedback-cs">
+                                <div class="invalid-feedback-cs"> </div>
                             </div>
 
                              <div class="form-group">
                                <label class="form-label">Tờ rơi</label>
-                                <input type="text" value="" name="Noted" id="txtScheduleNoted"
+                                <input type="text" value="@taxtItem.PageTax" name="Noted" id="cbToroiBaoHiem"
                                  class="form-control" required placeholder="" />
-                                <div class="invalid-feedback-cs">
+                                  <div class="invalid-feedback-cs"> </div>
                             </div>
+
+                         
 
                              <div class="form-group">
                                <label class="form-label">Bìa số</label>
-                                <input type="text" value="" name="Noted" id="txtScheduleNoted"
+                                <input type="text" value="@taxtItem.BiaSo" name="Noted" id="txtBiaSoBaoHiem"
                                  class="form-control" required placeholder="" />
-                                <div class="invalid-feedback-cs">
+                                   <div class="invalid-feedback-cs"> </div>
+                            </div>
+                            <div class="form-group">
+                            <label class="form-label"> Đăng ký BHYT</label>
+                                <input type="text" value="@taxtItem.RegBHYT" name="RegBHYT" id="txtRegBHYT"
+                                 class="form-control" required placeholder="" />
+                                <div class="invalid-feedback-cs"> </div>
                             </div>
 
-                             <button type="button" onclick="saveCanddiateDetail(@itemResult.Id)" class="btn btn-primary">Cập nhật</button> </br>
+                             <button type="button" onclick="UpdateOtherInfoEmployee(@itemResult.Id , 1)" class="btn btn-primary">Cập nhật</button> </br>
                              <strong> Thông tin thuế </strong>
 
 
                               <div class="form-group">
                                <label class="form-label">Mã số thuế</label>
-                                <input type="text" value="" name="Noted" id="txtScheduleNoted"
+                                <input type="text" value="@bhxhItem.NumberCode" name="Noted" id="txtTaxCodeInput"
                                  class="form-control" required placeholder="" />
-                                <div class="invalid-feedback-cs">
+                                   <div class="invalid-feedback-cs"> </div>
                             </div>
 
                              <div class="form-group">
                                <label class="form-label">Thư xác nhận thuế nhập</label>
-                                <input type="text" value="" name="Noted" id="txtScheduleNoted"
+                                <input type="text" value="@bhxhItem.IsConfirmletter" name="Noted" id="cbThuXacNhan"
                                  class="form-control" required placeholder="" />
-                                <div class="invalid-feedback-cs">
+                                 <div class="invalid-feedback-cs"> </div>
                             </div>
+
+                            
 
                              <div class="form-group">
                                <label class="form-label">Chứng từ thuế</label>
-                                <input type="text" value="" name="Noted" id="txtScheduleNoted"
+                                <input type="text" value="@bhxhItem.ChungTuThue" name="Noted" id="cbChungTuThue"
                                  class="form-control" required placeholder="" />
-                                <div class="invalid-feedback-cs">
+                                   <div class="invalid-feedback-cs"> </div>
                             </div>
-                         <button type="button" onclick="saveCanddiateDetail(@itemResult.Id)" class="btn btn-primary">Cập nhật</button> </br>
-                       
-                       
-                       
 
-                           
-                          
+                             <div class="form-group">
+                               <label class="form-label">Người phụ thuộc</label>
+                                <input type="text" value="@bhxhItem.DependentName" name="Noted" id="txtDependentName"
+                                 class="form-control" required placeholder="" />
+                                   <div class="invalid-feedback-cs"> </div>
+                            </div>
+
+                                  <div class="form-group">
+                               <label class="form-label">Mã số người phụ thuộc</label>
+                                <input type="text" value="@bhxhItem.Dependent" name="Noted" id="txtDependentNumber"
+                                 class="form-control" required placeholder="" />
+                                   <div class="invalid-feedback-cs"> </div>
+                            </div>
+                         <button type="button" onclick="UpdateOtherInfoEmployee(@itemResult.Id ,2 )" class="btn btn-primary">Cập nhật</button> </br>
+                         </form>
 
                 </div>
 
@@ -480,20 +741,21 @@
               
 
                 <div class="tab-pane fade" id="infomationDocument" role="tabpanel" aria-labelledby="infomationDocument-tab">
-    <div class="floatRight">
-        <button type="button" class=" btn btn-primary" 
-        data-bs-toggle="modal" 
-        data-bs-target="#verticalycentered">
-        Thêm file
-        <i class="fa fa-cloud-upload"></i>
 
-        </button>
-     </div>
-  
+                         <div class="floatRight">
+                        <button type="button" class=" btn btn-primary" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#verticalycentered">
+                        Thêm file
+                        <i class="fa fa-cloud-upload"></i>
+
+                        </button>
+                    </div>
+            
                     <div id ="documnetList">
 
- @foreach (var item in Model.DataFile.Data)
-{
+                            @foreach (var item in Model.DataFile.Data)
+                            {
                                 var itemDraw = item as dynamic;
                                 Html.RenderPartial("ControlForm/FileInputDocument",new
                                 {
@@ -503,72 +765,70 @@
                                 Lable = itemDraw.DisplayText, 
                                 ValueId =  itemDraw.Id
                                 });
-}
+                            }
                     </div>
                 
                                          
 
-    <div class="divblock">
+                    <div class="divblock">
 
-          <button type="button" onclick = "AddDocument(@itemResult.Id)"  class="btn btn-primary"> Câp nhật chứng từ</button>     
-    </div>
+                        <button type="button" onclick = "AddDocument(@itemResult.Id,2)"  class="btn btn-primary"> Câp nhật chứng từ</button>     
+                    </div>
 
                                       
       
  
 
-                                          <div class="card">
-            <div class="card-body">
+                    
+                        <div class="">
 
-              <!-- Vertically centered Modal -->
-             
-              <div class="modal fade" id="verticalycentered" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Chọn loại chứng từ cần thêm</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                     
-                            <div class="form-group">
-                                <label class="form-label">Chọn loại chứng từ</label>
-                                <select name="DocumentType" id="cbDocumentType" class="form-select" aria-label="">
-                                                @foreach (var item in Model.DataDepartment)
-                                                {
-                                                    var itemMasterData = item as dynamic;
+                        <!-- Vertically centered Modal -->
+                        
+                        <div class="modal fade" id="verticalycentered" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title">Chọn loại chứng từ cần thêm</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                
+                                        <div class="form-group">
+                                            <label class="form-label">Chọn loại chứng từ</label>
+                                            <select name="DocumentType" id="cbDocumentType" class="form-select" aria-label="">
+                                                            @foreach (var item in Model.DataDepartment)
+                                                            {
+                                                                var itemMasterData = item as dynamic;
 
-                                                   @*  var departmentCheck = itemResult.Status;
-                                                    var departmentCheckText = "-1";
-                                                    if (itemResult.Position.HasValue)
-                                                    {
-                                                        departmentCheckText = itemResult.Status.Value.ToString();
-                                                    }
-                                                    if (itemMasterData.Code == departmentCheckText)
-                                                    {
-                                                        <option selected 
-                                                           value="@itemMasterData.Code">@itemMasterData.Name</option>
-                                                    }
-                                                    else
-                                                    {
-                                                        <option value="@itemMasterData.Code">@itemMasterData.Name</option>
-                                                    } *@
-                                                }
-                                            </select>
+                                                                if(itemMasterData.TypeData != 7)
+                                                                {
+                                                                continue;
+                                                                }
+
+                                                                if( itemMasterData.ApplyFor == 0  )
+                                                                {
+                                                                continue;
+                                                                }
+
+                                                                 var departmentCheck = itemResult.Status;
+                                                                var departmentCheckText = "-1";
+                                                                 <option value="@itemMasterData.Code">@itemMasterData.Name</option>
+                                                            }
+                                             </select>
+                                        </div>
+
+
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                <button type="button" class="btn btn-primary" onclick="addDocumentSelect()">Thêm</button>
+                                </div>
                             </div>
+                            </div>
+                        </div><!-- End Vertically centered Modal-->
 
-
+                     
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                      <button type="button" class="btn btn-primary" onclick="addDocumentSelect()">Thêm</button>
-                    </div>
-                  </div>
-                </div>
-              </div><!-- End Vertically centered Modal-->
-
-            </div>
-          </div>
         
                            
                  </div>

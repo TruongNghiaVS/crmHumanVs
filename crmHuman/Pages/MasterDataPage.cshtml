@@ -47,12 +47,24 @@
                                 {
                                     datetimeUpdate = @itemInfo.UpdateAt.ToString("dd/MM/yyyy HH:mm");
                                 }
+                                  var textApply = ""; 
+                                
+                           
+                                if(itemInfo.ApplyFor == 1)
+                                {
+                                    textApply = "Nhân viên";
+                                }
+                                if(itemInfo.ApplyFor == 0)
+                                {
+                                    textApply = "Ứng Viên";
+                                }
                                 i++;
                                 <tr>
                                     <td>@i</td>
                                     <td>@itemInfo.Code</td>
                                     <td><a href="javascript:void(0)" onclick="openFormMasterData(@itemInfo.Id,'@Model.NameController')">@itemInfo.Name</a></td>
                                         <td>@Model.GetNameStatus(itemInfo.IsActive)</td>
+                                        <td>@textApply</td>
                                         <td>@datetimeCreate</td>
                                         <td>@datetimeUpdate</td>
                                     <td>

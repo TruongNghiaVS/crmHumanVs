@@ -34,6 +34,11 @@
                     {
                     continue;
                     }
+
+                     if(itemMasterData.ApplyFor ==1)
+                    {
+                    continue;
+                    }
                    if(  @Model.RequestSearch.CandidateStatus.ToString()  ==  itemMasterData.Code)
                    {
 
@@ -60,6 +65,11 @@
                     {
                     var itemMasterData = item;
                     if(itemMasterData.TypeData != 8)
+                    {
+                    continue;
+                    }
+
+                      if(itemMasterData.ApplyFor ==1)
                     {
                     continue;
                     }

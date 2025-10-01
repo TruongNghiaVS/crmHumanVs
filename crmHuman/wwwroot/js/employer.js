@@ -205,7 +205,8 @@ function updateEmployInfo(idEmp) {
 
     var updateName = getValueControl("txtUpdateName");
     var updateNote = getValueControl("txtUpdateNote");
-  
+      var updatePhone = getValueControl("txtPhoneInput");
+    var dayOfBirth = getValueControl("txtDayOfBirthInput");
     removeAllEror("formUpdateEmployee");
 
     if (updateName == "") {
@@ -228,7 +229,8 @@ function updateEmployInfo(idEmp) {
           
             FullName: updateName,
             Id: idEmp,
-           
+            Dob:  dayOfBirth,
+            Phone : updatePhone,
             Noted: updateNote
            
       
@@ -394,7 +396,9 @@ function SaveEmployee(idEmp) {
     var passText = getValueControl("txtPass");
     var roleCodeText = getValueControl("txtRoleCode");
     var txtColorCode = getValueControl("txtColor");
-   
+    var cbStatusWork = getValueControl("cbStatusWork");
+
+
     var isActiveCb = 1;
     var txtNotedText = getValueControl("txtNoted");
     removeAllEror("mainForm");
@@ -452,6 +456,7 @@ function SaveEmployee(idEmp) {
             Noted: txtNotedText,
             ColorCode :txtColorCode,
             Pass: passText,
+            StatusWork: cbStatusWork,
             Dob: dobcb, 
             IsActive: isActiveCb
         },
@@ -1311,7 +1316,7 @@ function SaveMasterData2(idEmp, namecontroller = "nganhnghe") {
     var fullNametext = getValueControl("txtFullName");
     var isActiveCb = getValueControl("isActive");
     var txtNotedText = getValueControl("txtNoted");
-
+    var txtTypeDataText = getValueControl("txtTypeData");
     
     var txtExtraText = getValueControl("txtExtra");
     var applyFor = getValueControl("applyFor");
@@ -1324,9 +1329,6 @@ function SaveMasterData2(idEmp, namecontroller = "nganhnghe") {
     else {
         removeError("txtFullName");
     }
-
-
-
     if (isActiveCb == "") {
         addError("isActiveCb", "Yêu cầu chọn trạng thái");
         return;
@@ -1348,10 +1350,10 @@ function SaveMasterData2(idEmp, namecontroller = "nganhnghe") {
             Name: fullNametext,
 
             Id: idEmp,
-
             Noted: txtNotedText,
             Extra: txtExtraText,
             applyFor: applyFor,
+            typeData:  txtTypeDataText,
 
             IsActive: isActiveCb
         },
@@ -2108,12 +2110,9 @@ function saveCanddiateDetail(idEmp) {
      var cbDepartmentIdInput = getValueControl("cbDepartmentId");
      var cbPositionInput = getValueControl("cbPosition");
      var cbManagerInput = getValueControl("cbManager");
-     
      var cbStatusHumanInput = getValueControl("cbStatusHuman");
      var txtStatusInput = getValueControl("cbStatus");
-
-   
-   
+     var txtReferrerInput = getValueControl("txtReferrer");
     if (txtFullName == "") {
         addError("txtFullName", "yêu cầu nhập họ và tên");
         return;
@@ -2128,8 +2127,6 @@ function saveCanddiateDetail(idEmp) {
     else {
         removeError("txtPhone");
     }
-  
-    
     var bodyRequest = {
         CandidateId: cbcandidateId,
         ShortDes: txtShortDes,
@@ -2145,7 +2142,8 @@ function saveCanddiateDetail(idEmp) {
         ShortDesOrder :txtNotedCand,
         ManagerId : cbManagerInput,
         StatusHuman :cbStatusHumanInput,
-        Status  : txtStatusInput
+        Status  : txtStatusInput,
+        referrer : txtReferrerInput
     };
 
 
@@ -2693,65 +2691,65 @@ function opneFormActiveUser()
 
 
 
-function SaveMasterData2(idEmp, namecontroller = "nganhnghe") {
+// function SaveMasterData2(idEmp, namecontroller = "nganhnghe") {
 
-    var code = getValueControl("txtCode");
-    var fullNametext = getValueControl("txtFullName");
-    var isActiveCb = getValueControl("isActive");
-    var txtNotedText = getValueControl("txtNoted");
-    var txtTypeDataText = getValueControl("txtTypeData");
+//     var code = getValueControl("txtCode");
+//     var fullNametext = getValueControl("txtFullName");
+//     var isActiveCb = getValueControl("isActive");
+//     var txtNotedText = getValueControl("txtNoted");
+//     var txtTypeDataText = getValueControl("txtTypeData");
 
-    removeAllEror("mainForm");
+//     removeAllEror("mainForm");
 
-    if (fullNametext == "") {
-        addError("txtFullName", "yêu cầu nhập tên đối tác");
-        return;
-    }
-    else {
-        removeError("txtFullName");
-    }
+//     if (fullNametext == "") {
+//         addError("txtFullName", "yêu cầu nhập tên đối tác");
+//         return;
+//     }
+//     else {
+//         removeError("txtFullName");
+//     }
 
 
 
-    if (isActiveCb == "") {
-        addError("isActiveCb", "Yêu cầu chọn trạng thái");
-        return;
-    }
-    else {
-        removeError("isActiveCb");
-    }
+//     if (isActiveCb == "") {
+//         addError("isActiveCb", "Yêu cầu chọn trạng thái");
+//         return;
+//     }
+//     else {
+//         removeError("isActiveCb");
+//     }
 
-    $.ajax({
-        headers: {
-            "RequestVerificationToken":
-                $('input[name="__RequestVerificationToken"]').val()
-        },
-        type: "POST",
-        datatype: "JSON",
-        url: '/' + namecontroller + '?handler=Add',
-        data: {
+//     $.ajax({
+//         headers: {
+//             "RequestVerificationToken":
+//                 $('input[name="__RequestVerificationToken"]').val()
+//         },
+//         type: "POST",
+//         datatype: "JSON",
+//         url: '/' + namecontroller + '?handler=Add',
+//         data: {
 
-            Name: fullNametext,
+//             Name: fullNametext,
 
-            Id: idEmp,
+//             Id: idEmp,
 
-            Noted: txtNotedText,
+//             Noted: txtNotedText,
 
-            IsActive: isActiveCb,
-            typeData:  txtTypeDataText
-        },
-        success: function (data) {
+//             IsActive: isActiveCb,
+//             typeData:  txtTypeDataText
+//         },
+//         success: function (data) {
 
-            successAdd(idEmp);
-        },
-        error: function (jqXHR, exception) {
-            showError(jqXHR);
-        },
-        complete: function () {
+//             successAdd(idEmp);
+//         },
+//         error: function (jqXHR, exception) {
+//             showError(jqXHR);
+//         },
+//         complete: function () {
 
-        }
-    });
-}
+//         }
+//     });
+// }
 
 
 
@@ -2791,9 +2789,36 @@ function openFormMasterData(id = -1, controller = "partner", type = "") {
 }
 
 
+function OpenFormImportCandidate() {
+    var controller =  "Candidate";
+    $.ajax({
+        headers: {
+            "RequestVerificationToken":
+                $('input[name="__RequestVerificationToken"]').val()
+        },
+        type: "GET",
+
+        url: '/' + controller + '?handler=FormImportCandidate',
+        success: function (data) {
+            $("#contentModal").empty();
+            $("#contentModal").append(data);
+            $('#formModal').modal('show');
+
+
+
+        },
+        error: function (jqXHR, exception) {
+            
+        },
+        complete: function () {
+
+        },
+    });
+}
+
 function saveMasterTypeData(idEmp, namecontroller = "MasterDataPage") {
 
-    debugger;
+
     namecontroller = "MasterDataPage";
 
     var fullNametext = getValueControl("txtFullName");
@@ -2803,6 +2828,8 @@ function saveMasterTypeData(idEmp, namecontroller = "MasterDataPage") {
     var txtExtraText = getValueControl("txtExtra");
     var applyFor = getValueControl("applyFor");
     var txtTypeDataValue = getValueControl("txtTypeData");
+
+
     removeAllEror("mainForm");
 
     if (fullNametext == "") {
@@ -2846,6 +2873,39 @@ function saveMasterTypeData(idEmp, namecontroller = "MasterDataPage") {
         },
         success: function (data) {
 
+            successAdd(idEmp);
+        },
+        error: function (jqXHR, exception) {
+            showError(jqXHR);
+        },
+        complete: function () {
+
+        }
+    });
+}
+
+
+var saveImport = true;
+function importCandidateToEmployee() {
+    // saveImport =false;
+  
+     var  namecontroller = "Employee";
+    var selectCandidateid = getValueControl("cbSelectCandidate");
+  
+    $.ajax({
+        headers: {
+            "RequestVerificationToken":
+                $('input[name="__RequestVerificationToken"]').val()
+        },
+        type: "POST",
+        datatype: "JSON",
+        url: '/' + namecontroller + '?handler=ConvertToEmployee',
+        data: {
+           
+            Id: selectCandidateid
+        },
+        success: function (data) {
+            saveImport = true;
             successAdd(idEmp);
         },
         error: function (jqXHR, exception) {
@@ -2948,7 +3008,7 @@ function getDataDocumentUpdate()
     return arrayoutput;
 }
 
-function AddDocument( idCandidate)
+function AddDocument( idCandidate, dataType =1)
 {
 
    
@@ -2956,7 +3016,9 @@ function AddDocument( idCandidate)
 
     var bodyRequest = {
         RelId : idCandidate,
-        Data :data
+        Data :data,
+        DataType : dataType
+
     };
     $.ajax({
         headers: {
@@ -3004,6 +3066,19 @@ function saveEmployeeDetail(idEmp) {
     var txtTemporaryAddressInput = getValueControl("txtTemporaryAddress");
      var cbStatusHumanInput = getValueControl("cbStatusHuman");
      var txtStatusInput = getValueControl("cbStatus");
+
+    var txtBankAccountInput = getValueControl("txtBankAccount");
+    var txtBankNameInput = getValueControl("txtBankName");
+
+    var inputcBEducationLevel = getValueControl("cBEducationLevel");
+    var intpucBMaritalStatus = getValueControl("cBMaritalStatus");
+
+      var cbStatusWorkInput = getValueControl("cbStatusWork");
+
+    const selectedDocuments = Array.from(document.querySelectorAll('input[name="Documents"]:checked'))
+    .map(checkbox => checkbox.value);
+
+    var valueSelectCheck = selectedDocuments.join(',');
     if (txtFullName == "") {
         addError("txtFullName", "yêu cầu nhập họ và tên");
         return;
@@ -3028,10 +3103,17 @@ function saveEmployeeDetail(idEmp) {
         DepartmentCode :  cbDepartmentIdInput,
         Email: txtEmailInput,
         CVLink:  txtfileCV,
+        PositionCode  : cbPositionInput,
         Noted : txtNotedCandInput,
         DocumentStatus :cbStatusHumanInput,
         Status  : txtStatusInput,
-        RoleCode : cbRoleCodeInput
+        StatusWork : cbStatusWorkInput,
+        RoleCode : cbRoleCodeInput,
+         BankName :txtBankNameInput,
+        BankAccount : txtBankAccountInput ,
+        EducationLevel :inputcBEducationLevel,
+        Maritalstatus : intpucBMaritalStatus ,
+        DocumentCheck:  valueSelectCheck
     };
 
       $.ajax({
@@ -3057,9 +3139,9 @@ function saveEmployeeDetail(idEmp) {
 
 function changePassword(reloadPage =true) {
     var currentPassword = getValueControl("txtPasswordCurrent");
-    var newPassword = getValueControl("txtPasswordNew");
-    var renewPassword = getValueControl("txtrenewPassword");
-    removeAllEror("updateChangePassword");
+    var newPassword = getValueControl("txtnewPassword");
+    var renewPassword = getValueControl("txtRepeatPasswordNew");
+
     if (newPassword == "") {
         addError("txtnewPassword", "yêu cầu nhập mật khẩu mới");
         return;
@@ -3069,16 +3151,20 @@ function changePassword(reloadPage =true) {
     }
 
     if (renewPassword == "") {
-        addError("txtrenewPassword", "yêu cầu nhập lại mật khẩu mới");
+        addError("txtRepeatPasswordNew", "yêu cầu nhập lại mật khẩu mới");
         return;
     }
     else {
-        removeError("txtrenewPassword");
+        removeError("txtRepeatPasswordNew");
     }
 
     if (newPassword != renewPassword) {
-        addError("txtrenewPassword", "Hai mật khẩu không trùng khớp");
+        addError("txtRepeatPasswordNew", "Hai mật khẩu không trùng khớp");
     }
+    var bodyRequest = {
+    newPassword: newPassword, 
+    id: getValueControl("inputId")
+    };
 
     $.ajax({
         headers: {
@@ -3087,23 +3173,262 @@ function changePassword(reloadPage =true) {
         },
         type: "POST",
         datatype: "JSON",
-        url: '/employee?handler=ChangePassword',
+        url: '/EmployeeInfo?handler=ChangePassword',
+        data:bodyRequest,
+        success: function (data) {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Đổi mật khẩu thành công",
+                    showConfirmButton: false,
+                    timer: 5000
+                });
+
+        },
+        error: function (jqXHR, exception) {
+            showError(jqXHR);
+        }
+    });
+}
+
+
+function saveRelaionItem(idEmp) {
+
+    var cbcandidateId = getValueControl("inputId");
+    var txtRelaFullNameInput = getValueControl("txtRelaFullName");
+    var txtRelaRelationCodeInput = getValueControl("txtRelaRelationCode");
+    var txtRelaPhoneInput = getValueControl("txtRelaPhone");
+    var txtRelaAddressInput = getValueControl("txtRelaAddress");
+  
+    if (txtRelaFullNameInput == "") {
+        addError("txtRelaFullName", "yêu cầu nhập họ và tên");
+        return;
+    }
+    else {
+        removeError("txtRelaFullName");
+    }
+    if (txtRelaRelationCodeInput == "") {
+        addError("txtRelaRelationCode", "Yều cầu nhập trường này");
+        return;
+    }
+    else {
+        removeError("txtRelaRelationCode");
+    }
+    var bodyRequest = {
+      
+        Name: txtRelaFullNameInput,
+        UserName :  getValueControl("txtUserName"),
+        Relationcode : txtRelaRelationCodeInput,
+        Phone :txtRelaPhoneInput,
+        Noted: "",
+        AddressInfo: txtRelaAddressInput
+       
+    };
+
+
+      $.ajax({
+        headers: {
+            "RequestVerificationToken":
+                $('input[name="__RequestVerificationToken"]').val()
+        },
+        type: "POST",
+        datatype: "JSON",
+        url: '/EmployeeInfo?handler=AddRelationItem',
+        data:  bodyRequest,
+        success: function (data) {
+            successAdd(idEmp, false, false);
+        },
+        error: function (jqXHR, exception) {
+            showError(jqXHR);
+        },
+        complete: function () {
+        }
+    });
+}
+
+function SaveHDLD(idEmp) {
+
+    var cbcandidateId = getValueControl("inputId");
+    var txtNumberHDLD = getValueControl("txtSoHDLD");
+    var htdldBegin = getValueControl("dtpHDLDBeginDate");
+    var hdldEdndInput = getValueControl("dtpHDLDEndDate");
+     var hdldLoaiHDInput = getValueControl("cbLoaiHopDong"); 
+    if (txtNumberHDLD == "") {
+        addError("txtSoHDLD", "yêu cầu nhập số hợp đồng");
+        return;
+    }
+    else {
+        removeError("txtSoHDLD");
+    }
+    if (htdldBegin == "") {
+        addError("dtpHDLDBeginDate", "Yều cầu nhập  ngày hợp đồng");
+        return;
+    }
+    else {
+        removeError("dtpHDLDBeginDate");
+    }
+
+     if (hdldEdndInput == "") {
+        addError("dtpHDLDEndDate", "Yêu cầu nhập hạn ngày hợp đồng");
+        return;
+    }
+    else {
+        removeError("dtpHDLDEndDate");
+    }
+    var bodyRequest = {
+            UserId :  cbcandidateId,
+            NoAgree :  txtNumberHDLD,
+            Start : htdldBegin,
+            End :hdldEdndInput,
+            CodeId:  hdldLoaiHDInput
+    };
+
+    
+    
+      $.ajax({
+        headers: {
+            "RequestVerificationToken":
+                $('input[name="__RequestVerificationToken"]').val()
+        },
+        type: "POST",
+        datatype: "JSON",
+        url: '/EmployeeInfo?handler=AddHDLDItem',
+        data:  bodyRequest,
+        success: function (data) {
+            successAdd(idEmp, false, false);
+        },
+        error: function (jqXHR, exception) {
+            showError(jqXHR);
+        },
+        complete: function () {
+        }
+    });
+}
+
+function UpdateOtherInfoEmployee(employId, typeUpdate) {
+    //LUONG
+    var txtBankAccountInput = getValueControl("txtBankAccount");
+    var txtBankNameInput = getValueControl("txtBankName");
+    // 
+    var masobaohiemInput = getValueControl("txtMaSoBaoHiem");
+    var cbToroiBaoHiemInput = getValueControl("cbToroiBaoHiem");
+    var txtBiaSoBaoHiem = getValueControl("txtBiaSoBaoHiem");
+    // tax code
+    var inputTaxCode = getValueControl("txtTaxCodeInput");
+    var inputCbThuXacNhan = getValueControl("cbThuXacNhan");
+    var intputCbChungTuThue = getValueControl("cbChungTuThue");
+    var inputDependent = getValueControl("txtDependentNumber");
+    var inputDependentName = getValueControl("txtDependentName");
+    var inptutxtRegBHYT = getValueControl("txtRegBHYT");
+    var bodyRequest =  {
+            EmployeeId: employId,
+            TypeUpdate: typeUpdate,
+            PageTax : cbToroiBaoHiemInput,
+            BiaSo: txtBiaSoBaoHiem,
+            CodeBHXH: masobaohiemInput,
+            TaxCode: inputTaxCode,
+            IsThuXacNhan:  inputCbThuXacNhan,
+            ChungTuThue :intputCbChungTuThue,
+            BankAccount :txtBankAccountInput, 
+            BankName :txtBankNameInput,
+            Dependent : inputDependent ,
+            RegBHYT : inptutxtRegBHYT,
+            DependentName : inputDependentName
+    };
+
+    $.ajax({
+    headers: {
+        "RequestVerificationToken":
+            $('input[name="__RequestVerificationToken"]').val()
+    },
+    type: "POST",
+    datatype: "JSON",
+    url: '/employeeInfo?handler=AddOtherInfomation',
+    data:bodyRequest,
+    success: function (data) {
+        successAdd(employId, false, false);
+    },
+    error: function (jqXHR, exception) {
+        showError(jqXHR);
+    },
+    complete: function () {
+    }
+    });
+}
+
+function OpenCreateNew(){
+    window.open("/EmployeeInfo?id=-1");
+}
+
+function updateOther(idEmp) {
+
+    var txtFullName = getValueControl("txtFullName");
+    var txtPhone = getValueControl("txtPhone");
+    var dobcb = getValueControl("dob");
+    var txtNoted = getValueControl("txtNotedCand");
+
+    var txtEmail = getValueControl("txtEmail");
+    var txtSourceCode = 0;
+    if(txtSourceCode =="")
+        {
+            txtSourceCode = 0;
+        }
+    var txtShortDes = getValueControl("txtNotedCand");
+    var cbisActive = 1;
+    var fileCvLinkInput = getValueControl("inputCvlink1");
+    removeAllEror("mainForm");
+    if (txtFullName == "") {
+        addError("txtFullName", "yêu cầu nhập họ và tên");
+        return;
+    }
+    else {
+        removeError("txtFullName");
+    }
+    if (txtPhone == "") {
+        addError("txtPhone", "Yêu cầu nhập số điện thoại");
+        return;
+    }
+    else {
+        removeError("txtPhone");
+    }
+    
+
+
+    if (cbisActive == "") {
+        addError("cbisActive", "yêu cầu nhập trạng thái");
+        return;
+    }
+    else {
+        removeError("cbisActive");
+    }
+
+    return;
+
+    $.ajax({
+        headers: {
+            "RequestVerificationToken":
+                $('input[name="__RequestVerificationToken"]').val()
+        },
+        type: "POST",
+        datatype: "JSON",
+        url: '/candidate?handler=Add',
         data: {
-
-            newPassword: newPassword
            
-
-
+            Phone: txtPhone,
+            Name: txtFullName,
+            Email: txtEmail,
+            Id: idEmp,
+            Dob: dobcb,
+            AvatarLink: "",
+            CVLink: fileCvLinkInput,
+            ShortDes:"",
+            Noted: txtNoted ,
+            Source : 0,
+            IsActive: 1
         },
         success: function (data) {
 
-            if (reloadPage == true) {
-                successAdd(1);
-            }
-            else {
-                openAlertAndClosePopup(1);
-            }
-           
+            successAdd(idEmp);
         },
         error: function (jqXHR, exception) {
             showError(jqXHR);
@@ -3113,3 +3438,10 @@ function changePassword(reloadPage =true) {
         }
     });
 }
+
+
+
+
+
+
+

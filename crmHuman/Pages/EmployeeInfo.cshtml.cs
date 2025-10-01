@@ -16,8 +16,9 @@ namespace crmHuman.Pages
         private readonly ImasterDataBussiness _masterDataBussiness;
         private readonly IScheduleInterviewBussiness _scheduleInterviewBussiness;
         private readonly IDocumentDataBussiness _documentDataBussiness;
+        public readonly IEmployeeExtraBusiness _employeeExtraBusiness;
 
-        public List<SelectDisplay> ArrayRol {get;set;}
+        public List<SelectDisplay> ArrayRol { get; set; }
 
         public List<string> TableColumnTextAdmin { get; set; }
         public CandidateRequest RequestSearch { get; set; }
@@ -38,6 +39,8 @@ namespace crmHuman.Pages
 
         public BaseList DataFile { get; set; }
 
+
+
         public int TotalRecord
         {
 
@@ -52,7 +55,8 @@ namespace crmHuman.Pages
             ImasterDataBussiness masterDataBussiness,
             IScheduleInterviewBussiness scheduleInterviewBussiness,
             IDocumentDataBussiness documentDataBussiness,
-            IEmpBusiness empBusiness1
+            IEmpBusiness empBusiness1,
+            IEmployeeExtraBusiness employeeExtraBusiness
             )
         {
             _logger = logger;
@@ -64,9 +68,11 @@ namespace crmHuman.Pages
             DataDepartment = new List<DataMasterItem>();
             _scheduleInterviewBussiness = scheduleInterviewBussiness;
             _documentDataBussiness = documentDataBussiness;
-            
+            _employeeExtraBusiness = employeeExtraBusiness;
 
-          ArrayRol =  new List<SelectDisplay>()
+
+
+            ArrayRol = new List<SelectDisplay>()
         {
             new Model.SelectDisplay()
             {
@@ -94,22 +100,13 @@ namespace crmHuman.Pages
             }
         };
 
+
         }
 
         public async Task<IActionResult> OnPostAddSchedule
            (CandidateScheduleAdd request)
         {
             var listEror = new List<object>();
-            //if (request.Id < 1)
-            //{
-            //    var itemError = new
-            //    {
-            //        name = "txtFullName",
-            //        Content = "Thiếu thông tin đối tượng Id"
-            //    };
-            //    listEror.Add(itemError);
-            //}
-
 
             if (listEror.Count > 0)
             {
@@ -129,6 +126,54 @@ namespace crmHuman.Pages
             };
 
             result = await _scheduleInterviewBussiness.AddOrUpdate(itemInsert);
+            var dataReponse = new
+            {
+                success = result,
+            };
+            return new JsonResult(dataReponse)
+            {
+                StatusCode = StatusCodes.Status200OK
+            };
+        }
+
+        public async Task<IActionResult> OnPostAddRelationItem
+          (RelationItemAdd request)
+        {
+            var listEror = new List<object>();
+            if (listEror.Count > 0)
+            {
+                return new JsonResult(listEror)
+                {
+                    StatusCode = StatusCodes.Status400BadRequest
+                };
+            }
+            var result = true;
+            result = await _employeeExtraBusiness.UpdateRelation(request);
+            var dataReponse = new
+            {
+                success = result,
+            };
+            return new JsonResult(dataReponse)
+            {
+                StatusCode = StatusCodes.Status200OK
+            };
+        }
+
+
+        public async Task<IActionResult> OnPostAddHDLDItem
+        (HDLDItemAdd request)
+        {
+
+            var listEror = new List<object>();
+            if (listEror.Count > 0)
+            {
+                return new JsonResult(listEror)
+                {
+                    StatusCode = StatusCodes.Status400BadRequest
+                };
+            }
+            var result = true;
+            result = await _employeeExtraBusiness.UpdateHDLDItem(request);
             var dataReponse = new
             {
                 success = result,
@@ -190,6 +235,38 @@ namespace crmHuman.Pages
             };
         }
 
+        public async Task<IActionResult> OnPostAddOtherInfomation
+           (EmployeeInfoOther request)
+        {
+            var listEror = new List<object>();
+            //if (request.UserId < 1)
+            //{
+            //    var itemError = new
+            //    {
+
+            //        Content = "Thiếu thông tin đối tượng Id"
+            //    };
+            //    listEror.Add(itemError);
+            //}
+
+            if (listEror.Count > 0)
+            {
+                return new JsonResult(listEror)
+                {
+                    StatusCode = StatusCodes.Status400BadRequest
+                };
+            }
+            var dataReponse = true;
+            //update bhxh
+            await _employeeExtraBusiness.UpdateEmployeeInfother(request);
+            //update tax
+            return new JsonResult(dataReponse)
+            {
+                StatusCode = StatusCodes.Status200OK
+            };
+        }
+
+
         public async Task<IActionResult> OnPostUpdate
             (EmployeeDetailUpdate request)
         {
@@ -227,11 +304,17 @@ namespace crmHuman.Pages
                 PositionCode = request.PositionCode,
                 Email = request.Email,
                 Noted = request.Noted,
+                StatusWork = request.StatusWork,
                 PermanentAddress = request.PermanentAddress,
                 TemporaryAddress = request.TemporaryAddress,
                 DocumentStatus = request.DocumentStatus,
                 Status = request.Status,
-                CVLink = request.CVLink
+                CVLink = request.CVLink,
+                BankAccount = request.BankAccount,
+                BankName = request.BankName,
+                EducationLevel = request.EducationLevel,
+                Maritalstatus = request.Maritalstatus,
+                DocumentCheck = request.DocumentCheck
             };
             if (request.Id < 0)
             {
@@ -251,6 +334,63 @@ namespace crmHuman.Pages
             };
         }
 
+        public async Task<IActionResult> OnPostChangePassword
+        (PasswordAdd request)
+        {
+            var listEror = new List<object>();
+            if (request.Id < 1)
+            {
+                var itemError = new
+                {
+                    name = "txtrid",
+                    Content = "Thiếu thông tin Id"
+                };
+                listEror.Add(itemError);
+            }
+            if (string.IsNullOrEmpty(request.NewPassword))
+            {
+                var itemError = new
+                {
+                    name = "txtrenewPassword",
+                    Content = "Thiếu thông tin họ và tên"
+                };
+                listEror.Add(itemError);
+            }
+            if (listEror.Count > 0)
+            {
+                return new JsonResult(listEror)
+                {
+                    StatusCode = StatusCodes.Status400BadRequest
+                };
+            }
+
+            int IdEmployer = -1;
+            if (request.ResetPass == true)
+            {
+                request.NewPassword = "Vietstar@2024";
+            }
+            if (request.Id.HasValue && request.Id.Value > 0)
+            {
+                IdEmployer = request.Id.Value;
+            }
+            else
+            {
+                GetInfoUser();
+                var userId = UserData.UserId;
+                IdEmployer = userId;
+            }
+            var result = await _empBusiness.ChangePassword(request.NewPassword, IdEmployer);
+            var dataReponse = new
+            {
+                success = result,
+
+            };
+            return new JsonResult(dataReponse)
+            {
+                StatusCode = StatusCodes.Status200OK
+
+            };
+        }
 
         public async Task<IActionResult> OnPostAddDocument
            (DocumentDataAddRequest request)
@@ -310,6 +450,7 @@ namespace crmHuman.Pages
                     Name = tempItem.Name,
                     TypeData = tempItem.TypeData,
                     Code = tempItem.Code,
+                    ApplyFor = tempItem.ApplyFor,
                     IsActive = tempItem.IsActive
                 };
                 DataDepartment.Add(itemInsert);
@@ -317,34 +458,61 @@ namespace crmHuman.Pages
 
             DataPostion = dataAllMaster;
 
-            var candidateInfo = await _empBusiness.GetById(idInput);
+            var itemInfo = await _empBusiness.GetById(idInput);
+
+            if (idInput < 1)
+            {
+                TitlePage = "Thêm mới nhân viên";
+            }
+
+            var dataRelation = await _employeeExtraBusiness.GetInfo(itemInfo.UserName);
+            var hdldItem = await _employeeExtraBusiness.GetHDLD(itemInfo.Id.ToString());
+            var bhxhItem = await _employeeExtraBusiness.GetBHXH(itemInfo.UserName);
+            var taxtItem = await _employeeExtraBusiness.GetTaxItem(itemInfo.UserName);
             var resultView = new EmployeeDisplayEdit()
             {
                 Id = idInput,
-                UserName = candidateInfo.UserName,
-                FullName = candidateInfo.FullName,
-                NationalDate = candidateInfo.NationalDate,
-                NationalId = candidateInfo.NationalId,
-                NationalPlace = candidateInfo.NationalPlace,
-                Phone = candidateInfo.Phone,
-                CVLink = candidateInfo.CVLink,
-                Dob = candidateInfo.Dob,
-                Email = candidateInfo.Email,
-                Onboard = candidateInfo.Onboard,
+                UserName = itemInfo.UserName,
+                FullName = itemInfo.FullName,
+                NationalDate = itemInfo.NationalDate,
+                NationalId = itemInfo.NationalId,
+                NationalPlace = itemInfo.NationalPlace,
+                Phone = itemInfo.Phone,
+                CVLink = itemInfo.CVLink,
+                Dob = itemInfo.Dob,
+                Email = itemInfo.Email,
+                Onboard = itemInfo.Onboard,
                 Deleted = false,
-                CreateAt = candidateInfo.CreateAt,
-                UpdateAt = candidateInfo.UpdateAt,
-                Noted = candidateInfo.Noted,
-                ManagerId = candidateInfo.ManagerId,
-                DocumentStatus = candidateInfo.DocumentStatus,
-                PositionCode = candidateInfo.PositionCode,
-                DepartmentCode = candidateInfo.DepartmentCode,
-                Status = candidateInfo.Status,
-                IsActive = candidateInfo.IsActive,
-                TemporaryAddress = candidateInfo.TemporaryAddress,
-                PermanentAddress = candidateInfo.PermanentAddress,
-                RoleCode = candidateInfo.RoleCode,
-                
+                CreateAt = itemInfo.CreateAt,
+                UpdateAt = itemInfo.UpdateAt,
+                Noted = itemInfo.Noted,
+                ManagerId = itemInfo.ManagerId,
+                DocumentStatus = itemInfo.DocumentStatus,
+                PositionCode = itemInfo.PositionCode,
+                DepartmentCode = itemInfo.DepartmentCode,
+                Status = itemInfo.Status,
+                IsActive = itemInfo.IsActive,
+                TemporaryAddress = itemInfo.TemporaryAddress,
+                PermanentAddress = itemInfo.PermanentAddress,
+                RoleCode = itemInfo.RoleCode,
+                DataRelation = dataRelation,
+                HDLD = hdldItem,
+                BHXHItem = bhxhItem,
+
+                TaxItem = taxtItem,
+                BankAccount = itemInfo.BankAccount,
+                BankName = itemInfo.BankName,
+                EducationLevel = itemInfo.EducationLevel,
+                Maritalstatus = itemInfo.Maritalstatus,
+                DocumentCheck = itemInfo.DocumentCheck,
+                DataCheckList = itemInfo.DocumentCheck != null
+    ? itemInfo.DocumentCheck
+        .Split(',', StringSplitOptions.RemoveEmptyEntries)
+        .Select(x => x.Trim())
+        .ToList()
+    : new List<string>(),
+                StatusWork = itemInfo.StatusWork
+
             };
             ResultModel = resultView;
             var dataAllHistory = await _scheduleInterviewBussiness.GetAll(new ScheduleInterviewRquest()
@@ -356,6 +524,8 @@ namespace crmHuman.Pages
 
             DataFile = await _documentDataBussiness.GetAll(new DocumentDataRquest()
             {
+                DataType = 2,
+                RelId = idInput
 
             });
             DataLead = await _empBusiness.GetAllManager();

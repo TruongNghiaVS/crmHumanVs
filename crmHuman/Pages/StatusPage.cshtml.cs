@@ -31,7 +31,7 @@ namespace crmHuman.Pages
             KeyPage = "statusPage";
             TableColumnText = new List<string>()
             {
-                "STT","Mã","Tên","Màu hiển thị","Trạng thái","Ngày tạo","Cập nhật gần nhất","Thao tác"
+                "STT","Mã","Tên","Màu hiển thị","Chỉ dành cho", "Trạng thái","Ngày tạo","Cập nhật gần nhất","Thao tác"
             };
             NameController = "StatusPage";
             TitleList = "Trạng thái";
@@ -100,8 +100,6 @@ namespace crmHuman.Pages
             return Page();
         }
 
-
-
         public async Task<ActionResult> OnGetAllData(CommonRequest request2)
         {
             RequestSearch = request2;
@@ -124,8 +122,6 @@ namespace crmHuman.Pages
                 resultView = await _empBusiness.GetById(id);
 
             }
-
-
             return Partial("MasterData/EditStatus", resultView);
         }
 

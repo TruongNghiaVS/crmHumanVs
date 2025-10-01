@@ -49,6 +49,7 @@
                             }
                             @foreach (var itemData in Model.DataAll.Data)
                             {
+                                 i++;
                                 var itemInfo = itemData as dynamic;
                                 var datetimeCreate = "";
                                 datetimeCreate  =@itemInfo.CreateAt.ToString("dd/MM/yyyy HH:mm");
@@ -123,11 +124,13 @@
     </div>
 </section>
 
+
 <div class="modal fade" id="formModal" tabindex="-1" >
     <div class="modal-dialog  modal-dialog-centered modal-lg" >
         <div class="modal-content" id="contentModal">
         </div>
     </div>
 </div><!-- End Large Modal-->
+
 
 

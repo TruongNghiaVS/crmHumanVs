@@ -94,7 +94,9 @@ namespace crmHuman.Pages
             var result = true;
             if (request.Id < 0)
             {
+                request.Status = 91;
                 result = await _empBusiness.Add(request);
+
             }
             else
             {
@@ -123,14 +125,10 @@ namespace crmHuman.Pages
             {
                 return Redirect("/");
             }
-
-
             var temp = await _masterDataBussiness.GetAll(new CommonRequest()
             {
 
             });
-
-
             foreach (var item in temp.Data)
             {
 
@@ -141,6 +139,7 @@ namespace crmHuman.Pages
                     Name = tempItem.Name,
                     TypeData = tempItem.TypeData,
                     Code = tempItem.Code,
+                    ApplyFor = tempItem.ApplyFor,
                     IsActive = tempItem.IsActive
                 };
                 DataMasterData.Add(itemInsert);
@@ -251,6 +250,20 @@ namespace crmHuman.Pages
                 Id = id
             };
             return Partial("formChangePassword", resultView);
+        }
+
+        public virtual async Task<PartialViewResult> OnGetFormImportCandidate()
+
+        {
+            var dataCandidate = await _empBusiness.GetAll(new CandidateRequest()
+            {
+                IsEmployee = true
+            });
+            var resultView = new
+            {
+                dataAll = dataCandidate.Data
+            };
+            return Partial("FormImportCandidate", resultView);
         }
 
         public async Task<IActionResult> OnPostDelete

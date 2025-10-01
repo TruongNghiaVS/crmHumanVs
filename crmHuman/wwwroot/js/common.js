@@ -43,7 +43,7 @@ function validateForm() {
     return true;
 }
 
-function successAdd(id = -1, deleteRecord = false) {
+function successAdd(id = -1, deleteRecord = false, isReload=true) {
     var timer1 = 1500;
     var textMess = "Thêm mới thành công";
     if (id > 0 ) {
@@ -60,7 +60,15 @@ function successAdd(id = -1, deleteRecord = false) {
         showConfirmButton: false,
         timer: timer1
     }).then((result) => {
-        window.location.reload();
+        if(isReload ==false)
+        {
+
+        }
+        else 
+        {
+            window.location.reload();
+        }
+        
     });
 }
 function khoiphucXoa() {

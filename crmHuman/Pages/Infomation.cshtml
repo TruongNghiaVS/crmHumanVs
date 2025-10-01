@@ -96,10 +96,7 @@
                     <div class="tab-content pt-2">
 
                         <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                       @*      <h5 class="card-title">About</h5>
-                            <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p>
-
-                           *@
+                
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label ">Họ và tên</div>
                             <div class="col-lg-9 col-md-8">@userCurrent.FullName</div>
@@ -119,10 +116,7 @@
                             <div class="col-lg-9 col-md-8">@onboardText</div>
                             </div>
 
-                        <div class="row">
-                            <div class="col-lg-3 col-md-4 label">Line đang gọi</div>
-                            <div class="col-lg-9 col-md-8">@userCurrent.LineCode</div>
-                        </div>
+                       
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Số điện thoại</div>
                                 <div class="col-lg-9 col-md-8">@userCurrent.Phone</div>
@@ -146,10 +140,24 @@
                             <form id="formUpdateEmployee">
                         
 
-                            <div class="row mb-3 form-group">
+                                 <div class="row mb-3 form-group">
                                     <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Họ tên</label>
                                     <div class="col-md-8 col-lg-9">
                                     <input name="fullName" type="text" class="form-control" id="txtUpdateName" value="@userCurrent.FullName">
+                                    </div>
+                                </div>
+
+                                 <div class="row mb-3 form-group">
+                                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Ngày sinh</label>
+                                    <div class="col-md-8 col-lg-9">
+                                    <input name="fullName" type="date" class="form-control" id="txtDayOfBirthInput" value="@dateText">
+                                    </div>
+                                </div>
+
+                                   <div class="row mb-3 form-group">
+                                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Số điện thoại</label>
+                                    <div class="col-md-8 col-lg-9">
+                                    <input name="fullName" type="text" class="form-control" id="txtPhoneInput" value="@userCurrent.Phone">
                                     </div>
                                 </div>
 

@@ -56,7 +56,8 @@
 
         @if (Model.Permision.Add == true)
         {
-            <button type="button" class="btn btn-primary" onclick="openFormEdit(-1, '@Model.KeyPage')">Thêm mới</button>
+            <button type="button" class="btn btn-primary" onclick="OpenFormImportCandidate()">Import</button>
+            <button type="button" class="btn btn-primary" onclick="OpenCreateNew(-1, '@Model.KeyPage')">Thêm mới</button>
         }
 
 

@@ -1,0 +1,47 @@
+﻿
+
+    <div class="modal-header">
+
+    <h5 class="modal-title">Danh sách ứng viên đã pass phỏng vấn</h5>
+    <button id="closePopup" type="button" class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+
+    <form id="updateChangePassword">
+        <div class="row mb-3 form-group">
+            
+                            <div class="form-group">
+                                <label class="form-label">Chọn ứng viên</label>
+                                <select name="StatusHuman" id="cbSelectCandidate" class="form-select" aria-label="">
+                                    @foreach (var item in Model.dataAll)
+                                    {  
+                                         var itemMasterData = item;
+                                         var displayName = @itemMasterData.Name;
+                                         <option  value="@itemMasterData.Id">@displayName</option>
+                                        
+                                    }
+                                </select>
+                                <div class="invalid-feedback-cs">
+                                    Please choose a username.
+                                </div>
+                            </div>
+            
+        </div>
+
+      
+       
+    </form><!-- End Change Password Form -->
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+                Đóng
+            </button>
+    <button type="button" onclick="importCandidateToEmployee()" class="btn btn-primary">Nhập</button>
+  
+        </div>
+

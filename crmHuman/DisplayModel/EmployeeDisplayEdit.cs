@@ -39,6 +39,21 @@ namespace crmHuman.DisplayModel
                 return string.Empty;
             }
         }
+        public string BankName { get; set; }
+        public string BankAccount { get; set; }
+
+        public RelationItem DataRelation { get; set; }
+        public HDLD HDLD { get; set; }
+        public TaxItem TaxItem { get; set; }
+
+        public BHXHItem BHXHItem { get; set; }
+
+        public List<string> DataCheckList { get; set; }
+
+        public EmployeeDisplayEdit()
+        {
+            DataCheckList = new List<string>();
+        }
 
 
     }

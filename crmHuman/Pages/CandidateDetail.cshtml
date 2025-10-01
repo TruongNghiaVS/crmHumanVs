@@ -159,6 +159,14 @@
 
                             </div>
 
+                               <div class=" form-group">
+                                <label class="form-label">Người giới thiệu</label>
+                                <input type="text" value="@itemResult.Referrer" name="referrer" id="txtReferrer" class="form-control" required placeholder="" />
+                                <div class="invalid-feedback-cs">
+                                </div>
+
+                            </div>
+
                                 @{
                                 Html.RenderPartial("ControlForm/FileInputCs",new
                                 {
@@ -181,6 +189,10 @@
                                        
                                          var itemMasterData = item;
                                         if(itemMasterData.TypeData != 8)
+                                        {
+                                            continue;
+                                        }
+                                        if( itemMasterData.ApplyFor == 1  )
                                         {
                                             continue;
                                         }
@@ -211,19 +223,25 @@
                                     @foreach (var item in Model.DataDepartment)
                                     {
                                          var itemMasterData = item;
-                                        if(itemMasterData.TypeData != 9)
+                                        if(itemMasterData.TypeData != 9 )
+                                        {  
+
+                                            continue;
+                                            
+                                          
+                                        }
+                                        if( itemMasterData.ApplyFor == 1  )
                                         {
                                             continue;
                                         }
-
                                         var departmentCheck = itemResult.Status;
                                         var departmentCheckText = "-1";
-                                         if (itemResult.Status != null & itemResult.Status.HasValue)
+                                         if (itemResult.Status != null & itemResult.Status.HasValue )
                                       
                                         {
                                             departmentCheckText = itemResult.Status.Value.ToString();
                                         }
-                                        if (itemMasterData.Code == departmentCheckText)
+                                        if (itemMasterData.Code == departmentCheckText )
                                         {
                                             <option selected value="@itemMasterData.Code">@itemMasterData.Name</option>
                                         }
@@ -344,7 +362,7 @@
 
     <div class="divblock">
 
-          <button type="button" onclick = "AddDocument(@itemResult.Id)"  class="btn btn-primary"> Câp nhật chứng từ</button>     
+          <button type="button" onclick = "AddDocument(@itemResult.Id,1)"  class="btn btn-primary"> Câp nhật chứng từ</button>     
     </div>
 
                                       
@@ -371,6 +389,15 @@
                                                 @foreach (var item in Model.DataDepartment)
                                                 {
                                                     var itemMasterData = item as dynamic;
+                                                    if(itemMasterData.TypeData != 7)
+                                                    {
+                                                    continue;
+                                                    }
+                                                    
+                                                    if( itemMasterData.ApplyFor == 1  )
+                                                    {
+                                                    continue;
+                                                    }
 
                                                     var departmentCheck = itemResult.Status;
                                                     var departmentCheckText = "-1";

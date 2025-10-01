@@ -28,18 +28,29 @@ namespace crmHuman.Pages
                         return "quan-he-nguoi-than";
                     case 5:
                         return "bo-phan";
-                   
-                     case 7:
+
+                    case 7:
                         return "Loai-chung-tu";
                     case 9:
-                         return "trang-thai-ung-vien";
+                        return "trang-thai-ung-vien";
+
+                    case 10:
+                        return "loai-chung-tu-nhan-vien";
                     case 8:
-                         return "trang-thai-chung-tu";
+                        return "trang-thai-chung-tu";
+                     case 11:
+                        return "trang-thai-lam-viec";
+                     case 13:
+                        return "trang-thai-hon-nhan";
+                     case 14:
+                        return "trinh-do-hoc-van";
                     default:
                         return "";
                 }
             }
         }
+
+       
 
         public int TotalRecord
         {
@@ -59,7 +70,7 @@ namespace crmHuman.Pages
             KeyPage = "statusPage";
             TableColumnText = new List<string>()
             {
-                "STT","Mã","Tên","Trạng thái","Ngày tạo","Cập nhật gần nhất","Thao tác"
+                "STT","Mã","Tên","Trạng thái","Đối tượng", "Ngày tạo","Cập nhật gần nhất","Thao tác"
             };
             NameController = "MasterDataPage";
             TitleList = "Trạng thái";
@@ -91,6 +102,7 @@ namespace crmHuman.Pages
                 TypeData = request.TypeData,
                 Name = request.Name,
                 Id = request.Id,
+                ApplyFor = request.ApplyFor,
 
                 IsActive = request.IsActive,
                 Noted = request.Noted,
@@ -143,7 +155,7 @@ namespace crmHuman.Pages
                     inputRequest.Type = 5;
                     break;
 
-                 case "trang-thai-ung-vien":
+                case "trang-thai-ung-vien":
                     inputRequest.Type = 9;
                     break;
                 case "trang-thai-chung-tu":
@@ -152,7 +164,18 @@ namespace crmHuman.Pages
                 case "Loai-chung-tu":
                     inputRequest.Type = 7;
                     break;
-             
+                case "loai-chung-tu-nhan-vien":
+                    inputRequest.Type = 10;
+                    break;
+                case "trang-thai-lam-viec":
+                    inputRequest.Type = 11;
+                    break;
+                 case "trang-thai-hon-nhan":
+                    inputRequest.Type = 13;
+                    break;
+                 case "trinh-do-hoc-van":
+                    inputRequest.Type = 14;
+                    break;
                 default:
                     inputRequest.Type = -1;
                     break;

@@ -36,6 +36,24 @@
             }
           
         };
+
+         var arrayApplyFor = new List<crmHuman.Model.SelectDisplay>()
+        {
+             new Model.SelectDisplay()
+            {
+              Code ="2", Name ="Tất cả"
+            },
+            new Model.SelectDisplay()
+            {
+                Code ="0", Name ="Ứng viên"
+            },
+            new Model.SelectDisplay()
+            {
+              Code ="1", Name ="Nhân viên"
+            }
+           
+          
+        };
     var dateText = "";
   
 }
@@ -86,6 +104,27 @@
                     @foreach (var item in arrayStatus)
                     {
                         @if (@Model.IsActive == int.Parse(item.Code))
+                        {
+                             <option selected value="@item.Code">@item.Name</option>
+                        }
+                        else
+                        {
+                             <option value="@item.Code">@item.Name</option>
+                        }
+                    }
+                    </select>
+                    <div class="invalid-feedback-cs">
+                        Please choose a username.
+                    </div>
+                </div>
+
+                       <div class="col-12 form-group">
+                    <label class="form-label">Ứng dụng cho </label>
+                    <select name="applyFor" id="applyFor" class="form-select" aria-label="">
+                        
+                    @foreach (var item in arrayApplyFor)
+                    {
+                        @if (@Model.ApplyFor == int.Parse(item.Code))
                         {
                              <option selected value="@item.Code">@item.Name</option>
                         }

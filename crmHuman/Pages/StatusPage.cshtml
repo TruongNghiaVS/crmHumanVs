@@ -40,10 +40,23 @@
                         <tbody>
                             @{
                                 int i = 0;
+
+                                
                             }
                             @foreach (var itemData in Model.DataAll.Data)
                             {
+
+                                var textApply = ""; 
+                                
                                 var itemInfo = itemData as dynamic;
+                                if(itemInfo.ApplyFor == 1)
+                                {
+                                    textApply = "Nhân viên";
+                                }
+                                if(itemInfo.ApplyFor == 0)
+                                {
+                                    textApply = "Ứng Viên";
+                                }
                                 var datetimeCreate = @itemInfo.CreateAt.ToString("dd/MM/yyyy HH:mm");
                                 var datetimeUpdate = "";
                                 if (@itemInfo.UpdateAt != null)
@@ -56,6 +69,7 @@
                                         <td><a href="javascript:void(0)" onclick="openFormEdit(@itemInfo.Id,'@Model.NameController')">@itemInfo.Name</a></td>
                                         <td>@itemInfo.Code</td>
                                         <td style="background-color: @itemInfo.Extra;"></td>
+                                        <td>@textApply</td>
                                         <td>@Model.GetNameStatus(itemInfo.IsActive)</td>
                                         <td>@datetimeCreate</td>
                                         <td>@datetimeUpdate</td>

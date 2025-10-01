@@ -145,12 +145,9 @@ namespace crmHuman.Pages
             request.Id = request.CandidateId;
             if (request.Id < 0)
             {
-                result = await _empBusiness.Update(request);
+                //request.Status = 91;
             }
-            else
-            {
-                result = await _empBusiness.Update(request);
-            }
+            result = await _empBusiness.Update(request);
             var dataReponse = new
             {
                 success = result,
@@ -220,6 +217,8 @@ namespace crmHuman.Pages
                     Name = tempItem.Name,
                     TypeData = tempItem.TypeData,
                     Code = tempItem.Code,
+                    ApplyFor = tempItem.ApplyFor,
+
                     IsActive = tempItem.IsActive
                 };
                 DataDepartment.Add(itemInsert);
@@ -245,6 +244,7 @@ namespace crmHuman.Pages
                 Deleted = false,
                 CreateAt = candidateInfo.CreateAt,
                 UpdateAt = candidateInfo.UpdateAt,
+                Referrer = candidateInfo.Referrer,
                 Noted = candidateInfo.Noted,
                 ManagerId = candidateInfo.ManagerId
 
@@ -259,6 +259,8 @@ namespace crmHuman.Pages
 
             DataFile = await _documentDataBussiness.GetAll(new DocumentDataRquest()
             {
+                DataType = 1,
+                RelId = idInput
 
             });
             DataLead = await _empBusiness1.GetAllManager();
